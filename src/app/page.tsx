@@ -22,7 +22,7 @@ export default function Home() {
         {/* Фоновое изображение */}
         <div 
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/hero-bg.jpg')" }}
+          style={{ backgroundImage: "url('./hero-bg.jpg')" }}
         />
         
         {/* Оверлей для читаемости */}
@@ -77,7 +77,7 @@ export default function Home() {
         >
           <div 
             className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-[1.5s] group-hover:scale-110"
-            style={{ backgroundImage: "url('/fond-bg.jpg')" }}
+            style={{ backgroundImage: "url('./fond-bg.jpg')" }}
           />
 
           <div className="absolute inset-0 z-10 bg-blue-900/50 group-hover:bg-blue-900/80 transition-colors duration-700" />
@@ -99,7 +99,7 @@ export default function Home() {
         >
           <div 
             className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-[1.5s] group-hover:scale-110"
-            style={{ backgroundImage: "url('/uriel-bg.jpg')" }}
+            style={{ backgroundImage: "url('./uriel-bg.jpg')" }}
           />
 
 
