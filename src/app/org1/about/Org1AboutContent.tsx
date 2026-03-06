@@ -39,7 +39,7 @@ export default function Org1AboutContent() {
           <section className="flex flex-col gap-4 pt-12 border-t-2 border-slate-900">
             <div>
               <span className="text-[10px] font-sans font-black uppercase tracking-[0.3em] text-slate-400">
-                Локация и данные
+                Юридический адрес
               </span>
             </div>
             <div>
