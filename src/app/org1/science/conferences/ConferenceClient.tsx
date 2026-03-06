@@ -40,14 +40,13 @@ export default function ConferenceClient() {
     },
   ];
 
-  const cities = [
-    "Севастополь",
-    "Артек",
-    "Волгоград",
-    "Казахстан",
-    "Курск",
-    "Рязань",
-    "Херсон",
+  const sections = [
+    "Творчество и мировоззрение Рерихов в современном пространстве отечественной культуры: потенциал для развития этики российского общества.",
+    "Формы государственно-гражданского взаимодействия в современном обществе: проблемы развития и практической реализации.",
+    "Отношения «Восток – Запад» как актуальная перспектива развития российского социума.",
+    "Современное российское общество: перспективы и задачи развития.",
+    "Социально-культурные новации и их вклад в развитие общества.",
+    "Личность. Виртуальная личность. ИИ: проблемы и перспективы исследования.",
   ];
 
   return (
@@ -57,7 +56,7 @@ export default function ConferenceClient() {
         <div className="absolute inset-0 bg-gradient-to-l from-transparent via-white/80 to-white z-10" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/20 to-white z-10" />
         <img
-          src="/university-bg.jpg" // ЗАМЕНИТЕ НА ВАШ ПУТЬ
+          src="/university-bg.jpg"
           alt="Институт"
           className="w-full h-full object-cover object-right-top grayscale hover:grayscale-0 transition-all duration-1000 opacity-100"
         />
@@ -86,8 +85,9 @@ export default function ConferenceClient() {
                   Севастопольский государственный университет,
                   Гуманитарно-педагогический институт, кафедра «Радиоэлектроника
                   и телекоммуникации» и РОО «Севастопольский городской фонд
-                  Рерихов» 10 апреля 2026 года проводят 27-ю Всероссийскую
-                  научно-практическую конференцию.
+                  Рерихов»{" "}
+                  <span className="font-bold">10 – 11 апреля 2026 года</span>{" "}
+                  проводят 27-ю Всероссийскую научно-практическую конференцию.
                 </p>
                 <p className="mt-4">
                   Встреча проходит в рамках постоянно действующего цикла
@@ -101,6 +101,17 @@ export default function ConferenceClient() {
                   также исторических памятников», известного во всем мире как{" "}
                   <span className="font-bold">Пакт Рериха</span>.
                 </p>
+
+                {/* ТЕКСТ ВМЕСТО ЧЕРНОГО БЛОКА */}
+                <p className="mt-8 pt-8 border-t border-slate-100 text-slate-700">
+                  В рамках конференции 10 апреля 2026 года проводится телемост
+                  Севастополь – «Артек» – Волгоград — Казахстан – Курск – Рязань
+                  — Херсон на тему: «Личность. Виртуальная личность. ИИ:
+                  проблемы и перспективы исследования», благодаря которому будет
+                  предоставлена онлайн площадка для презентаций и обсуждения
+                  заданной темы.
+                </p>
+
                 <p className="text-slate-800 border-l-2 border-slate-300 pl-6 py-2 my-8 font-bold">
                   Задача конференции – апробация результатов исследований,
                   связанных с основными тенденциями развития современного
@@ -108,46 +119,22 @@ export default function ConferenceClient() {
                 </p>
               </div>
 
-              {/* ГЕОГРАФИЯ ТЕЛЕМОСТА */}
-              <section className="relative overflow-hidden bg-slate-950 p-6 md:p-10 text-white shadow-xl rounded-sm">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-blue-900/20 via-slate-950 to-slate-950 z-0" />
-                <div className="absolute -right-10 -bottom-10 opacity-10 z-0 text-blue-400">
-                  <Globe size={200} strokeWidth={0.5} />
-                </div>
-
-                <div className="relative z-10">
-                  <div className="mb-8">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-6 h-[1px] bg-blue-500" />
-                      <h3 className="font-sans text-[8px] font-bold uppercase tracking-[0.4em] text-blue-400">
-                        Центральная тема
-                      </h3>
-                    </div>
-                    <h2 className="text-xl md:text-2xl font-bold leading-snug tracking-tight uppercase not-italic max-w-xl">
-                      «Личность. Виртуальная личность. Искусственный интеллект:
-                      проблемы и перспективы исследования»
-                    </h2>
-                  </div>
-
-                  <div className="pt-6 border-t border-white/10">
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-sans">
-                      {cities.map((city, i) => (
-                        <div key={city} className="flex items-center gap-4">
-                          <span className="text-[12px] md:text-sm font-bold uppercase tracking-[0.2em] text-white">
-                            {city}
-                          </span>
-                          {i < cities.length - 1 && (
-                            <span className="text-white/30 text-[10px]">—</span>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                    <p className="mt-4 text-[10px] font-sans text-slate-500 tracking-[0.1em] uppercase">
-                      Онлайн-трансляция и научная дискуссия
-                    </p>
-                  </div>
-                </div>
-              </section>
+              {/* СЕКЦИИ КОНФЕРЕНЦИИ */}
+              <div className="pt-10 space-y-6">
+                <h3 className="font-sans text-[10px] font-bold uppercase tracking-[0.4em] text-blue-900">
+                  Секции конференции
+                </h3>
+                <ul className="space-y-4 text-base md:text-lg text-slate-800 list-none">
+                  {sections.map((section, i) => (
+                    <li key={i} className="flex gap-4">
+                      <span className="text-blue-900 font-bold tracking-tighter">
+                        —
+                      </span>
+                      {section}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </section>
           </div>
 
@@ -160,7 +147,7 @@ export default function ConferenceClient() {
                     Дата проведения
                   </p>
                   <p className="text-xl md:text-2xl font-black text-slate-900 uppercase not-italic">
-                    10 апреля 2026
+                    10 – 11 апреля 2026
                   </p>
                 </div>
                 <div>
