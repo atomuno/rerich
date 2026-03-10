@@ -27,7 +27,7 @@ export function middleware(request: NextRequest) {
         <body style="font-family: sans-serif; text-align: center; pt-20">
           <h1>Ошибка доступа</h1>
           <p>Этот ресурс является несанкционированным зеркалом.</p>
-          <p>Официальный сайт проекта: <a href="https://${myDomain}">${myDomain}</a></p>
+          <p>Официальный сайт проекта: <a href="http://${myDomain}">${myDomain}</a></p>
         </body>
       </html>`,
       {
