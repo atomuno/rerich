@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import Metrika from "@/components/Metrika";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -93,6 +95,8 @@ export default function RootLayout({
   return (
     <html lang="ru" className={`${inter.variable} ${playfair.variable}`}>
       <body className="antialiased flex flex-col min-h-screen font-sans text-slate-900 bg-white">
+        <Metrika />
+        <GoogleAnalytics gaId="G-SP8BH9SRNC" />
         <Navbar />
 
         <main id="main-content" className="flex-grow pt-14">
