@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: "Научный лекторий СГФР — Видеоархив докладов",
     description:
       "Архив выступлений ведущих ученых на международных конференциях по культурному наследию.",
-    url: "http://sevcrf.ru/lectures",
+    url: "http://sevcrf.ru/fund/science/lectures",
     siteName: "Рериховский Центр Севастополя",
     locale: "ru_RU",
     type: "website",

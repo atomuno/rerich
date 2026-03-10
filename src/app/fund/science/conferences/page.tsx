@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: "Конференция: Перспективы развития современного общества (2026)",
     description:
       "Научная дискуссия о влиянии ИИ на личность и культуру в цифровую эпоху.",
-    url: "http://sevcrf.ru/conference", // Указываем точный путь
+    url: "http://sevcrf.ru/fund/science/conferences", // Указываем точный путь
     siteName: "Рериховский Центр Севастополя",
     locale: "ru_RU",
     type: "article",

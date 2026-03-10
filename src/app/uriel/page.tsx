@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "СГЦДТ «Уриэль» — Творческое развитие в Севастополе",
     description: "Художественное воспитание и развитие талантов в Севастополе.",
-    url: "http://sevcrf.ru/center",
+    url: "http://sevcrf.ru/uriel",
     siteName: "Рериховский Центр Севастополя",
     locale: "ru_RU",
     type: "website",
