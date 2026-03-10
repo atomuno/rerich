@@ -19,8 +19,8 @@ interface NavLink {
 
 interface NavConfigs {
   main: NavLink[];
-  org1: NavLink[];
-  org2: NavLink[];
+  fund: NavLink[];
+  uriel: NavLink[];
 }
 
 export default function Navbar() {
@@ -31,41 +31,41 @@ export default function Navbar() {
   // Конфигурация ссылок
   const navConfigs: NavConfigs = {
     main: [
-      { href: "/org1", label: "Фонд Рериха" },
-      { href: "/org2", label: "Центр Уриэль" },
+      { href: "/fund", label: "Фонд Рериха" },
+      { href: "/uriel", label: "Центр Уриэль" },
     ],
-    org1: [
-      { href: "/org1/about", label: "О нас" },
-      { href: "/org1/library", label: "Библиотека" },
-      { href: "/org1/museum", label: "Музей" },
+    fund: [
+      { href: "/fund/about", label: "О нас" },
+      { href: "/fund/library", label: "Библиотека" },
+      { href: "/fund/museum", label: "Музей" },
       {
         label: "Просвещение",
         submenu: [
-          { href: "/org1/science/conferences", label: "Конференции" },
-          { href: "/org1/science/lectures", label: "Лекторий" },
+          { href: "/fund/science/conferences", label: "Конференции" },
+          { href: "/fund/science/lectures", label: "Лекторий" },
         ],
       },
-      { href: "/org1/books", label: "Книги" },
-      { href: "/org1/gallery", label: "Галерея" },
+      { href: "/fund/books", label: "Книги" },
+      { href: "/fund/gallery", label: "Галерея" },
     ],
-    org2: [
-      { href: "/org2/about", label: "О нас" },
+    uriel: [
+      { href: "/uriel/about", label: "О нас" },
       {
         label: "Кружки",
         submenu: [
-          { href: "/org2/clubs/ships", label: "Судомодельный" },
-          { href: "/org2/clubs/art", label: "Художественный" },
+          { href: "/uriel/clubs/ships", label: "Судомодельный" },
+          { href: "/uriel/clubs/art", label: "Художественный" },
         ],
       },
       {
         label: "Работы",
         submenu: [
-          { href: "/org2/works/models", label: "Модели кораблей" },
-          { href: "/org2/works/painting", label: "Живопись" },
-          { href: "/org2/works/crafts", label: "Поделки" },
+          { href: "/uriel/works/models", label: "Модели кораблей" },
+          { href: "/uriel/works/painting", label: "Живопись" },
+          { href: "/uriel/works/crafts", label: "Поделки" },
         ],
       },
-      { href: "/org2/exhibitions", label: "Выставки" },
+      { href: "/uriel/exhibitions", label: "Выставки" },
     ],
   };
 
@@ -74,12 +74,12 @@ export default function Navbar() {
   let logoLabel = "РЕРИХ";
   let subLabel = "Наследие и Культура";
 
-  if (pathname.startsWith("/org1")) {
-    currentLinks = navConfigs.org1;
+  if (pathname.startsWith("/fund")) {
+    currentLinks = navConfigs.fund;
     logoLabel = "ФОНД РЕРИХА";
     subLabel = "Севастопольский городской";
-  } else if (pathname.startsWith("/org2")) {
-    currentLinks = navConfigs.org2;
+  } else if (pathname.startsWith("/uriel")) {
+    currentLinks = navConfigs.uriel;
     logoLabel = "УРИЭЛЬ";
     subLabel = "Центр детского творчества";
   }

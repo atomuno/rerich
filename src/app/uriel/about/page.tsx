@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
-import Org2About from "./Org2About";
+import UrielAbout from "./Org2About";
+
+// Текст, который будет отрисован нашим стильным генератором на Playfair Display
+const OG_TITLE = "Об организации: СГЦДТ «Уриэль»";
 
 export const metadata: Metadata = {
   title: "Об организации",
@@ -12,8 +15,26 @@ export const metadata: Metadata = {
     "детское творчество Севастополь",
     "реквизиты Уриэль",
   ],
+  openGraph: {
+    title: "О центре «Уриэль» — История и реквизиты",
+    description:
+      "Официальная информация о Севастопольском центре детского творчества.",
+    url: "http://sevcrf.ru/uriel/about",
+    siteName: "Рериховский Центр Севастополя",
+    locale: "ru_RU",
+    type: "article",
+    images: [
+      {
+        // Наш динамический API с ярким градиентом и сочным шрифтом
+        url: `/api/og?title=${encodeURIComponent(OG_TITLE)}`,
+        width: 1200,
+        height: 630,
+        alt: OG_TITLE,
+      },
+    ],
+  },
 };
 
 export default function AboutPage() {
-  return <Org2About />;
+  return <UrielAbout />;
 }

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Org2Layout({
+export default function UrielLayout({
   children,
 }: {
   children: React.ReactNode;

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import Org1AboutContent from "./Org1AboutContent";
+import FundAboutContent from "./Org1AboutContent";
+
+const TITLE = "Об организации";
 
 export const metadata: Metadata = {
-  title: "Об организации",
+  title: TITLE,
   description:
     "Подробная информация о Севастопольском городском фонде Рериха: история создания, руководство (Анохин А.М.) и официальные реквизиты организации.",
   keywords: [
@@ -12,8 +14,19 @@ export const metadata: Metadata = {
     "реквизиты фонда Рериха",
     "история фонда",
   ],
+  // Добавляем динамическую картинку для этой страницы
+  openGraph: {
+    images: [
+      {
+        url: `/api/og?title=${encodeURIComponent(TITLE)}`,
+        width: 1200,
+        height: 630,
+        alt: TITLE,
+      },
+    ],
+  },
 };
 
 export default function AboutPage() {
-  return <Org1AboutContent />;
+  return <FundAboutContent />;
 }

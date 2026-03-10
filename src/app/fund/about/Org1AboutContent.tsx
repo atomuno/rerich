@@ -1,6 +1,6 @@
 "use client";
 
-export default function Org1AboutContent() {
+export default function FundAboutContent() {
   return (
     <main className="min-h-screen bg-white font-serif text-slate-900 pt-20 md:pt-32 pb-16 md:pb-24">
       <div className="max-w-3xl mx-auto px-6 md:px-10">

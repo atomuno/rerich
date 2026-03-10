@@ -60,7 +60,7 @@ export default function HomeClient() {
         className="flex flex-col md:flex-row min-h-screen overflow-hidden scroll-mt-16 bg-white font-serif"
       >
         <Link
-          href="/org1"
+          href="/fund"
           className="relative flex-1 group flex items-center justify-center p-8 overflow-hidden border-b md:border-b-0 md:border-r border-slate-200 transition-all duration-700 min-h-[50vh] md:min-h-0"
         >
           <div
@@ -79,7 +79,7 @@ export default function HomeClient() {
         </Link>
 
         <Link
-          href="/org2"
+          href="/uriel"
           className="relative flex-1 group flex items-center justify-center p-8 overflow-hidden transition-all duration-700 min-h-[50vh] md:min-h-0"
         >
           <div

@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Org1Layout({
+export default function FundLayout({
   children,
 }: {
   children: React.ReactNode;
