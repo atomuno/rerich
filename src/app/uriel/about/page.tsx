@@ -20,7 +20,6 @@ export const metadata: Metadata = {
     description:
       "Официальная информация о Севастопольском центре детского творчества.",
     url: "http://sevcrf.ru/uriel/about",
-    siteName: "Рериховский Центр Севастополя",
     locale: "ru_RU",
     type: "article",
     images: [

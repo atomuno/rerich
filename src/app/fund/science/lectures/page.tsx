@@ -21,7 +21,6 @@ export const metadata: Metadata = {
     description:
       "Архив выступлений ведущих ученых на международных конференциях по культурному наследию.",
     url: "http://sevcrf.ru/fund/science/lectures",
-    siteName: "Рериховский Центр Севастополя",
     locale: "ru_RU",
     type: "website",
     images: [

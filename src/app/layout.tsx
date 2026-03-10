@@ -21,7 +21,6 @@ export const viewport: Viewport = {
 };
 
 // Константы для удобства
-const SITE_NAME = "Рериховский Центр Севастополя";
 const DOMAIN = "http://sevcrf.ru";
 
 export const metadata: Metadata = {
@@ -48,7 +47,6 @@ export const metadata: Metadata = {
     title: "Организации имени Н.К. Рериха | Севастополь",
     description: "Культура, наука и детское творчество в Севастополе.",
     url: DOMAIN,
-    siteName: SITE_NAME,
     locale: "ru_RU",
     type: "website",
     images: [
@@ -57,7 +55,6 @@ export const metadata: Metadata = {
         url: `/api/og?title=${encodeURIComponent("Рериховский Центр Севастополя")}`,
         width: 1200,
         height: 630,
-        alt: SITE_NAME,
       },
     ],
   },
