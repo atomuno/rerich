@@ -4,13 +4,20 @@ import { useEffect, Suspense } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import Script from "next/script";
 
+declare global {
+  interface Window {
+    ym: (id: number, action: string, ...args: unknown[]) => void;
+  }
+}
+
 function MetrikaContent() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const COUNTER_ID = 107236298;
 
   useEffect(() => {
-    if (typeof window.ym !== "undefined") {
-      window.ym(107236298, "hit", window.location.href); //
+    if (typeof window.ym === "function") {
+      window.ym(COUNTER_ID, "hit", window.location.href);
     }
   }, [pathname, searchParams]);
 
@@ -21,7 +28,7 @@ function MetrikaContent() {
         m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
         (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-        ym(107236298, "init", {
+        ym(${COUNTER_ID}, "init", {
              clickmap:true,
              trackLinks:true,
              accurateTrackBounce:true,
