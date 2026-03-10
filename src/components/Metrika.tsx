@@ -10,7 +10,7 @@ function MetrikaContent() {
 
   useEffect(() => {
     if (typeof window.ym !== "undefined") {
-      window.ym(107236298, "hit", window.location.href); // ЗАМЕНИ 96655443 на свой ID
+      window.ym(107236298, "hit", window.location.href); //
     }
   }, [pathname, searchParams]);
 
@@ -21,7 +21,7 @@ function MetrikaContent() {
         m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
         (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-        ym(96655443, "init", { // ЗАМЕНИ 96655443 на свой ID
+        ym(107236298, "init", {
              clickmap:true,
              trackLinks:true,
              accurateTrackBounce:true,
