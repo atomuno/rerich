@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Metrika from "@/components/Metrika";
+import { Suspense } from "react";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -20,28 +21,19 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-// Константы для удобства
-const DOMAIN = "http://sevcrf.ru";
+const DOMAIN = "https://sevcrf.ru";
 
 export const metadata: Metadata = {
   metadataBase: new URL(DOMAIN),
 
+  // Шаблон заголовка: если на странице title: "Контакты",
   title: {
     default: "Организации имени Н.К. Рериха | Севастополь",
-    template: "%s | Рериховский Центр",
+    template: "%s",
   },
 
   description:
-    "Официальный портал Севастопольского фонда Рериха и Центра детского творчества «Уриэль». Культурно-просветительская деятельность, наследие семьи Рерихов и творческое развитие молодежи.",
-
-  keywords: [
-    "Фонд Рериха",
-    "Уриэль Севастополь",
-    "Центр детского творчества",
-    "Севастополь культура",
-    "Николай Рерих",
-    "Анохин Александр Михайлович",
-  ],
+    "Официальный портал Севастопольского фонда Рериха и Центра детского творчества «Уриэль». Культурно-просветительская деятельность и наследие семьи Рерихов.",
 
   openGraph: {
     title: "Организации имени Н.К. Рериха | Севастополь",
@@ -49,38 +41,16 @@ export const metadata: Metadata = {
     url: DOMAIN,
     locale: "ru_RU",
     type: "website",
-    images: [
-      {
-        // По умолчанию для главной страницы
-        url: `/api/og?title=${encodeURIComponent("Рериховский Центр Севастополя")}`,
-        width: 1200,
-        height: 630,
-      },
-    ],
+    // Здесь МЫ НЕ ПИШЕМ images, чтобы они подтягивались динамически из page.tsx
   },
 
   twitter: {
     card: "summary_large_image",
-    // Twitter также подхватит нашу динамическую картинку
-    images: [
-      `/api/og?title=${encodeURIComponent("Рериховский Центр Севастополя")}`,
-    ],
   },
 
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-
-  alternates: {
-    canonical: "/",
   },
 };
 
@@ -92,8 +62,13 @@ export default function RootLayout({
   return (
     <html lang="ru" className={`${inter.variable} ${playfair.variable}`}>
       <body className="antialiased flex flex-col min-h-screen font-sans text-slate-900 bg-white">
-        <Metrika />
+        {/* Аналитика обернута в Suspense для корректной работы в Next.js */}
+        <Suspense fallback={null}>
+          <Metrika />
+        </Suspense>
+
         <GoogleAnalytics gaId="G-SP8BH9SRNC" />
+
         <Navbar />
 
         <main id="main-content" className="flex-grow pt-14">
@@ -112,14 +87,11 @@ export default function RootLayout({
                   <span className="text-[9px] text-slate-500 uppercase tracking-[0.2em]">
                     Севастополь
                   </span>
-                  <span className="text-[8px] text-slate-600 uppercase tracking-[0.1em] hidden md:block">
-                    Культурное наследие
-                  </span>
                 </div>
               </div>
 
               <div className="text-[9px] text-slate-500 tracking-widest uppercase text-center md:text-right">
-                <p>© {new Date().getFullYear()} — Все права защищены</p>
+                <p>© {new Date().getFullYear()} — СГФР | УРИЭЛЬ</p>
                 <p className="mt-1 text-slate-600 lowercase tracking-normal">
                   официальное представительство
                 </p>

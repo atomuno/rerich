@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: "/_next/",
+      disallow: ["/api/", "/admin/"], // Закрываем технические пути
     },
     sitemap: "https://sevcrf.ru/sitemap.xml",
   };
