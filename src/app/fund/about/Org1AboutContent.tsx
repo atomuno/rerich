@@ -23,8 +23,8 @@ export default function FundAboutContent() {
                 <span className="font-black text-slate-900">
                   Региональная общественная организация
                 </span>{" "}
-                «Севастопольский городской фонд Рериха» (РОО «СГФР») действует в
-                Севастополе с 1990 года.
+                «Севастопольский городской фонд Рерихов» (РОО «СГФР») действует
+                в Севастополе с 1990 года.
               </p>
               <p>
                 Руководит фондом председатель{" "}
@@ -102,7 +102,7 @@ export default function FundAboutContent() {
         </div>
 
         <footer className="mt-24 pt-8 border-t border-slate-100 opacity-40 text-[9px] font-sans font-black uppercase tracking-[1em] text-center">
-          Севастопольский городской фонд Рериха
+          Севастопольский городской фонд Рерихов
         </footer>
       </div>
     </main>

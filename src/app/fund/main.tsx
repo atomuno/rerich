@@ -13,7 +13,7 @@ export default function FoundationHero() {
               Севастопольский городской
             </h2>
             <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif text-blue-900 leading-none uppercase drop-shadow-sm py-4">
-              Фонд Рериха
+              Фонд Рерихов
             </h1>
           </div>
         </div>

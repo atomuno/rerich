@@ -31,7 +31,7 @@ export default function Navbar() {
   // Конфигурация ссылок
   const navConfigs: NavConfigs = {
     main: [
-      { href: "/fund", label: "Фонд Рериха" },
+      { href: "/fund", label: "Фонд Рерихов" },
       { href: "/uriel", label: "Центр Уриэль" },
     ],
     fund: [
@@ -76,7 +76,7 @@ export default function Navbar() {
 
   if (pathname.startsWith("/fund")) {
     currentLinks = navConfigs.fund;
-    logoLabel = "ФОНД РЕРИХА";
+    logoLabel = "ФОНД РЕРИХОВ";
     subLabel = "Севастопольский городской";
   } else if (pathname.startsWith("/uriel")) {
     currentLinks = navConfigs.uriel;

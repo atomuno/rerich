@@ -27,7 +27,7 @@ export default function HomeClient() {
             </span>
             <h1 className="text-2xl md:text-4xl lg:text-6xl font-serif text-white leading-tight drop-shadow-lg tracking-wide">
               Севастопольский городской <br className="hidden md:block" />
-              фонд Рериха
+              фонд Рерихов
             </h1>
           </div>
 
@@ -70,7 +70,7 @@ export default function HomeClient() {
           <div className="absolute inset-0 z-10 bg-slate-950/60 transition-all duration-700 group-hover:bg-blue-900/75" />
           <div className="relative z-20 text-center space-y-6 px-4">
             <h2 className="text-xl md:text-3xl lg:text-4xl font-serif font-bold uppercase tracking-[0.1em] text-white leading-tight">
-              Севастопольский городской <br /> фонд Рериха
+              Севастопольский городской <br /> фонд Рерихов
             </h2>
             <div className="inline-flex items-center font-sans text-white/90 opacity-0 group-hover:opacity-100 transition-all duration-500 uppercase text-[10px] tracking-[0.2em] border border-white/30 px-6 py-2 rounded-full">
               Перейти <ArrowRight className="ml-2 w-4 h-4" />
