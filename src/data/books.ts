@@ -27,7 +27,7 @@ export const booksData: Book[] = [
     id: "sevastopol-chronicles",
     title:
       "Севастопольские летописи. Краткие исторические хроники города-героя",
-    author: "Головина Н.М., Головина В.В.",
+    author: "Головина Н.М., Головин В.В.",
     year: "2025",
     pages: "512 с.",
     circulation: "500 экз.",
@@ -64,7 +64,7 @@ export const booksData: Book[] = [
   {
     id: "history-sevastopol-environs",
     title: "История Севастополя и окрестностей",
-    author: "Головина Н.М., Головина В.В.",
+    author: "Головина Н.М., Головин В.В.",
     year: "2018",
     pages: "392 с.",
     circulation: "3500 экз.",
