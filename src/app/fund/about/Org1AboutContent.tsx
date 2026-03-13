@@ -1,108 +1,154 @@
 "use client";
 
+import React from "react";
+import { motion } from "framer-motion";
+
 export default function FundAboutContent() {
   return (
-    <main className="min-h-screen bg-white font-serif text-slate-900 pt-20 md:pt-32 pb-16 md:pb-24">
-      <div className="max-w-3xl mx-auto px-6 md:px-10">
-        <header className="mb-12 md:mb-20">
-          <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-4">
-            О Фонде
-          </h1>
-          <div className="h-2 w-16 bg-blue-900" />
+    <main className="min-h-screen bg-white font-serif text-slate-900 pt-24 pb-20">
+      <div className="max-w-4xl mx-auto px-6">
+        {/* Заголовок в строгом стиле */}
+        <header className="border-b-2 border-slate-900 pb-8 mb-12">
+          <motion.h1
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-4xl md:text-5xl font-black uppercase tracking-tight"
+          >
+            О нас
+          </motion.h1>
         </header>
 
-        <div className="space-y-16 md:space-y-24">
-          <section className="flex flex-col gap-4">
-            <div>
-              <span className="text-[10px] font-sans font-black uppercase tracking-[0.3em] text-slate-400">
-                Организация
-              </span>
-            </div>
-            <div className="text-xl md:text-2xl leading-relaxed font-medium text-slate-800">
-              <p className="mb-6">
-                <span className="font-black text-slate-900">
-                  Региональная общественная организация
-                </span>{" "}
-                «Севастопольский городской фонд Рерихов» (РОО «СГФР») действует
-                в Севастополе с 1990 года.
-              </p>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
+          {/* Основной текстовый блок */}
+          <div className="md:col-span-8">
+            <section className="space-y-6 text-lg leading-relaxed text-slate-900">
               <p>
-                Руководит фондом председатель{" "}
-                <span className="text-blue-900 font-black">
-                  Александр Михайлович Анохин
+                <span className="font-bold">
+                  {`Региональная общественная организация "Севастопольский
+                  городской фонд Рерихов" (Фонд)`}
+                </span>{" "}
+                создан по инициативе общественности г. Севастополя{" "}
+                <span className="font-bold">17 ноября 1990 года</span> и в
+                соответствии с волей, выраженной в письме (газета «Советская
+                культура» от 3 июня 1989 года) единственного владельца и
+                хранителя художественно-научного наследия семьи Рерихов –{" "}
+                <span className="font-bold uppercase tracking-tight">
+                  Святослава Николаевича Рериха
                 </span>
-                , возглавляющий организацию с 2015 года.
-              </p>
-            </div>
-          </section>
-
-          <section className="flex flex-col gap-4 pt-12 border-t-2 border-slate-900">
-            <div>
-              <span className="text-[10px] font-sans font-black uppercase tracking-[0.3em] text-slate-400">
-                Юридический адрес
-              </span>
-            </div>
-            <div>
-              <p className="text-2xl md:text-4xl font-black leading-tight tracking-tight mb-10">
-                Севастополь, <br />
-                ул. Бориса Михайлова, <br />
-                д. 12, кв. 96
+                .
               </p>
 
-              <div className="space-y-4 font-sans text-lg md:text-xl font-bold">
-                <p className="flex justify-between border-b border-slate-100 pb-2">
-                  <span className="text-slate-400 uppercase text-[9px] tracking-widest pt-1">
-                    ОГРН
-                  </span>
-                  <span>1159204013320</span>
-                </p>
-                <p className="flex justify-between border-b border-slate-100 pb-2">
-                  <span className="text-slate-400 uppercase text-[9px] tracking-widest pt-1">
-                    ИНН
-                  </span>
-                  <span>9201506788</span>
-                </p>
-                <p className="flex justify-between border-b border-slate-100 pb-2">
-                  <span className="text-slate-400 uppercase text-[9px] tracking-widest pt-1">
-                    КПП
-                  </span>
-                  <span>920101001</span>
-                </p>
+              <div>
+                <h2 className="font-bold uppercase text-sm tracking-widest mb-4 mt-8 text-blue-900">
+                  Целью деятельности Фонда является:
+                </h2>
+                <ul className="space-y-4">
+                  <li className="flex gap-3">
+                    <span className="font-bold">•</span>
+                    <span>
+                      удовлетворение духовных и иных нематериальных
+                      потребностей, представление и защита общих интересов,
+                      достижение иных не противоречащих закону целей своих
+                      членов;
+                    </span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="font-bold">•</span>
+                    <span>
+                      возрождение нравственных ценностей народа на основе
+                      использования гуманистических идей семьи Рерихов, а также
+                      вовлечение общественности в активное участие в культурном
+                      возрождении;
+                    </span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="font-bold">•</span>
+                    <span>
+                      развитие сотрудничества в г. Севастополе на базе
+                      культурных и экологических движений, развертывающихся во
+                      всем мире;
+                    </span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="font-bold">•</span>
+                    <span>
+                      укрепление в г. Севастополе идей интернационализма и
+                      подлинной дружбы между народами всего мира в соответствии
+                      с традициями этического учения семьи Рерихов;
+                    </span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="font-bold">•</span>
+                    <span>
+                      развитие интереса членов Фонда к познанию истории и
+                      культуры народов, населяющих территорию нашего государства
+                      и зарубежных стран и его удовлетворение в просветительских
+                      формах деятельности.
+                    </span>
+                  </li>
+                </ul>
               </div>
-            </div>
-          </section>
 
-          <section className="flex flex-col gap-4 pt-12 border-t-2 border-slate-900">
-            <div>
-              <span className="text-[10px] font-sans font-black uppercase tracking-[0.3em] text-slate-400">
-                Регистрация
-              </span>
-            </div>
-            <div className="space-y-10">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <p className="pt-4 font-bold">
+                Фонд в своей работе опирается на широкую поддержку
+                общественности.
+              </p>
+            </section>
+          </div>
+
+          {/* Боковая панель с реквизитами */}
+          <div className="md:col-span-4">
+            <aside className="border border-slate-200 p-6 bg-slate-50">
+              <h3 className="text-[10px] font-sans font-black uppercase tracking-[0.2em] mb-6 text-slate-400 border-b pb-2">
+                Юридические сведения
+              </h3>
+
+              <div className="space-y-5 text-sm">
                 <div>
-                  <span className="text-[9px] font-sans font-black uppercase text-slate-400 block mb-1">
-                    № в ПФР/ФСС
+                  <span className="text-[9px] uppercase font-bold text-slate-400 block">
+                    Председатель
                   </span>
-                  <p className="text-xl md:text-2xl font-black font-sans">
-                    1023150632
+                  <p className="font-bold uppercase">
+                    Александр Михайлович Анохин
                   </p>
                 </div>
+
                 <div>
-                  <span className="text-[9px] font-sans font-black uppercase text-slate-400 block mb-1">
-                    Дата регистрации
+                  <span className="text-[9px] uppercase font-bold text-slate-400 block">
+                    Адрес
                   </span>
-                  <p className="text-xl md:text-2xl font-black font-sans">
-                    11 марта 2015
+                  <p className="leading-tight">
+                    Севастополь, ул. Бориса Михайлова, д. 12, кв. 96
                   </p>
+                </div>
+
+                <div className="pt-4 space-y-2 border-t border-slate-200 font-mono text-[12px]">
+                  <div className="flex justify-between">
+                    <span>ОГРН:</span>
+                    <span className="font-bold">1159204013320</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>ИНН:</span>
+                    <span className="font-bold">9201506788</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>КПП:</span>
+                    <span className="font-bold">920101001</span>
+                  </div>
+                  <div className="flex justify-between border-t border-dotted pt-2 mt-2">
+                    <span>ЗАРЕГ.:</span>
+                    <span className="font-bold text-blue-900">11.03.2015</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </aside>
+          </div>
         </div>
 
-        <footer className="mt-24 pt-8 border-t border-slate-100 opacity-40 text-[9px] font-sans font-black uppercase tracking-[1em] text-center">
-          Севастопольский городской фонд Рерихов
+        <footer className="mt-20 pt-8 border-t border-slate-100 text-center">
+          <p className="text-[10px] font-sans font-bold uppercase tracking-[0.8em] text-slate-300">
+            Севастопольский городской фонд Рерихов
+          </p>
         </footer>
       </div>
     </main>

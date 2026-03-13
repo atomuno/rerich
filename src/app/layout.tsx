@@ -26,6 +26,11 @@ const DOMAIN = "https://sevcrf.ru";
 export const metadata: Metadata = {
   metadataBase: new URL(DOMAIN),
 
+  icons: {
+    icon: "/favicon.ico", // Путь относительно папки public
+    shortcut: "/favicon.ico",
+  },
+
   // Шаблон заголовка: если на странице title: "Контакты",
   title: {
     default: "Организации имени Н.К. Рериха | Севастополь",
