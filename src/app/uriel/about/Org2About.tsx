@@ -84,18 +84,6 @@ export default function UrielAbout() {
               <div className="space-y-6 text-sm">
                 <div>
                   <span className="text-[9px] uppercase font-bold text-slate-400 block mb-1">
-                    Директор
-                  </span>
-                  <p className="font-bold uppercase leading-tight text-slate-900">
-                    Анохин Александр Михайлович
-                  </p>
-                  <p className="text-[10px] text-slate-400 mt-1 uppercase">
-                    с 6 марта 2015 года
-                  </p>
-                </div>
-
-                <div>
-                  <span className="text-[9px] uppercase font-bold text-slate-400 block mb-1">
                     Юридический адрес
                   </span>
                   <p className="font-medium leading-tight text-slate-900">

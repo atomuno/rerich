@@ -106,15 +106,6 @@ export default function FundAboutContent() {
               <div className="space-y-5 text-sm">
                 <div>
                   <span className="text-[9px] uppercase font-bold text-slate-400 block">
-                    Председатель
-                  </span>
-                  <p className="font-bold uppercase">
-                    Александр Михайлович Анохин
-                  </p>
-                </div>
-
-                <div>
-                  <span className="text-[9px] uppercase font-bold text-slate-400 block">
                     Адрес
                   </span>
                   <p className="leading-tight">
