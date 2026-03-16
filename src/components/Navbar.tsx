@@ -115,7 +115,7 @@ export default function Navbar() {
             >
               <Link
                 href={link.href || "#"}
-                className={`flex items-center whitespace-nowrap transition-colors duration-300 hover:text-blue-700 ${
+                className={`flex items-center whitespace-nowrap transition-colors duration-300 hover:text-blue-900 ${
                   pathname === link.href ? "text-blue-900" : ""
                 }`}
               >

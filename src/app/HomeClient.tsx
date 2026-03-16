@@ -18,7 +18,7 @@ export default function HomeClient() {
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('/hero-bg.jpg')" }}
         />
-        <div className="absolute inset-0 z-10 bg-slate-950/65 backdrop-blur-[1px]" />
+        <div className="absolute inset-0 z-10 bg-slate-950/40 backdrop-blur-[2px]" />
 
         <div className="relative z-20 max-w-6xl mx-auto space-y-10 md:space-y-12 -mt-10">
           <div className="space-y-4 md:space-y-5">
@@ -67,7 +67,7 @@ export default function HomeClient() {
             className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-[1.5s] group-hover:scale-105"
             style={{ backgroundImage: "url('/fond-bg.jpg')" }}
           />
-          <div className="absolute inset-0 z-10 bg-slate-950/60 transition-all duration-700 group-hover:bg-blue-900/75" />
+          <div className="absolute inset-0 z-10 bg-slate-950/40 transition-all duration-700 group-hover:bg-blue-900/75" />
           <div className="relative z-20 text-center space-y-6 px-4">
             <h2 className="text-xl md:text-3xl lg:text-4xl font-serif font-bold uppercase tracking-[0.1em] text-white leading-tight">
               Севастопольский городской <br /> фонд Рерихов
@@ -86,7 +86,7 @@ export default function HomeClient() {
             className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-[1.5s] group-hover:scale-105"
             style={{ backgroundImage: "url('/uriel-bg.jpg')" }}
           />
-          <div className="absolute inset-0 z-10 bg-slate-950/60 transition-all duration-700 group-hover:bg-blue-800/75" />
+          <div className="absolute inset-0 z-10 bg-slate-950/40 transition-all duration-700 group-hover:bg-blue-800/75" />
           <div className="relative z-20 text-center space-y-6 px-4">
             <h2 className="text-xl md:text-3xl lg:text-4xl font-serif font-bold uppercase tracking-[0.1em] text-white leading-tight">
               СГЦДТ «УРИЭЛЬ» <br /> имени Н.К. РЕРИХА
