@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import LibraryContent from "./LibraryContent";
 
+const OG_TITLE = "Общественно-массовая библиотека СГФР";
+
 export const metadata: Metadata = {
   title: "Общественно-массовая библиотека СГФР",
   description:
@@ -13,6 +15,19 @@ export const metadata: Metadata = {
     "общественно-массовая библиотека",
     "редкие издания книг Севастополь",
   ],
+  openGraph: {
+    title: OG_TITLE,
+    description:
+      "Познайте красоту мироздания через творчество Л.Л. Кирилловой.",
+    images: [
+      {
+        url: `/api/og?title=${encodeURIComponent(OG_TITLE)}`,
+        width: 1200,
+        height: 630,
+        alt: OG_TITLE,
+      },
+    ],
+  },
 };
 
 export default function LibraryPage() {
