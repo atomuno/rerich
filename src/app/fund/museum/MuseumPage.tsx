@@ -202,7 +202,7 @@ export default function MuseumPage() {
               </div>
               <div className="bg-slate-50 p-6 rounded-lg">
                 <h4 className="font-black uppercase text-xs mb-3 text-blue-900">
-                  Художественный зал
+                  Художетсвенный раздел
                 </h4>
                 <p className="text-sm">
                   Здесь выставлены работы Петриковской росписи художницы{" "}
@@ -214,21 +214,21 @@ export default function MuseumPage() {
               </div>
             </div>
 
-            <div className="mt-10 bg-slate-900 text-white p-8 rounded-xl">
+            <div className="mt-10 bg-slate-200 text-white p-8 rounded-xl">
               <h3 className="text-xl font-black uppercase mb-6 text-blue-400">
                 Живописное наследие
               </h3>
               <div className="flex flex-col md:flex-row gap-8">
                 <div className="flex-1">
-                  <p className="text-sm leading-relaxed">
+                  <p className="text-sm leading-relaxed text-black">
                     Наряду с работами художников Л.Л. Кирилловой и А.В. Евтушка
                     (1960–2026), экспонируется монументальное полотно
-                    <span className="italic text-blue-200">
+                    <span className="italic text-blue-500">
                       {" "}
                       «Севастополь, Севастополь, ты разгромлен, ты утоплен…»
                     </span>{" "}
                     Заслуженного художника УССР
-                    <span className="font-bold text-white">
+                    <span className="font-bold text-black">
                       {" "}
                       Коваленко Виктора Карповича (1930–2017)
                     </span>
@@ -236,10 +236,10 @@ export default function MuseumPage() {
                   </p>
                 </div>
                 <div className="flex-1 border-l border-slate-700 pl-0 md:pl-8">
-                  <p className="text-xs text-slate-400 uppercase tracking-wider mb-2">
+                  <p className="text-xs text-slate-700 uppercase tracking-wider mb-2">
                     О сюжете картины:
                   </p>
-                  <p className="text-sm text-slate-300">
+                  <p className="text-sm text-slate-700">
                     Запечатлен эпизод Первой обороны Севастополя 1854-1855 гг.
                     На картине изображена Даша Севастопольская, сопровождающая
                     раненого офицера, и мачты затопленных кораблей, преградивших
