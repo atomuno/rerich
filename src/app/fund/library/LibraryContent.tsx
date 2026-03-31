@@ -22,6 +22,7 @@ import {
   pereodic,
   sba,
 } from "../../../../public/library";
+import Image from "next/image"; // Импортируем компонент Image
 
 export default function LibraryContent() {
   const [openSection, setOpenSection] = useState<string | null>(null);
@@ -49,6 +50,19 @@ export default function LibraryContent() {
             </div>
           </div>
         </header>
+
+        {/* ГЛАВНОЕ ФОТО БИБЛИОТЕКИ */}
+        <div className="mb-16 relative w-full aspect-[1181/531] overflow-hidden rounded-xl shadow-2xl border border-slate-200">
+          <Image
+            src="/biblio.jpg"
+            alt="Интерьер общественно-массовой библиотеки"
+            fill
+            priority
+            className="object-cover transition-transform duration-1000 hover:scale-105"
+          />
+          {/* Легкий градиент поверх для премиальности */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+        </div>
 
         {/* ИСТОРИЧЕСКАЯ СПРАВКА */}
         <section className="mb-12 bg-white p-8 rounded-lg border border-slate-200 shadow-sm relative overflow-hidden">

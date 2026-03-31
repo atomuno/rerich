@@ -71,21 +71,20 @@ export default function GalleryPage() {
           <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-4 text-slate-200 text-6xl select-none">
             “
           </div>
-          <blockquote className="text-center max-w-4xl mx-auto">
-            <p className="text-lg md:text-xl leading-relaxed text-slate-800 mb-8">
+          <blockquote className="max-w-4xl mx-auto border-l-4 border-blue-600 pl-8 py-2">
+            <p className="text-lg md:text-xl leading-relaxed text-slate-800 mb-6 text-justify">
               «…Искусство во всех его проявлениях и во всех условных формах
               всегда будет началом духовным, будящим устремление к красоте, к
               Высшему, и в этом его главное и величайшее значение. &lt;…&gt;
               Ибо, действительно, истинное устремление к красоте приведёт нас к
               пониманию высшей красоты законов, управляющих Вселенной,
-              выраженных в Совершенном Разуме и Совершенном Сердце.»
+              выраженных в Совершенном Разуме и Совершенном Сердце».
             </p>
-            <footer className="flex items-center justify-center gap-4">
-              <div className="h-px w-8 bg-slate-300"></div>
-              <span className="text-slate-700 font-bold uppercase tracking-[0.2em] text-xs">
+            <footer className="flex items-center justify-end gap-4">
+              <div className="h-[1px] w-12 bg-blue-600/30"></div>
+              <span className="text-slate-700 font-bold uppercase tracking-[0.1em] text-sm">
                 Елена Ивановна Рерих
               </span>
-              <div className="h-px w-8 bg-slate-300"></div>
             </footer>
           </blockquote>
         </motion.div>
@@ -94,16 +93,17 @@ export default function GalleryPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 1 }}
-          className="text-center max-w-4xl mx-auto space-y-6 text-slate-700 leading-relaxed text-base"
+          className="text-center max-w-4xl mx-auto space-y-6 text-slate-800 leading-relaxed text-lg"
         >
           <p>
             В экспозиции представлены работы Кирилловой Людмилы Леонидовны —
-            члена Профессионального Союза Независимых Художников, Союза
-            дизайнеров России, Ассоциации народных художественных промыслов
-            Крыма, сотрудник СГФР. За 23 года творческой деятельности провела
-            более 50 выставок. Творчество Людмилы Леонидовны неразрывно связано
-            с философией Живой Этики, где художественные образы становятся
-            инструментом познания красоты мироздания и духовного
+            члена Профессионального Союза Независимых Художников, члена Союза
+            дизайнеров России, члена Ассоциации народных художественных
+            промыслов Крыма, члена Гильдии художников и мастеров земли
+            Кимерийской, сотрудника СГФР. За 23 года творческой деятельности
+            провела более 50 выставок. Творчество Людмилы Леонидовны неразрывно
+            связано с философией Живой Этики, где художественные образы
+            становятся инструментом познания красоты мироздания и духовного
             совершенствования.
           </p>
         </motion.div>
