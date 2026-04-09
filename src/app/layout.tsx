@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
-import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Metrika from "@/components/Metrika";
 import { Suspense } from "react";
+import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],

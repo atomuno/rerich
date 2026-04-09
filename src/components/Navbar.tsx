@@ -66,6 +66,7 @@ export default function Navbar() {
         ],
       },
       { href: "/uriel/exhibitions", label: "Выставки" },
+      { href: "/uriel/diplomas", label: "Грамоты" },
     ],
   };
 
