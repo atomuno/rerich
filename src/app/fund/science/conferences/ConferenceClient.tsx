@@ -1,9 +1,10 @@
 "use client";
 
-import { Download, ExternalLink, Globe } from "lucide-react";
+import { Play, Calendar, User, ArrowRight, ExternalLink } from "lucide-react";
 
 export default function ConferenceClient() {
   const archiveData = [
+    { year: "2026", id: "pending" },
     { year: "2025", id: "83208929" },
     { year: "2024", id: "72651687" },
     { year: "2023", id: "54736373" },
@@ -13,213 +14,243 @@ export default function ConferenceClient() {
     { year: "2019", id: "38598909" },
   ];
 
-  const files = [
+  const reports = [
     {
-      name: "Информационное письмо по конференции",
-      path: "/downloads/inform_letter.pdf",
+      id: 1,
+      title: "Открытие конференции. Приветственное слово программного комитета",
+      speaker: "Лебеденко А.А., Расулова Т.С., Головин В.В.",
+      date: "10 апреля 2026",
+      url: "https://rutube.ru/video/private/c556a95fd40bc7bb7ecbb2750afb6fc3/?p=JMr4DGmf5nRfaKTXqZDLKQ",
+      tag: "Открытие",
     },
     {
-      name: "Анкета участника ПРСО_2026 (DOCX)",
-      path: "/downloads/anketa_2026.docx",
+      id: 2,
+      title: "Презентация монографии: Севастопольские летописи (1783-2024)",
+      speaker: "Головина Н.М., Головин В.В.",
+      date: "10 апреля 2026",
+      url: "https://rutube.ru/video/private/f9540b724c2ef6447a77d0e052da9b62/?p=5M2eM6aIenejVPI8GTpf5w",
+      tag: "Монография",
     },
     {
-      name: "Анкета участника ПРСО_2026 (RTF)",
-      path: "/downloads/anketa_2026.rtf",
+      id: 3,
+      title: "Идеи Пакта Рериха в социалистической Болгарии",
+      speaker: "Лебеденко Анатолий Андреевич",
+      date: "10 апреля 2026",
+      url: "https://rutube.ru/video/private/19e69784aa5cc838563836a1db791ea1/?p=yWItpeQA4EEvXu4KdVMJuQ",
+      tag: "Доклад 1",
     },
     {
-      name: "Образец оформления тезисов (DOCX)",
-      path: "/downloads/sample_abstracts.docx",
+      id: 4,
+      title: "Культура как Знамя Мира и Победы!",
+      speaker: "Расулова Татьяна Салиховна",
+      date: "10 апреля 2026",
+      url: "https://rutube.ru/video/private/ff2c7cb86d631b71e648a2054a72c630/?p=Z9FPwSTtQyEIFyENiSsiQQ",
+      tag: "Доклад 2",
     },
     {
-      name: "Образец оформления тезисов (RTF)",
-      path: "/downloads/sample_abstracts.rtf",
+      id: 5,
+      title:
+        "Проблематика воспитания и созидания истинных людей в трудах Е.И. Рерих",
+      speaker: "Головина Наталья Михайловна",
+      date: "10 апреля 2026",
+      url: "https://rutube.ru/video/private/19e021e7dc28128aacc129214bd8fce2/?p=voeBEf298LbDc8FaZtfsVg",
+      tag: "Доклад 3",
     },
     {
-      name: "Оформление списка литературы (PDF)",
-      path: "/downloads/references_style.pdf",
+      id: 6,
+      title: "Метаморфозы ответственности в современную эпоху",
+      speaker: "Тупиленко Анастасия Бахтиеровна",
+      date: "10 апреля 2026",
+      url: "https://rutube.ru/video/private/fb1633bf33e30a3fc4b32942b100d0bf/?p=o0RMAge3ao8KFBtWUo4UXA",
+      tag: "Доклад 4",
     },
-  ];
-
-  const sections = [
-    "Творчество и мировоззрение Рерихов в современном пространстве отечественной культуры: потенциал для развития этики российского общества.",
-    "Формы государственно-гражданского взаимодействия в современном обществе: проблемы развития и практической реализации.",
-    "Отношения «Восток – Запад» как актуальная перспектива развития российского социума.",
-    "Современное российское общество: перспективы и задачи развития.",
-    "Социально-культурные новации и их вклад в развитие общества.",
-    "Личность. Виртуальная личность. ИИ: проблемы и перспективы исследования.",
+    {
+      id: 7,
+      title: "Общезначное время как онтологическая мера реальности",
+      speaker: "Григорьев Павел Евгеньевич",
+      date: "11 апреля 2026",
+      url: "https://rutube.ru/video/private/447531b2556bb41b3bbedaa3f8229ce0/?p=TS_7nVpH3HJ83HPKnXSxBQ",
+      tag: "Доклад 5",
+    },
+    {
+      id: 8,
+      title:
+        "Ретропричинность как эффект физико-семантической связности событий",
+      speaker: "Григорьев Павел Евгеньевич",
+      date: "11 апреля 2026",
+      url: "https://rutube.ru/video/private/5bc0a9d74ba09d7585f513e345c26656/?p=kAXdruaFj_I6TIGwwwgunQ",
+      tag: "Доклад 6",
+    },
+    {
+      id: 9,
+      title:
+        "Формирование консорций при помощи ИИ как перспективная социальная технология",
+      speaker: "Сулейменов Ибрагим Эсенович",
+      date: "11 апреля 2026",
+      url: "https://rutube.ru/video/private/15aeb821e3b4465934531a79c4a3170b/?p=F5U5axyQMV55SwLfqSvkZg",
+      tag: "Доклад 7",
+    },
+    {
+      id: 10,
+      title:
+        "Значение наследия Н.К. Рериха при обсуждении новой модели развития России",
+      speaker: "Головин Владислав Викторович",
+      date: "11 апреля 2026",
+      url: "https://rutube.ru/video/private/4d55752f8f52c52987415ee64830c2d1/?p=pH_W52Py-aSkaakk31dGOw",
+      tag: "Доклад 8",
+    },
   ];
 
   return (
-    <main className="relative min-h-screen bg-white font-serif text-slate-900 pt-20 md:pt-32 pb-24 selection:bg-blue-50 selection:text-blue-900 overflow-hidden">
-      {/* ФОНОВОЕ ИЗОБРАЖЕНИЕ ИНСТИТУТА */}
-      <div className="absolute top-0 right-0 w-full md:w-2/3 h-[500px] md:h-[800px] z-0 pointer-events-none opacity-40">
-        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-white/80 to-white z-10" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/20 to-white z-10" />
-        <img
-          src="/university-bg.jpg"
-          alt="Институт"
-          className="w-full h-full object-cover object-right-top grayscale hover:grayscale-0 transition-all duration-1000 opacity-100"
-        />
-      </div>
-
-      <div className="relative z-10 max-w-6xl mx-auto px-4 md:px-6">
-        {/* HEADER */}
-        <header className="mb-16 md:mb-24">
-          <div className="flex flex-col md:flex-row md:items-center gap-4 mb-8">
-            <span className="font-sans text-[10px] font-bold uppercase tracking-[0.4em] text-blue-900 bg-blue-50/80 backdrop-blur-sm px-3 py-1 w-fit">
-              27 Всероссийская научно-практическая конференция
+    <main className="min-h-screen bg-slate-50 font-serif pb-20 overflow-x-hidden">
+      {/* HEADER SECTION */}
+      <section className="bg-white border-b border-slate-200 pt-24 pb-12">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-8 h-[2px] bg-blue-900" />
+            <span className="font-sans text-[10px] font-black uppercase tracking-[0.4em] text-blue-900">
+              Научная деятельность • ПРСО-2026
             </span>
-          </div>
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight uppercase tracking-tight max-w-4xl not-italic">
-            Перспективы развития <br className="hidden md:block" /> современного
-            общества
-          </h1>
-        </header>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 mb-32">
-          {/* LEFT CONTENT */}
-          <div className="lg:col-span-7 space-y-12">
-            <section className="space-y-8">
-              <div className="space-y-0 text-lg md:text-xl leading-relaxed text-slate-800">
-                <p>
-                  Севастопольский государственный университет,
-                  Гуманитарно-педагогический институт, кафедра «Радиоэлектроника
-                  и телекоммуникации» и РОО «Севастопольский городской фонд
-                  Рерихов»{" "}
-                  <span className="font-bold">10 – 11 апреля 2026 года</span>{" "}
-                  проводят 27-ю Всероссийскую научно-практическую конференцию.
+            <div className="flex gap-4 font-sans">
+              <div className="bg-blue-50 px-4 py-2 border border-blue-100 rounded-lg">
+                <p className="text-[11px] font-black text-blue-900 uppercase tracking-widest leading-none">
+                  Конференция завершена
                 </p>
-                <p className="mt-4">
-                  Встреча проходит в рамках постоянно действующего цикла
-                  <span className="font-bold">
-                    {" "}
-                    «Осознание Культуры – залог обновления общества»{" "}
-                  </span>
-                  и посвящается годовщине подписания 15 апреля 1935 г. первого
-                  многостороннего международного соглашения об охране культурных
-                  ценностей – Договора «О защите учреждений науки и искусства, а
-                  также исторических памятников», известного во всем мире как{" "}
-                  <span className="font-bold">Пакт Рериха</span>.
-                </p>
-
-                {/* ТЕКСТ ВМЕСТО ЧЕРНОГО БЛОКА */}
-                <p className="mt-8 pt-8 border-t border-slate-100 text-slate-700">
-                  В рамках конференции 10 апреля 2026 года проводится телемост
-                  Севастополь – «Артек» – Волгоград — Казахстан – Курск – Рязань
-                  — Херсон на тему: «Личность. Виртуальная личность. ИИ:
-                  проблемы и перспективы исследования», благодаря которому будет
-                  предоставлена онлайн площадка для презентаций и обсуждения
-                  заданной темы.
-                </p>
-
-                <p className="text-slate-800 border-l-2 border-slate-300 pl-6 py-2 my-8 font-bold">
-                  Задача конференции – апробация результатов исследований,
-                  связанных с основными тенденциями развития современного
-                  социума и сохранением культурного наследия в цифровую эпоху.
-                </p>
-              </div>
-
-              {/* СЕКЦИИ КОНФЕРЕНЦИИ */}
-              <div className="pt-10 space-y-6">
-                <h3 className="font-sans text-[10px] font-bold uppercase tracking-[0.4em] text-blue-900">
-                  Секции конференции
-                </h3>
-                <ul className="space-y-4 text-base md:text-lg text-slate-800 list-none">
-                  {sections.map((section, i) => (
-                    <li key={i} className="flex gap-4">
-                      <span className="text-blue-900 font-bold tracking-tighter">
-                        —
-                      </span>
-                      {section}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </section>
-          </div>
-
-          {/* SIDEBAR */}
-          <div className="lg:col-span-5">
-            <div className="lg:sticky lg:top-32 space-y-12">
-              <div className="space-y-6 font-sans border-l-2 border-blue-900 pl-6 md:pl-8 bg-white/40 backdrop-blur-md p-4 -ml-4 md:-ml-8 rounded-r-lg">
-                <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
-                    Дата проведения
-                  </p>
-                  <p className="text-xl md:text-2xl font-black text-slate-900 uppercase not-italic">
-                    10 – 11 апреля 2026
-                  </p>
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
-                    Место проведения
-                  </p>
-                  <p className="text-xl md:text-2xl font-black text-slate-900 uppercase not-italic">
-                    Севастополь, СевГУ
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <h3 className="font-sans text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 mb-6">
-                  Документация
-                </h3>
-                <div className="grid grid-cols-1 gap-2 font-sans">
-                  {files.map((file, idx) => (
-                    <a
-                      key={idx}
-                      href={file.path}
-                      download
-                      className="group flex items-center justify-between p-4 border border-slate-100 bg-white/60 backdrop-blur-sm hover:bg-white hover:border-blue-900 transition-all duration-300 shadow-sm"
-                    >
-                      <span className="text-[11px] font-bold uppercase tracking-tight group-hover:text-blue-900 not-italic leading-none">
-                        {file.name}
-                      </span>
-                      <Download
-                        size={14}
-                        className="text-slate-300 group-hover:text-blue-900 flex-shrink-0 ml-4"
-                      />
-                    </a>
-                  ))}
-                </div>
               </div>
             </div>
           </div>
+
+          <h1 className="text-[36px] sm:text-[48px] md:text-[72px] font-black uppercase tracking-tighter leading-[0.9] mb-8 text-slate-900">
+            Перспективы развития <br /> современного общества
+          </h1>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
+            <p className="max-w-xl text-sm md:text-base text-slate-800 leading-relaxed border-l-2 border-blue-900/30 pl-6">
+              Материалы 27-й Всероссийской научно-практической конференции.
+              Севастопольский государственный университет, 10–11 апреля 2026
+              года. Видеозаписи докладов и архив публикаций.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ВИДЕОМАТЕРИАЛЫ - СЕТКА В СТИЛЕ ЛЕКТОРИЯ */}
+      <section className="max-w-6xl mx-auto px-6 mt-12">
+        <div className="flex items-center gap-4 mb-8">
+          <h2 className="font-sans text-[11px] font-black uppercase tracking-[0.4em] text-slate-400">
+            Видеоматериалы конференции
+          </h2>
+          <div className="h-px flex-grow bg-slate-200" />
         </div>
 
-        {/* АРХИВ */}
-        <section className="relative z-10 border-t-4 border-slate-900 pt-16 md:pt-20">
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tighter not-italic mb-12">
-            Архив РИНЦ
-          </h2>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 border border-slate-200">
-            {archiveData.map((item) => (
-              <a
-                key={item.year}
-                href={`https://www.elibrary.ru/item.asp?id=${item.id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative bg-white p-6 md:p-12 hover:bg-slate-950 transition-all duration-500 overflow-hidden min-h-[160px] md:min-h-[240px]"
-              >
-                <div className="relative z-10">
-                  <span className="font-sans text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 group-hover:text-blue-400 transition-colors">
-                    Сборник ПРСО
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {reports.map((item) => (
+            <article
+              key={item.id}
+              className="group relative bg-white border border-slate-200 transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(30,58,138,0.1)] hover:-translate-y-1 flex flex-col"
+            >
+              <div className="p-6 flex-grow flex flex-col">
+                <div className="flex justify-between items-start mb-6">
+                  <span className="font-sans text-[10px] font-black text-slate-200 group-hover:text-blue-900/30 transition-colors duration-500 uppercase tracking-widest">
+                    {item.tag}
                   </span>
-                  <p className="text-3xl md:text-5xl font-black mt-2 md:mt-4 font-sans text-slate-900 group-hover:text-white transition-colors tracking-tighter not-italic">
-                    {item.year}
-                  </p>
-                  <div className="font-sans mt-8 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-blue-900 group-hover:text-blue-400 opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0 italic-none">
-                    eLibrary <ExternalLink size={10} />
+
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center ring-1 ring-slate-100 hover:bg-blue-900 hover:scale-110 hover:ring-blue-900 transition-all duration-300 shadow-sm"
+                  >
+                    <Play
+                      size={14}
+                      className="text-slate-400 group-hover:text-white transition-colors duration-500 translate-x-0.5"
+                    />
+                  </a>
+                </div>
+
+                <h2 className="text-[17px] font-bold leading-snug mb-5 text-slate-800 uppercase not-italic tracking-tight">
+                  {item.title}
+                </h2>
+
+                <div className="mt-auto space-y-3 pt-5 border-t border-slate-50">
+                  <div className="flex items-start gap-2 text-slate-600">
+                    <User
+                      size={12}
+                      className="text-blue-900/40 mt-0.5 shrink-0"
+                    />
+                    <span className="font-sans text-[10px] font-bold uppercase tracking-widest leading-tight">
+                      {item.speaker}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 text-slate-400">
+                    <Calendar size={12} className="shrink-0" />
+                    <span className="font-sans text-[10px] uppercase tracking-widest leading-none">
+                      {item.date}
+                    </span>
                   </div>
                 </div>
-                <span className="absolute -bottom-4 -right-2 text-7xl md:text-9xl font-sans font-black text-slate-50 group-hover:text-white/5 pointer-events-none not-italic">
-                  {item.year.slice(-2)}
+              </div>
+
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative overflow-hidden bg-slate-50 group-hover:bg-blue-900 p-4 text-center transition-all duration-500 border-t border-slate-100"
+              >
+                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] transition-transform" />
+                <span className="relative z-10 font-sans text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 group-hover:text-white flex items-center justify-center gap-2 transition-colors duration-500">
+                  Смотреть запись <ArrowRight size={10} />
                 </span>
               </a>
-            ))}
-          </div>
-        </section>
-      </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* АРХИВ РИНЦ - ОСТАВЛЯЕМ СТРОГИЙ СТИЛЬ */}
+      <section className="max-w-6xl mx-auto px-6 mt-24">
+        <div className="flex items-center gap-4 mb-8">
+          <h2 className="font-sans text-[11px] font-black uppercase tracking-[0.4em] text-slate-400">
+            Архив публикации eLibrary / РИНЦ
+          </h2>
+          <div className="h-px flex-grow bg-slate-200" />
+        </div>
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 border border-slate-200">
+          {archiveData.map((item) => (
+            <a
+              key={item.year}
+              href={
+                item.id !== "pending"
+                  ? `https://www.elibrary.ru/item.asp?id=${item.id}`
+                  : "#"
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group relative bg-white p-8 hover:bg-slate-950 transition-all duration-500 overflow-hidden min-h-[180px] ${item.id === "pending" ? "cursor-default" : ""}`}
+            >
+              <div className="relative z-10">
+                <span className="font-sans text-[9px] font-bold uppercase tracking-[0.3em] text-slate-400 group-hover:text-blue-400 transition-colors">
+                  Сборник ПРСО
+                </span>
+                <p className="text-4xl font-black mt-3 font-sans text-slate-900 group-hover:text-white transition-colors tracking-tighter">
+                  {item.year}
+                </p>
+                <div className="font-sans mt-6 flex items-center gap-2 text-[9px] font-black uppercase tracking-widest text-blue-900 group-hover:text-blue-400 opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
+                  {item.id === "pending" ? "В обработке" : "Перейти"}{" "}
+                  <ExternalLink size={10} />
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <footer className="mt-20 text-center pb-10 border-t border-slate-200 pt-10">
+        <p className="font-sans text-[10px] text-slate-300 uppercase tracking-[0.5em] font-medium">
+          СГФР • Севастополь • 2026
+        </p>
+      </footer>
     </main>
   );
 }
