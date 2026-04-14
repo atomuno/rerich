@@ -4,15 +4,6 @@ import { Play, Calendar, User, ArrowRight } from "lucide-react";
 
 export default function LecturesClient() {
   const lectures = [
-    // --- НОВЫЕ ЛЕКЦИИ (ПРСО-2026) ---
-    {
-      id: 1,
-      title: "Открытие конференции. Приветственное слово программного комитета",
-      speaker: "Лебеденко А.А., Расулова Т.С., Головин В.В.",
-      date: "10 апреля 2026",
-      url: "https://rutube.ru/video/private/c556a95fd40bc7bb7ecbb2750afb6fc3/?p=JMr4DGmf5nRfaKTXqZDLKQ",
-      tag: "Открытие",
-    },
     {
       id: 2,
       title: "Презентация монографии: Севастопольские летописи (1783-2024)",
