@@ -204,7 +204,7 @@ export const exhibitions: Exhibition[] = [
     title: "Участие в городском празднике «День Исторического бульвара»",
     hasPhotos: true,
     slug: "2010_08_06",
-    photoCount: 7,
+    photoCount: 6,
   },
   {
     id: 26,
@@ -223,6 +223,7 @@ export const exhibitions: Exhibition[] = [
     title: "Организация выставки «Как прекрасен этот мир»",
     hasPhotos: true,
     slug: "2012_15_04",
+    photoCount: 5,
   },
   {
     id: 28,
@@ -346,8 +347,7 @@ export const exhibitions: Exhibition[] = [
     id: 41,
     date: "21.04.2017",
     location: "г. Севастополь, ДКР",
-    title:
-      "Подготовка к открытию детской выставки «Как прекрасен этот мир» и выставки А.Ф. Шорохова",
+    title: "Подготовка к открытию детской выставки «Как прекрасен этот мир»",
     hasPhotos: true,
     slug: "2017_21_04",
     photoCount: 8,

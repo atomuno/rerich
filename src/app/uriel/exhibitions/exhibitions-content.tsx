@@ -151,7 +151,7 @@ export default function ExhibitionsContent() {
                     {selectedEx.date}
                   </span>
                 </div>
-                <h2 className="text-xl md:text-3xl font-bold text-black leading-tight tracking-tight max-w-3xl">
+                <h2 className="text-xl md:text-3xl font-bold text-black leading-tight tracking-tight max-w-5xl">
                   {selectedEx.title}
                 </h2>
                 <div className="flex items-center gap-2 text-slate-400 mt-2 font-sans">

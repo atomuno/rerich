@@ -61,7 +61,7 @@ export default function Navbar() {
         label: "Работы",
         submenu: [
           { href: "/uriel/works/models", label: "Модели кораблей" },
-          { href: "/uriel/works/painting", label: "Живопись" },
+          // { href: "/uriel/works/painting", label: "Живопись" },
           { href: "/uriel/works/crafts", label: "Поделки" },
         ],
       },
