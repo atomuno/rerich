@@ -158,27 +158,6 @@ export default function FundExhibitionsContent() {
                 <X size={20} />
               </button>
 
-              <div className="p-6 md:p-8 border-b border-slate-100 shrink-0 font-serif bg-white">
-                <div className="flex items-center gap-2 text-blue-600 mb-1">
-                  <Calendar size={14} />
-                  <span className="font-sans font-bold uppercase tracking-[0.2em] text-[10px]">
-                    {selectedExhibition.date}
-                  </span>
-                </div>
-                <h2 className="text-xl md:text-3xl font-bold text-black leading-tight tracking-tight max-w-5xl">
-                  {selectedExhibition.title}
-                </h2>
-                <div className="flex items-center gap-2 text-slate-400 mt-2 font-sans">
-                  <MapPin size={12} />
-                  <span className="text-[10px] uppercase font-bold tracking-widest">
-                    {selectedExhibition.location}
-                  </span>
-                </div>
-                <p className="mt-4 text-sm md:text-base text-slate-700 leading-relaxed max-w-5xl">
-                  {selectedExhibition.description}
-                </p>
-              </div>
-
               <div
                 className={`flex-grow overflow-y-auto bg-white ${
                   selectedExhibition.photos.length <= 2
@@ -194,6 +173,27 @@ export default function FundExhibitionsContent() {
                       : "max-w-[min(100%,80rem)]"
                   }`}
                 >
+                  <div className="mb-6 border-b border-slate-100 px-5 pb-5 pt-2 pr-14 font-serif md:mb-8 md:px-8 md:pb-6 md:pt-3">
+                    <div className="mb-1 flex items-center gap-2 text-blue-600">
+                      <Calendar size={14} />
+                      <span className="font-sans text-[10px] font-bold uppercase tracking-[0.2em]">
+                        {selectedExhibition.date}
+                      </span>
+                    </div>
+                    <h2 className="max-w-5xl text-xl font-bold leading-tight tracking-tight text-black md:text-3xl">
+                      {selectedExhibition.title}
+                    </h2>
+                    <div className="mt-2 flex items-center gap-2 font-sans text-slate-400">
+                      <MapPin size={12} />
+                      <span className="text-[10px] font-bold uppercase tracking-widest">
+                        {selectedExhibition.location}
+                      </span>
+                    </div>
+                    <p className="mt-4 max-w-5xl text-sm leading-relaxed text-slate-700 md:text-base">
+                      {selectedExhibition.description}
+                    </p>
+                  </div>
+
                   <ExhibitionMasonryGallery photos={selectedExhibition.photos} />
                 </div>
 
