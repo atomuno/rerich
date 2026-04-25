@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
+import ExhibitionMasonryGallery from "@/components/ExhibitionMasonryGallery";
 import {
   ArrowRight,
   Calendar,
@@ -145,7 +145,11 @@ export default function FundExhibitionsContent() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative bg-white w-full max-w-6xl max-h-[98vh] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl flex flex-col z-10 border border-slate-100"
+              className={`relative flex max-h-[98vh] w-full flex-col overflow-hidden rounded-[2rem] border border-slate-100 bg-white shadow-2xl z-10 md:rounded-[3rem] ${
+                selectedExhibition.photos.length <= 2
+                  ? "max-w-[min(96vw,1540px)]"
+                  : "max-w-7xl"
+              }`}
             >
               <button
                 onClick={() => setSelectedExhibition(null)}
@@ -176,32 +180,21 @@ export default function FundExhibitionsContent() {
               </div>
 
               <div
-                className="flex-grow overflow-y-auto p-4 md:p-8 bg-slate-50/30"
+                className={`flex-grow overflow-y-auto bg-white ${
+                  selectedExhibition.photos.length <= 2
+                    ? "p-1 sm:p-2"
+                    : "p-3 md:p-6"
+                }`}
                 style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
               >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 max-w-5xl mx-auto">
-                  {selectedExhibition.photos.map((photo, idx) => (
-                    <div
-                      key={`${selectedExhibition.id}-${photo.src}`}
-                      className="relative aspect-video md:aspect-[4/3] rounded-2xl overflow-hidden bg-white shadow-md group border border-slate-200/50"
-                    >
-                      <Image
-                        src={photo.src}
-                        alt={photo.caption || `Фото ${idx + 1}`}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105 pointer-events-none"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        priority={idx < 4}
-                      />
-                      {photo.caption && (
-                        <div className="absolute inset-x-0 bottom-0 p-3 md:p-4 bg-gradient-to-t from-black/85 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          <p className="text-white text-xs md:text-sm leading-snug font-sans">
-                            {photo.caption}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                <div
+                  className={`mx-auto w-full ${
+                    selectedExhibition.photos.length <= 2
+                      ? "max-w-none"
+                      : "max-w-[min(100%,80rem)]"
+                  }`}
+                >
+                  <ExhibitionMasonryGallery photos={selectedExhibition.photos} />
                 </div>
 
                 {selectedExhibition.videos?.length ? (
