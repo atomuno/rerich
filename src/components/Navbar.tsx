@@ -38,6 +38,7 @@ export default function Navbar() {
       { href: "/fund/about", label: "О нас" },
       { href: "/fund/library", label: "Библиотека" },
       { href: "/fund/museum", label: "Музей" },
+      { href: "/fund/exhibitions", label: "Выставки" },
       {
         label: "Просвещение",
         submenu: [
