@@ -32,6 +32,7 @@ export default function VideosContent() {
       <main className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
         {fundVideos.map((video) => {
           const embedUrl = toRutubeEmbedUrl(video.rutubeUrl);
+          if (!embedUrl) return null;
 
           return (
             <a
