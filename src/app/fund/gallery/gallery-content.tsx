@@ -106,6 +106,18 @@ export default function GalleryPage() {
             становятся инструментом познания красоты мироздания и духовного
             совершенствования.
           </p>
+          <p>
+            Вы можете посмотреть репортаж от 2007 года о выставке Людмилы Кирилловой по {""}
+            <a
+              href="https://rutube.ru/video/private/f94d84f9f73e8a0f354b4c221c711422/?p=RMEXE-RYw-7KvN1jnGEjuw"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-700 underline underline-offset-4 hover:text-blue-900 transition-colors"
+            >
+              ссылке
+            </a>
+            .
+          </p>
         </motion.div>
       </header>
 
