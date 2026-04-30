@@ -3,6 +3,7 @@ import CenterHero from "./main";
 
 // Для превью выведем полное красивое название центра
 const OG_TITLE = "Центр детского творчества «Уриэль»";
+const PAGE_PATH = "/uriel";
 
 export const metadata: Metadata = {
   title: "Главная",
@@ -15,10 +16,13 @@ export const metadata: Metadata = {
     "центр Рериха",
     "развитие детей",
   ],
+  alternates: {
+    canonical: PAGE_PATH,
+  },
   openGraph: {
     title: "СГЦДТ «Уриэль» — Творческое развитие в Севастополе",
     description: "Художественное воспитание и развитие талантов в Севастополе.",
-    url: "http://sevcrf.ru/uriel",
+    url: `https://sevcrf.ru${PAGE_PATH}`,
     locale: "ru_RU",
     type: "website",
     images: [
@@ -30,6 +34,12 @@ export const metadata: Metadata = {
         alt: OG_TITLE,
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "СГЦДТ «Уриэль» — Творческое развитие в Севастополе",
+    description: "Художественное воспитание и развитие талантов в Севастополе.",
+    images: [`/api/og?title=${encodeURIComponent(OG_TITLE)}`],
   },
 };
 

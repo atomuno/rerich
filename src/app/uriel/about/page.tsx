@@ -3,6 +3,7 @@ import UrielAbout from "./Org2About";
 
 // Текст, который будет отрисован нашим стильным генератором на Playfair Display
 const OG_TITLE = "Об организации: СГЦДТ «Уриэль»";
+const PAGE_PATH = "/uriel/about";
 
 export const metadata: Metadata = {
   title: "Об организации",
@@ -14,11 +15,14 @@ export const metadata: Metadata = {
     "детское творчество Севастополь",
     "реквизиты Уриэль",
   ],
+  alternates: {
+    canonical: PAGE_PATH,
+  },
   openGraph: {
     title: "О центре «Уриэль» — История и реквизиты",
     description:
       "Официальная информация о Севастопольском центре детского творчества.",
-    url: "http://sevcrf.ru/uriel/about",
+    url: `https://sevcrf.ru${PAGE_PATH}`,
     locale: "ru_RU",
     type: "article",
     images: [
@@ -30,6 +34,13 @@ export const metadata: Metadata = {
         alt: OG_TITLE,
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "О центре «Уриэль» — История и реквизиты",
+    description:
+      "Официальная информация о Севастопольском центре детского творчества.",
+    images: [`/api/og?title=${encodeURIComponent(OG_TITLE)}`],
   },
 };
 

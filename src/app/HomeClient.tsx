@@ -4,6 +4,30 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 
 export default function HomeClient() {
+  const highlights = [
+    {
+      title: "Культурные проекты",
+      desc: "Выставки, архивы и просветительские инициативы фонда.",
+    },
+    {
+      title: "Детское творчество",
+      desc: "Кружки, работы воспитанников и городские выставки «Уриэль».",
+    },
+    {
+      title: "Наследие Рерихов",
+      desc: "Изучение, сохранение и популяризация культурного наследия.",
+    },
+  ];
+
+  const quickActions = [
+    { href: "/fund/exhibitions", label: "Выставки фонда" },
+    { href: "/fund/gallery", label: "Галерея картин" },
+    { href: "/fund/videos", label: "Видеоролики" },
+    { href: "/uriel/exhibitions", label: "Выставки «Уриэль»" },
+    { href: "/uriel/works/models", label: "Модели кораблей" },
+    { href: "/uriel/diplomas", label: "Грамоты и достижения" },
+  ];
+
   const scrollToSections = () => {
     const element = document.getElementById("sections");
     if (element) {
@@ -49,7 +73,7 @@ export default function HomeClient() {
         <button
           onClick={scrollToSections}
           aria-label="Листать вниз"
-          className="absolute bottom-10 z-30 text-white/40 hover:text-white transition-all transform hover:scale-110 animate-bounce cursor-pointer focus:outline-none"
+          className="absolute bottom-10 z-30 text-white/40 hover:text-white transition-all transform hover:scale-110 animate-bounce cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
         >
           <ChevronDown className="w-8 h-8 md:w-12 md:h-12" strokeWidth={1} />
         </button>
@@ -96,6 +120,58 @@ export default function HomeClient() {
             </div>
           </div>
         </Link>
+      </section>
+
+      <section className="border-t border-slate-200 bg-slate-50 py-14 md:py-16">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-4xl font-bold uppercase text-slate-900">
+              Единое пространство культуры
+            </h2>
+            <p className="mt-3 text-slate-600 font-sans max-w-3xl mx-auto">
+              Портал объединяет деятельность Севастопольского городского фонда
+              Рерихов и Центра детского творчества «Уриэль».
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+            {highlights.map((item) => (
+              <article
+                key={item.title}
+                className="rounded-2xl border border-slate-200 bg-white p-5 md:p-6"
+              >
+                <h3 className="text-lg font-serif font-bold text-slate-900 mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-sm font-sans text-slate-600 leading-relaxed">
+                  {item.desc}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-14 md:py-16 border-t border-slate-100">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          <h2 className="text-center text-2xl md:text-3xl font-serif font-bold uppercase text-slate-900 mb-8">
+            Быстрые действия
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+            {quickActions.map((action) => (
+              <Link
+                key={action.href}
+                href={action.href}
+                className="group rounded-xl border border-slate-200 bg-white px-4 py-3.5 font-sans font-semibold text-slate-700 hover:border-blue-300 hover:text-blue-800 hover:shadow-sm transition-all"
+              >
+                <span className="inline-flex items-center justify-between w-full">
+                  {action.label}
+                  <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-700" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
       </section>
     </div>
   );

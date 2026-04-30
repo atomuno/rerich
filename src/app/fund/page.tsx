@@ -3,6 +3,7 @@ import FoundationHero from "./main";
 
 // Для главной страницы на картинке лучше вывести полное название
 const OG_TITLE = "Севастопольский городской фонд Рерихов";
+const PAGE_PATH = "/fund";
 
 export const metadata: Metadata = {
   title: "Главная",
@@ -14,9 +15,13 @@ export const metadata: Metadata = {
     "Севастополь культура",
     "Рериховское движение",
   ],
+  alternates: {
+    canonical: PAGE_PATH,
+  },
   openGraph: {
     title: "Севастопольский городской фонд Рерихов",
     description: "Культурные проекты, история и просвещение в Севастополе.",
+    url: `https://sevcrf.ru${PAGE_PATH}`,
     images: [
       {
         url: `/api/og?title=${encodeURIComponent(OG_TITLE)}`,
@@ -25,6 +30,12 @@ export const metadata: Metadata = {
         alt: OG_TITLE,
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: OG_TITLE,
+    description: "Культурные проекты, история и просвещение в Севастополе.",
+    images: [`/api/og?title=${encodeURIComponent(OG_TITLE)}`],
   },
 };
 

@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import MuseumPage from "./MuseumPage";
 
-const OG_TITLE = 'Историко-технический музей в моделях морских судов"';
+const OG_TITLE = "Историко-технический музей в моделях морских судов";
+const PAGE_PATH = "/fund/museum";
 
 // ОБЪЕКТ SEO (Metadata API)
 export const metadata: Metadata = {
@@ -18,10 +19,14 @@ export const metadata: Metadata = {
     "фонд Рерихов",
   ],
   authors: [{ name: "Севастопольский городской фонд Рерихов" }],
+  alternates: {
+    canonical: PAGE_PATH,
+  },
   openGraph: {
     title: OG_TITLE,
     description:
       "Посетите уникальный музей моделей морских судов в Севастополе. Руководитель Васильцова Галина Михайловна. Вход свободный. Экспозиции: морская тематика и Петриковская роспись.",
+    url: `https://sevcrf.ru${PAGE_PATH}`,
     images: [
       {
         url: `/api/og?title=${encodeURIComponent(OG_TITLE)}`,
@@ -30,6 +35,13 @@ export const metadata: Metadata = {
         alt: OG_TITLE,
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: OG_TITLE,
+    description:
+      "Посетите уникальный музей моделей морских судов в Севастополе. Вход свободный.",
+    images: [`/api/og?title=${encodeURIComponent(OG_TITLE)}`],
   },
   robots: {
     index: true,

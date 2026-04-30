@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ExhibitionMasonryGallery from "@/components/ExhibitionMasonryGallery";
 import { Calendar, ImageIcon, ArrowRight, MapPin, X } from "lucide-react";
@@ -10,9 +10,33 @@ export default function ExhibitionsContent() {
   const [selectedEx, setSelectedEx] = useState<(typeof exhibitions)[0] | null>(
     null,
   );
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const lastFocusedElementRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     document.body.style.overflow = selectedEx ? "hidden" : "unset";
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [selectedEx]);
+
+  useEffect(() => {
+    if (!selectedEx) return;
+
+    lastFocusedElementRef.current = document.activeElement as HTMLElement;
+    closeButtonRef.current?.focus();
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSelectedEx(null);
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+      lastFocusedElementRef.current?.focus();
+    };
   }, [selectedEx]);
 
   return (
@@ -48,6 +72,18 @@ export default function ExhibitionsContent() {
             <div
               key={ex.id}
               onClick={() => ex.hasPhotos && setSelectedEx(ex)}
+              onKeyDown={(event) => {
+                if (!ex.hasPhotos) return;
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setSelectedEx(ex);
+                }
+              }}
+              role={ex.hasPhotos ? "button" : undefined}
+              tabIndex={ex.hasPhotos ? 0 : -1}
+              aria-label={
+                ex.hasPhotos ? `Открыть фотографии выставки ${ex.title}` : undefined
+              }
               className={`
                 h-full flex flex-col justify-between
                 group p-6 md:p-8 rounded-[2.5rem] border transition-all duration-500
@@ -133,6 +169,9 @@ export default function ExhibitionsContent() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="uriel-exhibition-dialog-title"
               className={`relative flex max-h-[98vh] w-full flex-col overflow-hidden rounded-[2rem] border border-slate-100 bg-white shadow-2xl z-10 md:rounded-[3rem] ${
                 (selectedEx.photoCount || 0) <= 2
                   ? "max-w-[min(96vw,1540px)]"
@@ -141,7 +180,9 @@ export default function ExhibitionsContent() {
             >
               {/* Кнопка закрытия (чуть меньше и аккуратнее) */}
               <button
+                ref={closeButtonRef}
                 onClick={() => setSelectedEx(null)}
+                aria-label="Закрыть окно с фотографиями выставки"
                 className="absolute top-5 right-5 z-[120] w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur border border-slate-100 rounded-full shadow-lg text-slate-900 hover:scale-110 active:scale-95 transition-all cursor-pointer"
               >
                 <X size={20} />
@@ -155,7 +196,10 @@ export default function ExhibitionsContent() {
                     {selectedEx.date}
                   </span>
                 </div>
-                <h2 className="text-xl md:text-3xl font-bold text-black leading-tight tracking-tight max-w-5xl">
+                <h2
+                  id="uriel-exhibition-dialog-title"
+                  className="text-xl md:text-3xl font-bold text-black leading-tight tracking-tight max-w-5xl"
+                >
                   {selectedEx.title}
                 </h2>
                 <div className="flex items-center gap-2 text-slate-400 mt-2 font-sans">

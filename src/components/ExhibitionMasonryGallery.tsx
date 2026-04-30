@@ -15,6 +15,10 @@ export type MasonryPhoto = {
   alt?: string;
 };
 
+function toWebp(src: string): string {
+  return src.replace(/\.(jpe?g|png)$/i, ".webp");
+}
+
 function PhotoTile({
   photo,
   idx,
@@ -26,16 +30,19 @@ function PhotoTile({
 }) {
   return (
     <div className="group relative w-full break-inside-avoid">
-      <img
-        src={photo.src}
-        alt={photo.alt ?? photo.caption ?? `Фото ${idx + 1}`}
-        loading={idx < 8 ? "eager" : "lazy"}
-        decoding="async"
-        className={
-          imgClassName ??
-          "block w-full rounded-md shadow-sm transition duration-300 group-hover:shadow-md"
-        }
-      />
+      <picture>
+        <source srcSet={toWebp(photo.src)} type="image/webp" />
+        <img
+          src={photo.src}
+          alt={photo.alt ?? photo.caption ?? `Фото ${idx + 1}`}
+          loading={idx < 8 ? "eager" : "lazy"}
+          decoding="async"
+          className={
+            imgClassName ??
+            "block w-full rounded-md shadow-sm transition duration-300 group-hover:shadow-md"
+          }
+        />
+      </picture>
       {photo.caption ? (
         <div className="pointer-events-none absolute inset-x-0 bottom-0 rounded-b-md bg-gradient-to-t from-black/80 via-black/40 to-transparent p-3 pt-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
           <p className="text-left text-[11px] leading-snug text-white sm:text-xs">

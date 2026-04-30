@@ -16,6 +16,11 @@ function toRutubeEmbedUrl(url: string): string | null {
   }
 }
 
+function extractYear(description: string): string {
+  const match = description.match(/\b(\d{4})\b/u);
+  return match ? match[1] : "";
+}
+
 export default function VideosContent() {
   return (
     <div className="min-h-screen bg-white text-slate-900 px-4 md:px-6 py-12">
@@ -33,6 +38,7 @@ export default function VideosContent() {
         {fundVideos.map((video) => {
           const embedUrl = toRutubeEmbedUrl(video.rutubeUrl);
           if (!embedUrl) return null;
+          const year = extractYear(video.description);
 
           return (
             <a
@@ -43,7 +49,7 @@ export default function VideosContent() {
               className="rounded-2xl border border-slate-100 shadow-sm overflow-hidden bg-white hover:shadow-md transition-shadow duration-300"
               aria-label={video.title}
             >
-              <article className="h-full">
+              <article className="h-full font-sans">
                 <div className="relative w-full aspect-video bg-slate-100">
                   <iframe
                     src={embedUrl}
@@ -53,6 +59,14 @@ export default function VideosContent() {
                     allowFullScreen
                     className="absolute inset-0 h-full w-full pointer-events-none"
                   />
+                </div>
+                <div className="px-4 py-3 border-t border-slate-100">
+                  <p className="text-sm md:text-[15px] text-slate-800 leading-snug tracking-tight">
+                    {video.title}
+                    {year ? (
+                      <span className="text-slate-400 font-medium"> ({year})</span>
+                    ) : null}
+                  </p>
                 </div>
               </article>
             </a>

@@ -3,6 +3,7 @@ import LecturesClient from "./LecturesClient";
 
 // Заголовок для нашей сочной карточки (сделаем акцент на научном статусе)
 const OG_TITLE = "Научный лекторий СГФР: Видеоархив докладов";
+const PAGE_PATH = "/fund/science/lectures";
 
 export const metadata: Metadata = {
   title: "Научный лекторий | СГФР",
@@ -16,11 +17,14 @@ export const metadata: Metadata = {
     "культура и наука",
     "Лебеденко А.А.",
   ],
+  alternates: {
+    canonical: PAGE_PATH,
+  },
   openGraph: {
     title: "Научный лекторий СГФР — Видеоархив докладов",
     description:
       "Архив выступлений ведущих ученых на международных конференциях по культурному наследию.",
-    url: "http://sevcrf.ru/fund/science/lectures",
+    url: `https://sevcrf.ru${PAGE_PATH}`,
     locale: "ru_RU",
     type: "website",
     images: [
@@ -32,6 +36,13 @@ export const metadata: Metadata = {
         alt: "Научный лекторий СГФР: Архив докладов",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Научный лекторий СГФР — Видеоархив докладов",
+    description:
+      "Архив выступлений ведущих ученых на международных конференциях по культурному наследию.",
+    images: [`/api/og?title=${encodeURIComponent(OG_TITLE)}`],
   },
 };
 

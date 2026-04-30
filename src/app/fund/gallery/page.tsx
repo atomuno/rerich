@@ -3,6 +3,7 @@ import GalleryContent from "./gallery-content"; // Перенеси основн
 
 const PAGE_TITLE = "Галерея картин Л.Л. Кирилловой";
 const OG_TITLE = "Галерея картин Л.Л. Кирилловой — СГФР";
+const PAGE_PATH = "/fund/gallery";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -16,10 +17,14 @@ export const metadata: Metadata = {
     "СГФР галерея",
     "культурное наследие Рерихов",
   ],
+  alternates: {
+    canonical: PAGE_PATH,
+  },
   openGraph: {
     title: OG_TITLE,
     description:
       "Познайте красоту мироздания через творчество Л.Л. Кирилловой.",
+    url: `https://sevcrf.ru${PAGE_PATH}`,
     images: [
       {
         url: `/api/og?title=${encodeURIComponent(OG_TITLE)}`,
@@ -28,6 +33,13 @@ export const metadata: Metadata = {
         alt: OG_TITLE,
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: OG_TITLE,
+    description:
+      "Познайте красоту мироздания через творчество Л.Л. Кирилловой.",
+    images: [`/api/og?title=${encodeURIComponent(OG_TITLE)}`],
   },
 };
 

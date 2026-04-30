@@ -3,6 +3,7 @@ import VideosContent from "./videos-content";
 
 const PAGE_TITLE = "Видеоролики";
 const OG_TITLE = "Видеоролики фонда Рерихов";
+const PAGE_PATH = "/fund/videos";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -15,10 +16,14 @@ export const metadata: Metadata = {
     "культура и история",
     "RuTube видеоматериалы",
   ],
+  alternates: {
+    canonical: PAGE_PATH,
+  },
   openGraph: {
     title: OG_TITLE,
     description:
       "Смотрите архивные видеоролики Севастопольского городского фонда Рерихов.",
+    url: `https://sevcrf.ru${PAGE_PATH}`,
     images: [
       {
         url: `/api/og?title=${encodeURIComponent(OG_TITLE)}`,
@@ -27,6 +32,13 @@ export const metadata: Metadata = {
         alt: OG_TITLE,
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: OG_TITLE,
+    description:
+      "Смотрите архивные видеоролики Севастопольского городского фонда Рерихов.",
+    images: [`/api/og?title=${encodeURIComponent(OG_TITLE)}`],
   },
 };
 

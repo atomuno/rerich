@@ -23,6 +23,16 @@ import {
   sba,
 } from "../../../../public/library";
 import Image from "next/image"; // Импортируем компонент Image
+import type { LucideIcon } from "lucide-react";
+
+interface LibrarySectionProps {
+  id: string;
+  title: string;
+  icon?: LucideIcon;
+  isOpen: boolean;
+  onToggle: (id: string) => void;
+  children: React.ReactNode;
+}
 
 export default function LibraryContent() {
   const [openSection, setOpenSection] = useState<string | null>(null);
@@ -104,7 +114,7 @@ export default function LibraryContent() {
             </p>
             <ol className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 text-[13px] font-sans leading-relaxed">
               {sba.map((text, index) => (
-                <li key={index} className="flex gap-4 group items-start">
+                <li key={text} className="flex gap-4 group items-start">
                   <span className="font-bold text-blue-900 tabular-nums">
                     {index + 1}.
                   </span>
@@ -133,7 +143,7 @@ export default function LibraryContent() {
             <ul className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-3 text-[12px] font-sans leading-snug">
               {lib_fund.map((book, idx) => (
                 <li
-                  key={idx}
+                  key={book}
                   className="flex gap-3 border-b border-slate-100 pb-2 last:border-0 hover:border-blue-200 transition-colors"
                 >
                   <span className="text-blue-900 font-bold opacity-50 tabular-nums">
@@ -164,8 +174,8 @@ export default function LibraryContent() {
                     "Рерих Е.И. У Порога Нового мира. – М.: МЦР, 2000.",
                     "Рерих Н.К. Листы дневника. – М.: МЦР, 1995-1996.",
                     "Рерих Н.К. Шамбала. – М.: МЦР, 1994.",
-                  ].map((item, i) => (
-                    <li key={i} className="flex gap-3 items-center">
+                  ].map((item) => (
+                    <li key={item} className="flex gap-3 items-center">
                       <div className="w-1.5 h-1.5 bg-blue-900 rounded-full" />
                       {item}
                     </li>
@@ -178,9 +188,9 @@ export default function LibraryContent() {
                   Малая Рериховская библиотека
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-[12px] font-sans">
-                  {litle_rerich.map((item, idx) => (
+                  {litle_rerich.map((item) => (
                     <div
-                      key={idx}
+                      key={item}
                       className="flex gap-2 text-slate-700 py-1 border-b border-slate-50"
                     >
                       <span className="text-blue-900">/</span> {item}
@@ -248,9 +258,9 @@ export default function LibraryContent() {
                 "Амонашвили Ш.А. — 12 книг",
                 "Макаренко А.С. — 3 тома",
                 "Сухомлинский В.А. — 5 томов",
-              ].map((item, idx) => (
+              ].map((item) => (
                 <div
-                  key={idx}
+                  key={item}
                   className="flex items-center gap-4 p-4 border border-slate-100 rounded-sm hover:bg-slate-50 transition-colors"
                 >
                   <span className="text-sm font-medium">{item}</span>
@@ -276,8 +286,8 @@ export default function LibraryContent() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
-                  {pereodic.map(([title, qty], idx) => (
-                    <tr key={idx} className="hover:bg-slate-50">
+                  {pereodic.map(([title, qty]) => (
+                    <tr key={title} className="hover:bg-slate-50">
                       <td className="px-6 py-3 text-slate-800 font-medium">
                         «{title}»
                       </td>
@@ -318,9 +328,9 @@ export default function LibraryContent() {
                   ["Педагогика", "695"],
                   ["Медицинская литература", "243"],
                   ["Школьная и мировая классика", "700"],
-                ].map(([title, count], idx) => (
+                ].map(([title, count]) => (
                   <tr
-                    key={idx}
+                    key={title}
                     className="hover:bg-blue-50/30 transition-colors"
                   >
                     <td className="p-6 font-bold text-slate-800 uppercase text-[11px] tracking-tight">
@@ -369,8 +379,7 @@ function LibrarySection({
   isOpen,
   onToggle,
   children,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-}: any) {
+}: LibrarySectionProps) {
   return (
     <div
       className={`border transition-all duration-500 ${isOpen ? "border-slate-400 shadow-lg" : "border-slate-200 shadow-sm"} bg-white rounded-lg overflow-hidden`}

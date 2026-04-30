@@ -3,22 +3,39 @@ import { MetadataRoute } from "next";
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://sevcrf.ru";
 
-  // Полный список путей на основе вашей структуры
   const paths = [
-    "", // Главная
-    "/fund", // Секция Фонда
-    "/fund/about", // О Фонде
-    "/fund/science", // Наука (общий раздел)
-    "/fund/science/conferences", // Конференции
-    "/fund/science/lectures", // Лекции (самое важное!)
-    "/uriel", // Секция Uriel
-    "/uriel/about", // О Uriel
+    "",
+    "/fund",
+    "/fund/about",
+    "/fund/books",
+    "/fund/exhibitions",
+    "/fund/gallery",
+    "/fund/library",
+    "/fund/museum",
+    "/fund/science/conferences",
+    "/fund/science/lectures",
+    "/fund/videos",
+    "/uriel",
+    "/uriel/about",
+    "/uriel/clubs/art",
+    "/uriel/clubs/ships",
+    "/uriel/diplomas",
+    "/uriel/exhibitions",
+    "/uriel/works/crafts",
+    "/uriel/works/models",
   ];
 
   return paths.map((path) => ({
     url: `${baseUrl}${path}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
-    priority: path === "" ? 1 : path.includes("lectures") ? 0.9 : 0.7,
+    priority:
+      path === ""
+        ? 1
+        : path === "/fund" || path === "/uriel"
+          ? 0.9
+          : path.includes("science")
+            ? 0.8
+            : 0.7,
   }));
 }

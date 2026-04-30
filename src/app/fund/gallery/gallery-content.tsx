@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { X, PlayCircle } from "lucide-react";
@@ -16,17 +16,20 @@ interface CustomPhoto {
   alt: string;
 }
 
+function toWebp(src: string): string {
+  return src.replace(/\.(jpe?g|png)$/i, ".webp");
+}
+
 export default function GalleryPage() {
   const [selected, setSelected] = useState<GalleryItem | null>(null);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setMounted(true), 0);
-    return () => clearTimeout(timer);
-  }, []);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const lastFocusedElementRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     document.body.style.overflow = selected ? "hidden" : "unset";
+    return () => {
+      document.body.style.overflow = "unset";
+    };
   }, [selected]);
 
   const photos = useMemo(
@@ -41,7 +44,24 @@ export default function GalleryPage() {
     [],
   );
 
-  if (!mounted) return null;
+  useEffect(() => {
+    if (!selected) return;
+
+    lastFocusedElementRef.current = document.activeElement as HTMLElement;
+    closeButtonRef.current?.focus();
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSelected(null);
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+      lastFocusedElementRef.current?.focus();
+    };
+  }, [selected]);
 
   return (
     <div className="min-h-screen bg-white text-slate-900 px-1 md:px-2 py-12">
@@ -130,9 +150,11 @@ export default function GalleryPage() {
           targetRowHeight={600}
           rowConstraints={{ maxPhotos: 3 }}
           renderPhoto={({ photo, wrapperStyle }) => (
-            <div
+            <button
+              type="button"
               style={{ ...wrapperStyle, margin: 0 }}
               onClick={() => setSelected((photo as CustomPhoto).itemData)}
+              aria-label={`Открыть картину ${(photo as CustomPhoto).itemData.title}`}
               className="relative group cursor-pointer overflow-hidden rounded-xl bg-slate-100 shadow-sm hover:shadow-md transition-all duration-300"
             >
               <Image
@@ -147,7 +169,7 @@ export default function GalleryPage() {
                   {(photo as CustomPhoto).itemData.title}
                 </p>
               </div>
-            </div>
+            </button>
           )}
         />
       </main>
@@ -184,9 +206,9 @@ export default function GalleryPage() {
               desc: "Художественные работы Кирилловой Л.Л. с персональной выставки",
               link: "https://rutube.ru/video/private/a2164adff2166392a571fd5ea23b6e80/?p=DgqdWJG_r5Q6v6u0Zwm_sw",
             },
-          ].map((video, idx) => (
+          ].map((video) => (
             <a
-              key={idx}
+              key={video.link}
               href={video.link}
               target="_blank"
               rel="noopener noreferrer"
@@ -228,32 +250,38 @@ export default function GalleryPage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              // ИСПРАВЛЕНО: overflow-y-auto на мобилках для прокрутки ВСЕЙ модалки
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="gallery-modal-title"
               className="relative bg-white w-full md:w-fit max-w-[95vw] h-full md:h-auto md:max-h-[95vh] rounded-[2rem] overflow-y-auto md:overflow-hidden shadow-2xl flex flex-col md:flex-row z-10"
             >
               <button
+                ref={closeButtonRef}
                 onClick={() => setSelected(null)}
+                aria-label="Закрыть окно просмотра картины"
                 className="absolute top-5 right-5 z-[120] w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur-md border border-slate-100 rounded-full shadow-lg text-slate-900 hover:scale-110 transition-transform cursor-pointer"
               >
                 <X size={20} />
               </button>
 
-              {/* Секция с картинкой */}
               <div className="bg-slate-50 flex items-center justify-center p-0 shrink-0 md:shrink">
-                <img
-                  src={selected.image}
-                  alt={selected.title}
-                  // ИСПРАВЛЕНО: на мобилках высота h-auto, чтобы она не ограничивала скролл всей модалки
-                  className="w-full h-auto md:max-h-[95vh] object-contain"
-                />
+                <picture>
+                  <source srcSet={toWebp(selected.image)} type="image/webp" />
+                  <img
+                    src={selected.image}
+                    alt={selected.title}
+                    className="w-full h-auto md:max-h-[95vh] object-contain"
+                  />
+                </picture>
               </div>
 
-              {/* Секция с текстом */}
-              {/* ИСПРАВЛЕНО: md:overflow-y-auto — на десктопе скроллим только тут, на мобилке скроллится вся модалка выше */}
               <div className="w-full md:w-[450px] lg:w-[500px] flex flex-col bg-white border-t md:border-t-0 md:border-l border-slate-50 md:overflow-y-auto hide-scrollbar">
                 <div className="p-8 md:p-10">
                   <div className="mb-8">
-                    <h2 className="text-xl md:text-2xl font-serif font-bold text-black mb-2 leading-tight">
+                    <h2
+                      id="gallery-modal-title"
+                      className="text-xl md:text-2xl font-serif font-bold text-black mb-2 leading-tight"
+                    >
                       {selected.title}
                     </h2>
                     <p className="text-[9px] uppercase tracking-[0.2em] text-slate-600 font-bold">
@@ -269,7 +297,7 @@ export default function GalleryPage() {
 
                   <div className="space-y-8">
                     {selected.quotes?.map((q, i) => (
-                      <div key={i} className="space-y-3">
+                      <div key={`${q.author}-${i}`} className="space-y-3">
                         <p className="text-black font-serif text-[14px] leading-relaxed italic">
                           «{q.text}»
                         </p>
