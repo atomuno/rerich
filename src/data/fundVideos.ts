@@ -6,6 +6,60 @@ export interface FundVideoItem {
 
 export const fundVideos: FundVideoItem[] = [
   {
+    title: "Дух жизни",
+    description: "Видеоклип создан 20.09.2007.",
+    rutubeUrl:
+      "https://rutube.ru/video/private/432c8a7d58eb5df06eabb49ecd7e909a/?p=m5eD7dNv0u635KxyQaU7Ww",
+  },
+  {
+    title: "Россия",
+    description: "Видеоклип создан 29.09.2007.",
+    rutubeUrl:
+      "https://rutube.ru/video/private/81a9acab438a28fcef54923d6f9aceee/?p=80zFJ_-jL8AVxtQMeT3PqQ",
+  },
+  {
+    title: "Гималаи",
+    description: "Видеоклип создан 03.10.2007.",
+    rutubeUrl:
+      "https://rutube.ru/video/private/3e99cb452a636e4cb7856a01fc2bb4f0/?p=A0drAtSgKVohCq4XSDvzRA",
+  },
+  {
+    title: "Елена Ивановна Рерих",
+    description: "Видеоклип создан 03.10.2007.",
+    rutubeUrl:
+      "https://rutube.ru/video/private/886288cd5dedfae44240f8384acbfe6d/?p=tIi_WPzmKv8GXNj2iMffDQ",
+  },
+  {
+    title: "Святослав Николаевич Рерих",
+    description: "Видеоклип создан 04.10.2007.",
+    rutubeUrl:
+      "https://rutube.ru/video/private/4e449a07f56f4a691ea0c0f91e210957/?p=T29viW6jeVG3i8mWsgoqAQ",
+  },
+  {
+    title: "Севастополь и море",
+    description: "Видеоклип создан 28.10.2007.",
+    rutubeUrl:
+      "https://rutube.ru/video/private/eb982d6dc6c9ae6268c8bf15acf1f545/?p=5VSR2k6DT71Db_vZF5XKUA",
+  },
+  {
+    title: "Библейские образы",
+    description: "Видеоклип создан 03.11.2007.",
+    rutubeUrl:
+      "https://rutube.ru/video/private/19468202a33f25762f18cfd1fa810a86/?p=r-pTkK3yspc9Pr1KNV3MWA",
+  },
+  {
+    title: "А.П. Бородин. Половецкие пляски",
+    description: "Видеоклип создан 09.11.2007.",
+    rutubeUrl:
+      "https://rutube.ru/video/private/b1085bf082611401b5f06d7e82ddfb78/?p=rlNkMp878WFOX4IR_SMDKg",
+  },
+  {
+    title: "Русь православная",
+    description: "Видеоклип создан 25.11.2007.",
+    rutubeUrl:
+      "https://rutube.ru/video/private/5f4c2162ec7c9bc1e8c377853784a18a/?p=tBZgAZcn2rhOBMOy_eq7Kg",
+  },
+  {
     title: "Русская революция",
     description: "Видеоклип создан 08.12.2007.",
     rutubeUrl:

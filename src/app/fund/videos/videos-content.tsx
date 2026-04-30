@@ -42,7 +42,7 @@ export default function VideosContent() {
 
           return (
             <a
-              key={video.title}
+              key={video.rutubeUrl}
               href={video.rutubeUrl}
               target="_blank"
               rel="noopener noreferrer"
