@@ -65,7 +65,8 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: ".next,public,package.json,package-lock.json,next.config.ts,payload.config.ts"
+          # src/ обязателен: payload.config.ts импортирует коллекции; админка — importMap.js и custom.scss
+          source: ".next,public,src,scripts,package.json,package-lock.json,next.config.ts,payload.config.ts,tsconfig.json,postcss.config.mjs,ecosystem.config.cjs"
           target: "/var/www/sevcrf"
 
       - name: Restore SQLite and media after copy
@@ -97,7 +98,13 @@ jobs:
           script: |
             set -e
             cd /var/www/sevcrf
+            if [ ! -f .env ]; then
+              echo "ERROR: нет /var/www/sevcrf/.env (PAYLOAD_SECRET, DATABASE_URL)"
+              exit 1
+            fi
             npm install --omit=dev
             pm2 delete sevcrf || true
-            pm2 start npm --name "sevcrf" -- start
+            pm2 start ecosystem.config.cjs
             pm2 save
+            sleep 2
+            pm2 logs sevcrf --lines 15 --nostream || true
