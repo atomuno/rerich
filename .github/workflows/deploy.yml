@@ -14,44 +14,90 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
+      # Payload инициализируется при next build (SSG/сборка страниц с getPayload).
+      # Секрет должен совпадать с PAYLOAD_SECRET в .env на сервере, иначе сессии админки «сломаются».
       - name: Install and Build
+        env:
+          PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+          DATABASE_URL: file:./payload.sqlite
         run: |
           npm ci
           npm run build
 
-      - name: Prepare Server Folders
+      - name: Backup SQLite and uploads on server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            mkdir -p /var/www/sevcrf
-            # Очищаем папку перед новым деплоем, кроме папки node_modules (для скорости)
-            find /var/www/sevcrf -maxdepth 1 ! -name 'node_modules' ! -name '.' -exec rm -rf {} +
+            set -e
+            APP=/var/www/sevcrf
+            BK="$APP/.deploy-backup"
+            mkdir -p "$APP" "$BK"
+            rm -rf "$BK/media" "$BK"/payload.sqlite*
+            if [ -d "$APP/public/media" ]; then
+              cp -a "$APP/public/media" "$BK/media"
+            fi
+            for f in payload.sqlite payload.sqlite-wal payload.sqlite-shm; do
+              if [ -f "$APP/$f" ]; then cp -a "$APP/$f" "$BK/$f"; fi
+            done
+            echo "Backup done (if files existed)."
 
-      - name: Copy Files to Server
+      - name: Remove old Next build only
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e
+            APP=/var/www/sevcrf
+            mkdir -p "$APP"
+            rm -rf "$APP/.next"
+            echo "Removed .next only; kept node_modules, .env, DB, public/media."
+
+      - name: Copy files to server
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          # Копируем билд, конфиги и файлы запуска
-          source: ".next,public,package.json,package-lock.json,next.config.ts"
+          source: ".next,public,package.json,package-lock.json,next.config.ts,payload.config.ts"
           target: "/var/www/sevcrf"
 
-      - name: Start Application via PM2
+      - name: Restore SQLite and media after copy
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            set -e
+            APP=/var/www/sevcrf
+            BK="$APP/.deploy-backup"
+            mkdir -p "$APP/public/media"
+            if [ -d "$BK/media" ]; then
+              rm -rf "$APP/public/media"
+              cp -a "$BK/media" "$APP/public/media"
+            fi
+            for f in payload.sqlite payload.sqlite-wal payload.sqlite-shm; do
+              if [ -f "$BK/$f" ]; then cp -a "$BK/$f" "$APP/$f"; fi
+            done
+            echo "Restore done."
+
+      - name: Start application via PM2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e
             cd /var/www/sevcrf
-            npm install --production
-            # Перезапускаем или создаем процесс в PM2
+            npm install --omit=dev
             pm2 delete sevcrf || true
             pm2 start npm --name "sevcrf" -- start
             pm2 save

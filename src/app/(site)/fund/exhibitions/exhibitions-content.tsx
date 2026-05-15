@@ -1,0 +1,302 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import ExhibitionMasonryGallery from "@/components/ExhibitionMasonryGallery";
+import {
+  ArrowRight,
+  Calendar,
+  ImageIcon,
+  MapPin,
+  PlayCircle,
+  X,
+} from "lucide-react";
+import type { FundExhibitionView } from "@/lib/cms/payload-queries";
+
+export default function FundExhibitionsContent({
+  exhibitions,
+}: {
+  exhibitions: FundExhibitionView[];
+}) {
+  const [selectedExhibition, setSelectedExhibition] =
+    useState<FundExhibitionView | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const lastFocusedElementRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    document.body.style.overflow = selectedExhibition ? "hidden" : "unset";
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [selectedExhibition]);
+
+  useEffect(() => {
+    if (!selectedExhibition) return;
+
+    lastFocusedElementRef.current = document.activeElement as HTMLElement;
+    closeButtonRef.current?.focus();
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSelectedExhibition(null);
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+      lastFocusedElementRef.current?.focus();
+    };
+  }, [selectedExhibition]);
+
+  return (
+    <div className="min-h-screen bg-white pb-32">
+      <header className="pt-24 pb-20 px-4 text-center border-b border-slate-50 bg-slate-50/30 font-serif">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-4xl md:text-7xl font-bold uppercase tracking-tighter text-slate-900 mb-8 leading-none text-center">
+              Выставки фонда
+            </h1>
+            <p className="text-slate-500 font-sans text-xs md:text-sm uppercase tracking-[0.4em] font-bold mb-8 text-center">
+              Архив выставочных проектов СГФР
+            </p>
+            <div className="h-px w-20 bg-slate-200 mx-auto mb-8"></div>
+            <p className="text-lg md:text-xl text-slate-700 leading-relaxed max-w-3xl mx-auto text-center">
+              Раздел объединяет проекты Севастопольского городского фонда
+              Рерихов: персональные и международные выставки, а также фотоархив
+              ключевых событий.
+            </p>
+          </motion.div>
+        </div>
+      </header>
+
+      <main className="max-w-[1400px] mx-auto px-4 py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-6">
+          {exhibitions.map((exhibition) => {
+            const hasPhotos = exhibition.photos.length > 0;
+            const cardClassName = `
+              h-full w-full text-left flex flex-col justify-between
+              group p-6 md:p-8 rounded-[2.5rem] border transition-all duration-500
+              ${
+                hasPhotos
+                  ? "bg-white border-blue-100 hover:border-blue-300 hover:shadow-2xl hover:shadow-blue-50/50 cursor-pointer active:scale-[0.98]"
+                  : "bg-slate-50/40 border-blue-100"
+              }
+            `;
+
+            return (
+              <div key={exhibition.id}>
+                {hasPhotos ? (
+                  <button
+                    type="button"
+                    onClick={() => setSelectedExhibition(exhibition)}
+                    aria-label={`Открыть фотографии выставки ${exhibition.title}`}
+                    className={cardClassName}
+                  >
+                    <div className="space-y-4">
+                      <div className="flex flex-wrap items-center justify-between gap-3">
+                        <div className="flex items-center gap-2">
+                          <div className="p-2 rounded-xl bg-blue-600 text-white">
+                            <Calendar size={14} />
+                          </div>
+                          <span className="font-sans font-bold text-slate-900 tracking-tight text-sm md:text-base">
+                            {exhibition.date}
+                          </span>
+                        </div>
+                        <div className="flex gap-2">
+                          <div className="flex items-center gap-1.5 bg-blue-50 text-blue-600 px-3 py-1 rounded-full animate-pulse">
+                            <ImageIcon size={12} />
+                            <span className="text-[10px] font-black uppercase tracking-wider">
+                              Галерея
+                            </span>
+                          </div>
+
+                          <div className="flex items-center gap-1.5 text-slate-400">
+                            <MapPin size={12} className="shrink-0" />
+                            <span className="text-[9px] uppercase font-sans font-bold tracking-[0.1em]">
+                              {exhibition.location}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <h3 className="text-lg md:text-xl font-serif font-bold leading-snug transition-colors duration-300 group-hover:text-blue-700 text-black">
+                        {exhibition.title}
+                      </h3>
+                      <p className="text-sm md:text-base text-slate-600 leading-relaxed">
+                        {exhibition.summary}
+                      </p>
+                    </div>
+
+                    <div className="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-blue-600 font-sans font-black text-[10px] uppercase tracking-widest transition-all group-hover:gap-3">
+                        <ImageIcon size={14} />
+                        <span>Открыть фотографии</span>
+                        <ArrowRight size={14} />
+                      </div>
+                      <span className="text-[10px] font-mono text-slate-300">
+                        №{exhibition.id}
+                      </span>
+                    </div>
+                  </button>
+                ) : (
+                  <div className={cardClassName}>
+                    <div className="space-y-4">
+                      <div className="flex flex-wrap items-center justify-between gap-3">
+                        <div className="flex items-center gap-2">
+                          <div className="p-2 rounded-xl bg-slate-200 text-slate-500">
+                            <Calendar size={14} />
+                          </div>
+                          <span className="font-sans font-bold text-slate-900 tracking-tight text-sm md:text-base">
+                            {exhibition.date}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-1.5 text-slate-400">
+                          <MapPin size={12} className="shrink-0" />
+                          <span className="text-[9px] uppercase font-sans font-bold tracking-[0.1em]">
+                            {exhibition.location}
+                          </span>
+                        </div>
+                      </div>
+
+                      <h3 className="text-lg md:text-xl font-serif font-bold leading-snug text-slate-700">
+                        {exhibition.title}
+                      </h3>
+                      <p className="text-sm md:text-base text-slate-600 leading-relaxed">
+                        {exhibition.summary}
+                      </p>
+                    </div>
+
+                    <div className="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between">
+                      <span className="text-[9px] uppercase font-sans font-black text-slate-300 tracking-[0.2em]">
+                        Архивная запись
+                      </span>
+                      <span className="text-[10px] font-mono text-slate-300">
+                        №{exhibition.id}
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </main>
+
+      <AnimatePresence>
+        {selectedExhibition && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 md:p-4 lg:p-8">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedExhibition(null)}
+              className="absolute inset-0 bg-white/60 backdrop-blur-2xl"
+            />
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="fund-exhibition-dialog-title"
+              className={`relative flex max-h-[98vh] w-full flex-col overflow-hidden rounded-[2rem] border border-slate-100 bg-white shadow-2xl z-10 md:rounded-[3rem] ${
+                selectedExhibition.photos.length <= 2
+                  ? "max-w-[min(96vw,1540px)]"
+                  : "max-w-7xl"
+              }`}
+            >
+              <button
+                ref={closeButtonRef}
+                onClick={() => setSelectedExhibition(null)}
+                aria-label="Закрыть окно с фотографиями выставки"
+                className="absolute top-5 right-5 z-[120] w-10 h-10 flex items-center justify-center bg-white/90 backdrop-blur border border-slate-100 rounded-full shadow-lg text-slate-900 hover:scale-110 active:scale-95 transition-all cursor-pointer"
+              >
+                <X size={20} />
+              </button>
+
+              <div
+                className={`flex-grow overflow-y-auto bg-white ${
+                  selectedExhibition.photos.length <= 2
+                    ? "p-1 sm:p-2"
+                    : "p-3 md:p-6"
+                }`}
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
+                <div
+                  className={`mx-auto w-full ${
+                    selectedExhibition.photos.length <= 2
+                      ? "max-w-none"
+                      : "max-w-[min(100%,80rem)]"
+                  }`}
+                >
+                  <div className="mb-6 border-b border-slate-100 px-5 pb-5 pt-2 pr-14 font-serif md:mb-8 md:px-8 md:pb-6 md:pt-3">
+                    <div className="mb-1 flex items-center gap-2 text-blue-600">
+                      <Calendar size={14} />
+                      <span className="font-sans text-[10px] font-bold uppercase tracking-[0.2em]">
+                        {selectedExhibition.date}
+                      </span>
+                    </div>
+                    <h2
+                      id="fund-exhibition-dialog-title"
+                      className="max-w-5xl text-xl font-bold leading-tight tracking-tight text-black md:text-3xl"
+                    >
+                      {selectedExhibition.title}
+                    </h2>
+                    <div className="mt-2 flex items-center gap-2 font-sans text-slate-400">
+                      <MapPin size={12} />
+                      <span className="text-[10px] font-bold uppercase tracking-widest">
+                        {selectedExhibition.location}
+                      </span>
+                    </div>
+                    <p className="mt-4 max-w-5xl text-sm leading-relaxed text-slate-700 md:text-base">
+                      {selectedExhibition.description}
+                    </p>
+                  </div>
+
+                  <ExhibitionMasonryGallery photos={selectedExhibition.photos} />
+                </div>
+
+                {selectedExhibition.videos?.length ? (
+                  <div className="max-w-5xl mx-auto mt-10 p-6 bg-white rounded-2xl border border-slate-100">
+                    <h3 className="text-sm md:text-base font-bold uppercase tracking-wide text-slate-900 mb-4">
+                      Видеоматериалы
+                    </h3>
+                    <div className="grid grid-cols-1 gap-3">
+                      {selectedExhibition.videos.map((video) => (
+                        <a
+                          key={video.url}
+                          href={video.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group flex items-center justify-between gap-3 p-4 rounded-xl border border-slate-100 hover:border-slate-300 hover:bg-slate-50 transition-colors"
+                        >
+                          <span className="text-sm text-slate-700 font-medium leading-snug">
+                            {video.title}
+                          </span>
+                          <PlayCircle
+                            size={18}
+                            className="text-slate-400 group-hover:text-blue-600 transition-colors shrink-0"
+                          />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+
+              <div className="p-4 text-center text-[9px] font-sans font-bold text-slate-300 uppercase tracking-[0.3em] border-t border-slate-50 shrink-0 bg-white">
+                Архив СГФР • {selectedExhibition.date}
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}

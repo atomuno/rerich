@@ -1,6 +1,5 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element -- masonry needs intrinsic image heights */
 import Masonry from "react-masonry-css";
 
 /** Fewer columns → larger thumbnails */
@@ -32,6 +31,7 @@ function PhotoTile({
     <div className="group relative w-full break-inside-avoid">
       <picture>
         <source srcSet={toWebp(photo.src)} type="image/webp" />
+        { }
         <img
           src={photo.src}
           alt={photo.alt ?? photo.caption ?? `Фото ${idx + 1}`}

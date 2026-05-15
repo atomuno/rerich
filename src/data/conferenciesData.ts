@@ -1,0 +1,86 @@
+export const conferenciesData = [
+    {
+      id: 1,
+      title: "Открытие конференции. Приветственное слово программного комитета",
+      speaker: "Лебеденко А.А., Расулова Т.С., Головин В.В.",
+      date: "10 апреля 2026",
+      url: "https://rutube.ru/video/private/c556a95fd40bc7bb7ecbb2750afb6fc3/?p=JMr4DGmf5nRfaKTXqZDLKQ",
+      tag: "Открытие",
+    },
+    {
+      id: 2,
+      title: "Презентация монографии: Севастопольские летописи (1783-2024)",
+      speaker: "Головина Н.М., Головин В.В.",
+      date: "10 апреля 2026",
+      url: "https://rutube.ru/video/private/f9540b724c2ef6447a77d0e052da9b62/?p=5M2eM6aIenejVPI8GTpf5w",
+      tag: "Монография",
+    },
+    {
+      id: 3,
+      title: "Идеи Пакта Рериха в социалистической Болгарии",
+      speaker: "Лебеденко Анатолий Андреевич",
+      date: "10 апреля 2026",
+      url: "https://rutube.ru/video/private/19e69784aa5cc838563836a1db791ea1/?p=yWItpeQA4EEvXu4KdVMJuQ",
+      tag: "Доклад 1",
+    },
+    {
+      id: 4,
+      title: "Культура как Знамя Мира и Победы!",
+      speaker: "Расулова Татьяна Салиховна",
+      date: "10 апреля 2026",
+      url: "https://rutube.ru/video/private/ff2c7cb86d631b71e648a2054a72c630/?p=Z9FPwSTtQyEIFyENiSsiQQ",
+      tag: "Доклад 2",
+    },
+    {
+      id: 5,
+      title:
+        "Проблематика воспитания и созидания истинных людей в трудах Е.И. Рерих",
+      speaker: "Головина Наталья Михайловна",
+      date: "10 апреля 2026",
+      url: "https://rutube.ru/video/private/19e021e7dc28128aacc129214bd8fce2/?p=voeBEf298LbDc8FaZtfsVg",
+      tag: "Доклад 3",
+    },
+    {
+      id: 6,
+      title: "Метаморфозы ответственности в современную эпоху",
+      speaker: "Тупиленко Анастасия Бахтиеровна",
+      date: "10 апреля 2026",
+      url: "https://rutube.ru/video/private/fb1633bf33e30a3fc4b32942b100d0bf/?p=o0RMAge3ao8KFBtWUo4UXA",
+      tag: "Доклад 4",
+    },
+    {
+      id: 7,
+      title: "Общезначное время как онтологическая мера реальности",
+      speaker: "Григорьев Павел Евгеньевич",
+      date: "11 апреля 2026",
+      url: "https://rutube.ru/video/private/447531b2556bb41b3bbedaa3f8229ce0/?p=TS_7nVpH3HJ83HPKnXSxBQ",
+      tag: "Доклад 5",
+    },
+    {
+      id: 8,
+      title:
+        "Ретропричинность как эффект физико-семантической связности событий",
+      speaker: "Григорьев Павел Евгеньевич",
+      date: "11 апреля 2026",
+      url: "https://rutube.ru/video/private/5bc0a9d74ba09d7585f513e345c26656/?p=kAXdruaFj_I6TIGwwwgunQ",
+      tag: "Доклад 6",
+    },
+    {
+      id: 9,
+      title:
+        "Формирование консорций при помощи ИИ как перспективная социальная технология",
+      speaker: "Сулейменов Ибрагим Эсенович",
+      date: "11 апреля 2026",
+      url: "https://rutube.ru/video/private/15aeb821e3b4465934531a79c4a3170b/?p=F5U5axyQMV55SwLfqSvkZg",
+      tag: "Доклад 7",
+    },
+    {
+      id: 10,
+      title:
+        "Значение наследия Н.К. Рериха при обсуждении новой модели развития России",
+      speaker: "Головин Владислав Викторович",
+      date: "11 апреля 2026",
+      url: "https://rutube.ru/video/private/4d55752f8f52c52987415ee64830c2d1/?p=pH_W52Py-aSkaakk31dGOw",
+      tag: "Доклад 8",
+    },
+  ];
