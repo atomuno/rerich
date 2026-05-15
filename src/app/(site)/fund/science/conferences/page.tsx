@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { fetchConferenceTalks } from "@/lib/cms/payload-queries";
 import ConferenceClient from "./ConferenceClient";
 
+export const dynamic = "force-dynamic";
+
 // Заголовок для нашей стильной карточки (сделаем акцент на ИИ)
 const OG_TITLE = "Искусственный интеллект и виртуальная личность (2026)";
 

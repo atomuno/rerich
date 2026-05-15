@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { fetchBooks } from "@/lib/cms/payload-queries";
 import BooksContent from "./books-content";
 
+export const dynamic = "force-dynamic";
+
 const OG_TITLE = "Книги Севастопольского городского фонда Рерихов";
 
 export const metadata: Metadata = {

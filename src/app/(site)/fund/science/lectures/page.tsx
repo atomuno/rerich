@@ -3,6 +3,8 @@ import { fetchLectures } from "@/lib/cms/payload-queries";
 
 import LecturesClient, { type LectureCard } from "./LecturesClient";
 
+export const dynamic = "force-dynamic";
+
 // Заголовок для нашей сочной карточки (сделаем акцент на научном статусе)
 const OG_TITLE = "Научный лекторий СГФР: Видеоархив докладов";
 const PAGE_PATH = "/fund/science/lectures";

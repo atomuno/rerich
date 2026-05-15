@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { fetchCrafts } from "@/lib/cms/payload-queries";
 import CraftsContent from "./CraftsContent";
 
+export const dynamic = "force-dynamic";
+
 const TITLE = "Поделки | Петриковская роспись";
 
 export const metadata: Metadata = {

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { fetchGallery } from "@/lib/cms/payload-queries";
 import GalleryContent from "./gallery-content"; // Перенеси основной код сюда
 
+export const dynamic = "force-dynamic";
+
 const PAGE_TITLE = "Галерея картин Л.Л. Кирилловой";
 const OG_TITLE = "Галерея картин Л.Л. Кирилловой — СГФР";
 const PAGE_PATH = "/fund/gallery";

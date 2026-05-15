@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { fetchUrielExhibitions } from "@/lib/cms/payload-queries";
 import ExhibitionsContent from "./exhibitions-content"; // Путь к клиентскому файлу
 
+export const dynamic = "force-dynamic";
+
 const PAGE_TITLE = "Городские выставки и культурные мероприятия";
 const OG_TITLE = "Архив выставок СГЦДТ «Уриэль» — Севастополь";
 

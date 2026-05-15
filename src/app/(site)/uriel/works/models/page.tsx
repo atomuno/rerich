@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { fetchShipGroups } from "@/lib/cms/payload-queries";
 import ShipModelsGallery from "./ShipModelsGallery";
 
+export const dynamic = "force-dynamic";
+
 const TITLE = "Модели кораблей";
 
 export const metadata: Metadata = {

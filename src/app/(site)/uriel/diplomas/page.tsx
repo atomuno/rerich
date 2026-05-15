@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { fetchDiplomaCards } from "@/lib/cms/payload-queries";
 import DiplomasContent from "./diplomas-content"; // Путь к клиентскому компоненту
 
+export const dynamic = "force-dynamic";
+
 const PAGE_TITLE = "Благодарности и дипломы СГЦДТ «Уриэль»";
 const OG_TITLE = "Официальные награды центра «Уриэль» — Севастополь";
 

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { fetchFundVideos } from "@/lib/cms/payload-queries";
 import VideosContent from "./videos-content";
 
+export const dynamic = "force-dynamic";
+
 const PAGE_TITLE = "Видеоролики";
 const OG_TITLE = "Видеоролики фонда Рерихов";
 const PAGE_PATH = "/fund/videos";

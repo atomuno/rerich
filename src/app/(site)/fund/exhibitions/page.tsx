@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { fetchFundExhibitions } from "@/lib/cms/payload-queries";
 import FundExhibitionsContent from "./exhibitions-content";
 
+export const dynamic = "force-dynamic";
+
 const PAGE_TITLE = "Выставки фонда";
 const OG_TITLE = "Выставочные проекты СГФР";
 const PAGE_PATH = "/fund/exhibitions";
