@@ -26,6 +26,7 @@ if [[ ${#ITEMS[@]} -eq 0 ]]; then
   exit 1
 fi
 
-tar czf "$ARCHIVE" "${ITEMS[@]}"
+# Без xattr macOS — чище распаковка на Linux
+COPYFILE_DISABLE=1 tar czf "$ARCHIVE" "${ITEMS[@]}"
 echo "Создан архив: $ARCHIVE"
 echo "Перенесите этот файл на новый сервер вместе с кодом, затем: npm run payload:restore -- $ARCHIVE"

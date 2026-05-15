@@ -13,13 +13,13 @@
     "generate:types": "payload generate:types",
     "seed:cms": "jiti scripts/seed-payload-cms.ts",
     "payload:backup": "bash scripts/backup-payload.sh",
-    "payload:restore": "bash scripts/restore-payload.sh"
+    "payload:restore": "bash scripts/restore-payload.sh",
+    "payload:orphans": "bash scripts/list-orphan-media.sh"
   },
   "overrides": {
     "@next/env": "16.2.6"
   },
   "dependencies": {
-    "@netlify/plugin-nextjs": "^5.15.8",
     "@next/env": "16.2.6",
     "@next/third-parties": "^16.2.6",
     "@payloadcms/db-sqlite": "^3.84.1",

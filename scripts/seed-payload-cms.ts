@@ -3,6 +3,8 @@
  * В обычной работе источник правды — БД + public/media; переносите их между серверами
  * (npm run payload:backup / payload:restore). Повторный seed без --force не трогает
  * коллекции, где уже есть документы. --force затирает контент и media (users не трогаем).
+ * Для сида нужны файлы из src/data; старые public/gallery, public/sgfr и т.п. удалены —
+ * повторный полный сид только после восстановления архива или с копии legacy-файлов.
  *
  * Запуск: npm run seed:cms   |   Полная перезаливка: npm run seed:cms -- --force
  */

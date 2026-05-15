@@ -22,6 +22,15 @@ import { Videos } from "./src/payload/collections/Videos";
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
+if (
+  process.env.NODE_ENV === "production" &&
+  !process.env.PAYLOAD_SECRET?.trim()
+) {
+  throw new Error(
+    "PAYLOAD_SECRET is required in production. Set it in .env on the server.",
+  );
+}
+
 export default buildConfig({
   admin: {
     user: Users.slug,
