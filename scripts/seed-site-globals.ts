@@ -40,7 +40,7 @@ const fundAbout = {
   ogrn: "1159204013320",
   inn: "9201506788",
   kpp: "920101001",
-  registeredAt: "11.03.2015",
+  registeredAt: "11.03.2015 г.",
 };
 
 const urielAbout = {
