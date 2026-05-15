@@ -2,6 +2,8 @@
 
 import Masonry from "react-masonry-css";
 
+import { optionalWebpSrc } from "@/lib/images";
+
 /** Fewer columns → larger thumbnails */
 const breakpointColsMany = {
   default: 2,
@@ -14,10 +16,6 @@ export type MasonryPhoto = {
   alt?: string;
 };
 
-function toWebp(src: string): string {
-  return src.replace(/\.(jpe?g|png)$/i, ".webp");
-}
-
 function PhotoTile({
   photo,
   idx,
@@ -27,11 +25,12 @@ function PhotoTile({
   idx: number;
   imgClassName?: string;
 }) {
+  const webpSrc = optionalWebpSrc(photo.src);
+
   return (
     <div className="group relative w-full break-inside-avoid">
       <picture>
-        <source srcSet={toWebp(photo.src)} type="image/webp" />
-        { }
+        {webpSrc ? <source srcSet={webpSrc} type="image/webp" /> : null}
         <img
           src={photo.src}
           alt={photo.alt ?? photo.caption ?? `Фото ${idx + 1}`}

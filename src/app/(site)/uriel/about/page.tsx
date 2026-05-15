@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+
+import { fetchUrielAbout } from "@/lib/cms/payload-queries";
+
 import UrielAbout from "./Org2About";
+
+export const dynamic = "force-dynamic";
 
 // Текст, который будет отрисован нашим стильным генератором на Playfair Display
 const OG_TITLE = "Об организации: СГЦДТ «Уриэль»";
@@ -44,6 +50,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AboutPage() {
-  return <UrielAbout />;
+export default async function AboutPage() {
+  const data = await fetchUrielAbout();
+  if (!data) notFound();
+  return <UrielAbout data={data} />;
 }

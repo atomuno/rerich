@@ -3,20 +3,24 @@
  * В обычной работе источник правды — БД + public/media; переносите их между серверами
  * (npm run payload:backup / payload:restore). Повторный seed без --force не трогает
  * коллекции, где уже есть документы. --force затирает контент и media (users не трогаем).
- * Для сида нужны файлы из src/data; старые public/gallery, public/sgfr и т.п. удалены —
- * повторный полный сид только после восстановления архива или с копии legacy-файлов.
+ * Для полного seed:cms --force нужны legacy-файлы (см. scripts/seed-payload-cms.ts в репозитории
+ * или восстановите payload:restore из архива). Сайт читает только payload.sqlite + public/media.
+ * Одноразовые миграции: payload:migrate-uriel-exhibitions, payload:migrate-club-photos.
  *
  * Запуск: npm run seed:cms   |   Полная перезаливка: npm run seed:cms -- --force
  */
 
 import "./env-bootstrap";
 
-import { existsSync } from "node:fs";
-import path from "node:path";
-
 import { getPayload } from "payload";
 
 import config from "../payload.config";
+import {
+  buildUrielExhibitionPhotos,
+  clearPayloadMediaCache,
+  getOrCreateMediaFromWebPath,
+  type PayloadInstance,
+} from "./lib/payload-media";
 import { booksData } from "../src/data/books";
 import { conferenciesData } from "../src/data/conferenciesData";
 import { craftsData } from "../src/data/craftsData";
@@ -41,8 +45,6 @@ const CONTENT_COLLECTIONS = [
   "lectures",
   "media",
 ] as const;
-
-type PayloadInstance = Awaited<ReturnType<typeof getPayload>>;
 
 async function purgeCollection(
   payload: PayloadInstance,
@@ -79,65 +81,6 @@ async function collectionHasDocs(
   return res.totalDocs > 0;
 }
 
-/** Путь вида /sgfr/01/01.jpg → файл в public */
-function absolutePublicPath(webPath: string): string {
-  const rel = webPath.startsWith("/") ? webPath.slice(1) : webPath;
-  const parts = rel.split("/").filter(Boolean);
-  return path.join(process.cwd(), "public", ...parts);
-}
-
-function fileExistsVariants(webPath: string): string | null {
-  const base = absolutePublicPath(webPath);
-  const candidates = [
-    base,
-    base.replace(/\.jpg$/i, ".JPG"),
-    base.replace(/\.jpeg$/i, ".JPEG"),
-    base.replace(/\.jpg$/i, ".jpg"),
-  ];
-  const seen = new Set<string>();
-  for (const p of candidates) {
-    if (seen.has(p)) continue;
-    seen.add(p);
-    if (existsSync(p)) return p;
-  }
-  return null;
-}
-
-const mediaIdBySource = new Map<string, number>();
-
-async function getOrCreateMediaFromWebPath(
-  payload: PayloadInstance,
-  webPath: string,
-  alt: string,
-): Promise<number | null> {
-  const key = webPath.startsWith("/") ? webPath : `/${webPath}`;
-  if (mediaIdBySource.has(key)) return mediaIdBySource.get(key)!;
-
-  const abs = fileExistsVariants(key);
-  if (!abs) {
-    console.warn(`    файл не найден: ${key}`);
-    return null;
-  }
-
-  let doc: { id: number | string };
-  try {
-    doc = (await payload.create({
-      collection: "media",
-      data: { alt },
-      filePath: abs,
-      overrideAccess: true,
-    })) as { id: number | string };
-  } catch (e) {
-    const msg = e instanceof Error ? e.message : String(e);
-    console.warn(`    не удалось загрузить в Media (пропуск): ${key} — ${msg}`);
-    return null;
-  }
-
-  const id = doc.id as number;
-  mediaIdBySource.set(key, id);
-  return id;
-}
-
 async function main(): Promise<void> {
   if (!process.env.PAYLOAD_SECRET?.trim()) {
     console.error(
@@ -156,7 +99,7 @@ async function main(): Promise<void> {
       await purgeCollection(payload, slug);
       console.log(`  очищено: ${slug}`);
     }
-    mediaIdBySource.clear();
+    clearPayloadMediaCache();
   }
 
   // --- conferences ---
@@ -395,6 +338,16 @@ async function main(): Promise<void> {
   } else {
     let n = 0;
     for (const ex of exhibitions) {
+      const photos =
+        ex.hasPhotos && ex.slug
+          ? await buildUrielExhibitionPhotos(
+              payload,
+              ex.slug,
+              ex.photoCount ?? 0,
+              ex.title,
+            )
+          : [];
+
       await payload.create({
         collection: "exhibitions-uriel",
         data: {
@@ -402,11 +355,13 @@ async function main(): Promise<void> {
           date: ex.date,
           title: ex.title,
           location: ex.location,
-          hasPhotos: Boolean(ex.hasPhotos),
+          hasPhotos: photos.length > 0,
           ...(ex.slug ? { slug: ex.slug } : {}),
-          ...(typeof ex.photoCount === "number"
-            ? { photoCount: ex.photoCount }
-            : {}),
+          ...(photos.length
+            ? { photoCount: photos.length, photos }
+            : typeof ex.photoCount === "number"
+              ? { photoCount: ex.photoCount }
+              : {}),
         },
         overrideAccess: true,
       });

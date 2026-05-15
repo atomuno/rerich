@@ -7,6 +7,7 @@ import { buildConfig } from "payload";
 import sharp from "sharp";
 
 import { Books } from "./src/payload/collections/Books";
+import { ClubGallery } from "./src/payload/collections/ClubGallery";
 import { Conferences } from "./src/payload/collections/Conferences";
 import { Crafts } from "./src/payload/collections/Crafts";
 import { Diplomas } from "./src/payload/collections/Diplomas";
@@ -18,6 +19,9 @@ import { Media } from "./src/payload/collections/Media";
 import { ShipsModels } from "./src/payload/collections/ShipsModels";
 import { Users } from "./src/payload/collections/Users";
 import { Videos } from "./src/payload/collections/Videos";
+import { FundAbout } from "./src/payload/globals/FundAbout";
+import { FundMuseum } from "./src/payload/globals/FundMuseum";
+import { UrielAbout } from "./src/payload/globals/UrielAbout";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -49,6 +53,7 @@ export default buildConfig({
     Gallery,
     ShipsModels,
     Crafts,
+    ClubGallery,
     ExhibitionsUriel,
     Diplomas,
   ],
@@ -63,6 +68,7 @@ export default buildConfig({
     },
     wal: true,
   }),
+  globals: [FundAbout, UrielAbout, FundMuseum],
   sharp,
   plugins: [],
 });

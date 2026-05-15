@@ -31,18 +31,39 @@ export const ExhibitionsUriel: CollectionConfig = {
     {
       name: "hasPhotos",
       type: "checkbox",
-      label: "Есть фотогалерея",
+      label: "Есть фотогалерея (устарело — см. поле «Фото»)",
       defaultValue: false,
+      admin: { position: "sidebar" },
     },
     {
       name: "slug",
       type: "text",
-      label: "Slug папки галереи (как в TS)",
+      label: "Slug legacy-папки (public/exhibitions)",
+      admin: {
+        description: "Используется скриптом миграции; после переноса можно оставить для справки.",
+        position: "sidebar",
+      },
     },
     {
       name: "photoCount",
       type: "number",
-      label: "Количество фото (как в TS; при переходе на Media можно не использовать)",
+      label: "Кол-во фото legacy (для миграции)",
+      admin: { position: "sidebar" },
+    },
+    {
+      name: "photos",
+      type: "array",
+      label: "Фото",
+      fields: [
+        {
+          name: "image",
+          type: "upload",
+          relationTo: "media",
+          required: true,
+          label: "Изображение",
+        },
+        { name: "caption", type: "text", label: "Подпись" },
+      ],
     },
   ],
 };
