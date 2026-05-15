@@ -7,6 +7,8 @@ import { X, PlayCircle } from "lucide-react";
 import type { GalleryItemView } from "@/lib/cms/payload-queries";
 import PhotoAlbum from "react-photo-album";
 
+import { optionalWebpSrc } from "@/lib/images";
+
 // Определяем тип для фото в альбоме, чтобы избежать any
 interface CustomPhoto {
   src: string;
@@ -14,10 +16,6 @@ interface CustomPhoto {
   height: number;
   itemData: GalleryItemView;
   alt: string;
-}
-
-function toWebp(src: string): string {
-  return src.replace(/\.(jpe?g|png)$/i, ".webp");
 }
 
 export default function GalleryContent({
@@ -270,7 +268,12 @@ export default function GalleryContent({
 
               <div className="bg-slate-50 flex items-center justify-center p-0 shrink-0 md:shrink">
                 <picture>
-                  <source srcSet={toWebp(selected.image)} type="image/webp" />
+                  {optionalWebpSrc(selected.image) ? (
+                    <source
+                      srcSet={optionalWebpSrc(selected.image)!}
+                      type="image/webp"
+                    />
+                  ) : null}
                   <img
                     src={selected.image}
                     alt={selected.title}

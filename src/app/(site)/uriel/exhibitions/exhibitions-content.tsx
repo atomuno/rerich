@@ -177,7 +177,7 @@ export default function ExhibitionsContent({
               aria-modal="true"
               aria-labelledby="uriel-exhibition-dialog-title"
               className={`relative flex max-h-[98vh] w-full flex-col overflow-hidden rounded-[2rem] border border-slate-100 bg-white shadow-2xl z-10 md:rounded-[3rem] ${
-                (selectedEx.photoCount || 0) <= 2
+                selectedEx.photos.length <= 2
                   ? "max-w-[min(96vw,1540px)]"
                   : "max-w-7xl"
               }`}
@@ -217,7 +217,7 @@ export default function ExhibitionsContent({
               {/* СЕТКА ФОТО (КРУПНО) */}
               <div
                 className={`flex-grow overflow-y-auto bg-white ${
-                  (selectedEx.photoCount || 0) <= 2
+                  selectedEx.photos.length <= 2
                     ? "p-1 sm:p-2"
                     : "p-3 md:p-6"
                 }`}
@@ -225,22 +225,16 @@ export default function ExhibitionsContent({
               >
                 <div
                   className={`mx-auto w-full ${
-                    (selectedEx.photoCount || 0) <= 2
+                    selectedEx.photos.length <= 2
                       ? "max-w-none"
                       : "max-w-[min(100%,80rem)]"
                   }`}
                 >
                   <ExhibitionMasonryGallery
-                    photos={Array.from(
-                      { length: selectedEx.photoCount || 0 },
-                      (_, i) => {
-                        const n = (i + 1).toString().padStart(2, "0");
-                        return {
-                          src: `/exhibitions/${selectedEx.slug}/${n}.jpg`,
-                          alt: `Фото ${n}`,
-                        };
-                      },
-                    )}
+                    photos={selectedEx.photos.map((p) => ({
+                      src: p.src,
+                      alt: p.alt,
+                    }))}
                   />
                 </div>
               </div>

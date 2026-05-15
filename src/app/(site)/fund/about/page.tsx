@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+
+import { fetchFundAbout } from "@/lib/cms/payload-queries";
+
 import FundAboutContent from "./Org1AboutContent";
+
+export const dynamic = "force-dynamic";
 
 const TITLE = "Об организации";
 
@@ -26,6 +32,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AboutPage() {
-  return <FundAboutContent />;
+export default async function AboutPage() {
+  const data = await fetchFundAbout();
+  if (!data) notFound();
+  return <FundAboutContent data={data} />;
 }

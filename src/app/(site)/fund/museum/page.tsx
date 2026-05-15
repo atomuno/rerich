@@ -1,5 +1,11 @@
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
+
+import { fetchFundMuseum } from "@/lib/cms/payload-queries";
+
 import MuseumPage from "./MuseumPage";
+
+export const dynamic = "force-dynamic";
 
 const OG_TITLE = "Историко-технический музей в моделях морских судов";
 const PAGE_PATH = "/fund/museum";
@@ -49,7 +55,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Page() {
+export default async function Page() {
+  const museum = await fetchFundMuseum();
+  if (!museum) notFound();
+
   return (
     <>
       {/* Разметка JSON-LD для Google (структурированные данные) */}
@@ -75,7 +84,7 @@ export default function Page() {
       />
 
       {/* Основной контент страницы */}
-      <MuseumPage />
+      <MuseumPage data={museum} />
     </>
   );
 }

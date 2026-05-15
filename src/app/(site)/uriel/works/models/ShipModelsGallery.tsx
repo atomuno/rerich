@@ -6,11 +6,6 @@ import Image from "next/image";
 import { Anchor, Ship, Rocket } from "lucide-react";
 import type { ShipGroupView } from "@/lib/cms/payload-queries";
 
-function stripPublicPrefix(src: string): string {
-  if (!src) return src;
-  return src.startsWith("/public") ? src.replace(/^\/public/, "") : src;
-}
-
 const ICONS = {
   junior: Anchor,
   middle: Ship,
@@ -21,12 +16,14 @@ const ICONS = {
 function GroupGallery({ group, icon: Icon }: { group: ShipGroupView; icon: any }) {
   const photos = useMemo(
     () =>
-      group.models.map((m) => ({
-        src: stripPublicPrefix(m.src || `${group.url}/${m.id}.jpg`),
-        width: 800,
-        height: 600,
-        title: m.title,
-      })),
+      group.models
+        .filter((m) => m.src)
+        .map((m) => ({
+          src: m.src!,
+          width: 800,
+          height: 600,
+          title: m.title,
+        })),
     [group],
   );
 
@@ -35,7 +32,7 @@ function GroupGallery({ group, icon: Icon }: { group: ShipGroupView; icon: any }
       {/* Background Layer */}
       <div className="absolute inset-0 z-0">
         <Image
-          src={stripPublicPrefix(group.background)}
+          src={group.background}
           alt={group.name}
           fill
           className="object-cover opacity-10 grayscale brightness-50 fixed"
@@ -71,7 +68,7 @@ function GroupGallery({ group, icon: Icon }: { group: ShipGroupView; icon: any }
               className="relative group overflow-hidden rounded-xl bg-white shadow-sm border border-slate-200 transition-all duration-500 hover:shadow-xl"
             >
               <Image
-                src={stripPublicPrefix(photo.src)}
+                src={photo.src}
                 alt={photo.title || ""}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

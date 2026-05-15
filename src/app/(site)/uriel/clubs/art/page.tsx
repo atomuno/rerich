@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
+
+import { fetchClubGallery } from "@/lib/cms/payload-queries";
+
 import ArtClubContent from "./ArtClubContent";
+
+export const dynamic = "force-dynamic";
 
 const TITLE = "Кружок «Озарение»";
 
@@ -27,7 +32,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ArtClubPage() {
+export default async function ArtClubPage() {
+  const photos = await fetchClubGallery("art");
+
   return (
     <>
       <script
@@ -47,7 +54,7 @@ export default function ArtClubPage() {
           }),
         }}
       />
-      <ArtClubContent />
+      <ArtClubContent photos={photos} />
     </>
   );
 }

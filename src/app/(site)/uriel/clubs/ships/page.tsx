@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
+
+import { fetchClubGallery } from "@/lib/cms/payload-queries";
+
 import ShipModelingContent from "./ShipsClubContent";
+
+export const dynamic = "force-dynamic";
 
 const TITLE = "Кружок технического моделирования";
 
@@ -29,7 +34,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ShipModelingPage() {
+export default async function ShipModelingPage() {
+  const photos = await fetchClubGallery("techmodel");
+
   return (
     <>
       <script
@@ -56,7 +63,7 @@ export default function ShipModelingPage() {
         }}
       />
       {/* ИСПРАВЛЕНО: вызываем компонент с контентом, а не саму страницу */}
-      <ShipModelingContent />
+      <ShipModelingContent photos={photos} />
     </>
   );
 }

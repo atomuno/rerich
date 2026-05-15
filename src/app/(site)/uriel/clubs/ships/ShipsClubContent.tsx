@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
-import PhotoAlbum from "react-photo-album";
 import {
   Clock,
   MapPin,
@@ -13,14 +11,14 @@ import {
   Award,
 } from "lucide-react";
 
-const PHOTOS = Array.from({ length: 8 }, (_, i) => ({
-  id: i + 1,
-  src: `/techmodel/0${i + 1}.jpg`,
-  width: 900,
-  height: i % 2 === 0 ? 1000 : 700,
-}));
+import ClubMasonryGallery from "@/components/ClubMasonryGallery";
+import type { ClubPhotoView } from "@/lib/cms/payload-queries";
 
-export default function ShipModelingContent() {
+export default function ShipModelingContent({
+  photos,
+}: {
+  photos: ClubPhotoView[];
+}) {
   return (
     <div className="min-h-screen bg-white">
       {/* Шапка страницы */}
@@ -162,38 +160,7 @@ export default function ShipModelingContent() {
             <div className="h-1.5 w-24 bg-slate-900 mt-6 rounded-full"></div>
           </div>
 
-          <PhotoAlbum
-            layout="masonry"
-            photos={PHOTOS}
-            spacing={4} // Как в Озарении — минимальный отступ между колонками
-            columns={(containerWidth) => {
-              if (containerWidth < 640) return 1;
-              if (containerWidth < 1024) return 2;
-              return 3;
-            }}
-            renderPhoto={({ photo, wrapperStyle }) => (
-              <div
-                style={{
-                  ...wrapperStyle,
-                  margin: 0,
-                  marginBottom: "32px", // Вертикальный отступ как в Озарении
-                }}
-                className="relative overflow-hidden rounded-[3rem] shadow-lg group bg-slate-50 transition-all duration-500 hover:shadow-2xl border border-transparent"
-              >
-                <div className="relative w-full h-full min-h-[300px]">
-                  {/* Фиксируем минимальную высоту, чтобы fill работал корректно */}
-                  <Image
-                    src={photo.src}
-                    alt="Техническое моделирование"
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-1000 group-hover:scale-110"
-                  />
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </div>
-            )}
-          />
+          <ClubMasonryGallery photos={photos} />
         </section>
       </main>
 

@@ -51,8 +51,8 @@ export const ShipsModels: CollectionConfig = {
     {
       name: "url",
       type: "text",
-      required: true,
-      label: "Базовый URL (как в shipsData.url)",
+      label: "Legacy URL (не используется на сайте)",
+      admin: { position: "sidebar" },
     },
     {
       name: "models",
