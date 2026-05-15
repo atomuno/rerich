@@ -458,7 +458,9 @@ grep -E '^PAYLOAD_SECRET|^DATABASE_URL' .env
 
 Обновлять Payload/Next осторожно: проверять [Payload migrations](https://payloadcms.com/docs) и прогонять `build` + админку локально.
 
----
+
+
+-------
 
 ## Контакты и домен
 
