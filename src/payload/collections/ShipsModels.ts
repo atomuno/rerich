@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload";
 
+import { PAYLOAD_ADMIN_GROUP, PAYLOAD_COLLECTION_LABELS } from "../admin-labels";
 import { authenticated } from "../access/authenticated";
 
 /**
@@ -9,8 +10,9 @@ import { authenticated } from "../access/authenticated";
 export const ShipsModels: CollectionConfig = {
   slug: "ships-models",
   defaultSort: "sortOrder",
+  labels: PAYLOAD_COLLECTION_LABELS.shipsModels,
   admin: {
-    group: "Uriel",
+    group: PAYLOAD_ADMIN_GROUP.uriel,
     useAsTitle: "name",
     defaultColumns: ["sortOrder", "groupKey", "name"],
   },
@@ -47,12 +49,6 @@ export const ShipsModels: CollectionConfig = {
       relationTo: "media",
       required: true,
       label: "Фон (background)",
-    },
-    {
-      name: "url",
-      type: "text",
-      label: "Legacy URL (не используется на сайте)",
-      admin: { position: "sidebar" },
     },
     {
       name: "models",

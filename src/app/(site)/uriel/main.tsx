@@ -47,12 +47,16 @@ export default function CenterHero() {
       <section className="relative py-10 md:py-14 flex flex-col items-center justify-center px-4 text-center overflow-hidden bg-white border-b border-slate-100">
         <div className="relative z-20 max-w-5xl mx-auto space-y-4 md:space-y-6">
           <div className="space-y-1 md:space-y-2">
-            <h2 className="text-sm md:text-base lg:text-lg font-serif text-slate-800 leading-tight uppercase tracking-wide">
-              Севастопольский городской центр <br className="hidden md:block" />{" "}
-              детского творчества
+          <h2 className="text-sm md:text-base lg:text-lg font-serif text-slate-700 leading-tight uppercase tracking-wide">
+              Региональная общественная организация
             </h2>
+            <h2 className="text-base md:text-2xl lg:text-3xl font-serif text-slate-800 leading-tight uppercase tracking-wide">
+            Севастопольский городской центр <br className="hidden md:block" />{" "}
+            детского творчества
+            </h2>
+           
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-blue-900 leading-tight uppercase drop-shadow-sm py-2">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-blue-900 leading-none uppercase drop-shadow-sm py-2">
               «УРИЭЛЬ»
             </h1>
 

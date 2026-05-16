@@ -63,9 +63,18 @@ export default function SiteRootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const year = new Date().getFullYear();
+
   return (
-    <html lang="ru" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="antialiased flex flex-col min-h-screen font-sans text-slate-900 bg-white">
+    <html
+      lang="ru"
+      className={`${inter.variable} ${playfair.variable}`}
+      suppressHydrationWarning
+    >
+      <body
+        className="antialiased flex flex-col min-h-screen font-sans text-slate-900 bg-white"
+        suppressHydrationWarning
+      >
         <Suspense fallback={null}>
           <Metrika />
         </Suspense>
@@ -94,7 +103,7 @@ export default function SiteRootLayout({
               </div>
 
               <div className="text-[9px] text-slate-500 tracking-widest uppercase text-center md:text-right">
-                <p>© {new Date().getFullYear()} — СГФР | УРИЭЛЬ</p>
+                <p suppressHydrationWarning>© {year} — СГФР | УРИЭЛЬ</p>
                 <p className="mt-1 text-slate-600 lowercase tracking-normal">
                   официальное представительство
                 </p>

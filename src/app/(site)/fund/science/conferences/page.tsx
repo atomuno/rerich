@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { fetchConferenceTalks } from "@/lib/cms/payload-queries";
+import { fetchFundConferencesPage } from "@/lib/cms/payload-queries";
 import ConferenceClient from "./ConferenceClient";
 
 export const dynamic = "force-dynamic";
@@ -39,6 +39,14 @@ export const metadata: Metadata = {
 };
 
 export default async function ConferencesPage() {
-  const talks = await fetchConferenceTalks();
-  return <ConferenceClient talks={talks} />;
+  const page = await fetchFundConferencesPage();
+  return (
+    <ConferenceClient
+      talks={page.talks}
+      proceedings={{
+        sectionTitle: page.sectionTitle,
+        proceedingsPdf: page.proceedingsPdf,
+      }}
+    />
+  );
 }

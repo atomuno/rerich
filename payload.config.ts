@@ -8,7 +8,6 @@ import sharp from "sharp";
 
 import { Books } from "./src/payload/collections/Books";
 import { ClubGallery } from "./src/payload/collections/ClubGallery";
-import { Conferences } from "./src/payload/collections/Conferences";
 import { Crafts } from "./src/payload/collections/Crafts";
 import { Diplomas } from "./src/payload/collections/Diplomas";
 import { ExhibitionsFund } from "./src/payload/collections/ExhibitionsFund";
@@ -20,6 +19,8 @@ import { ShipsModels } from "./src/payload/collections/ShipsModels";
 import { Users } from "./src/payload/collections/Users";
 import { Videos } from "./src/payload/collections/Videos";
 import { FundAbout } from "./src/payload/globals/FundAbout";
+import { FundConferences } from "./src/payload/globals/FundConferences";
+import { FundLibrary } from "./src/payload/globals/FundLibrary";
 import { FundMuseum } from "./src/payload/globals/FundMuseum";
 import { UrielAbout } from "./src/payload/globals/UrielAbout";
 
@@ -38,6 +39,8 @@ if (
 export default buildConfig({
   admin: {
     user: Users.slug,
+    // Расширения браузера (напр. Яндекс) добавляют атрибуты на <html> — иначе hydration warning в dev.
+    suppressHydrationWarning: true,
     importMap: {
       baseDir: path.resolve(dirname, "src/payload"),
     },
@@ -46,7 +49,6 @@ export default buildConfig({
     Users,
     Media,
     ExhibitionsFund,
-    Conferences,
     Videos,
     Lectures,
     Books,
@@ -67,8 +69,11 @@ export default buildConfig({
       url: process.env.DATABASE_URL || "file:./payload.sqlite",
     },
     wal: true,
+    // Без этого в dev Drizzle ждёт ответ в терминале (y/N) при расхождении схемы —
+    // навигация «зависает» на Rendering, а отказ завершает процесс (process.exit).
+    push: false,
   }),
-  globals: [FundAbout, UrielAbout, FundMuseum],
+  globals: [FundAbout, FundMuseum, FundLibrary, FundConferences, UrielAbout],
   sharp,
   plugins: [],
 });

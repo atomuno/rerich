@@ -1,13 +1,15 @@
 import type { CollectionConfig } from "payload";
 
+import { PAYLOAD_ADMIN_GROUP, PAYLOAD_COLLECTION_LABELS } from "../admin-labels";
 import { authenticated } from "../access/authenticated";
 
 /** Соответствует FundExhibition + ExhibitionPhoto (image → Media) + ExhibitionVideo */
 export const ExhibitionsFund: CollectionConfig = {
   slug: "exhibitions-fund",
   defaultSort: "sortOrder",
+  labels: PAYLOAD_COLLECTION_LABELS.exhibitionsFund,
   admin: {
-    group: "Fund",
+    group: PAYLOAD_ADMIN_GROUP.fund,
     useAsTitle: "title",
     defaultColumns: ["sortOrder", "title", "date"],
   },

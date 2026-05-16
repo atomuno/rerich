@@ -15,6 +15,7 @@
     "payload:migrate-uriel-exhibitions": "jiti scripts/migrate-uriel-exhibition-photos.ts",
     "payload:migrate-club-photos": "NODE_ENV=production jiti scripts/migrate-club-photos.ts",
     "payload:seed-site-pages": "NODE_ENV=production jiti scripts/seed-site-globals.ts",
+    "payload:migrate-fund-conferences": "NODE_ENV=production jiti scripts/migrate-fund-conferences-global.ts",
     "payload:backup": "bash scripts/backup-payload.sh",
     "payload:restore": "bash scripts/restore-payload.sh",
     "payload:orphans": "bash scripts/list-orphan-media.sh"

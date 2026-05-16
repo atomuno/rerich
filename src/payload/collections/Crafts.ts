@@ -1,13 +1,15 @@
 import type { CollectionConfig } from "payload";
 
+import { PAYLOAD_ADMIN_GROUP, PAYLOAD_COLLECTION_LABELS } from "../admin-labels";
 import { authenticated } from "../access/authenticated";
 
 /** Соответствует элементам craftsData; изображение — Media вместо /crafts/{id}.jpg */
 export const Crafts: CollectionConfig = {
   slug: "crafts",
   defaultSort: "sortOrder",
+  labels: PAYLOAD_COLLECTION_LABELS.crafts,
   admin: {
-    group: "Uriel",
+    group: PAYLOAD_ADMIN_GROUP.uriel,
     useAsTitle: "title",
     defaultColumns: ["sortOrder", "key", "title"],
   },

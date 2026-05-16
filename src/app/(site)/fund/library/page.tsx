@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
+
+import { fetchFundLibrary } from "@/lib/cms/payload-queries";
+
 import LibraryContent from "./LibraryContent";
+
+export const dynamic = "force-dynamic";
 
 const OG_TITLE = "Общественно-массовая библиотека СГФР";
 
@@ -30,7 +35,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function LibraryPage() {
-  return <LibraryContent />;
+export default async function LibraryPage() {
+  const library = await fetchFundLibrary();
+  return <LibraryContent library={library} />;
 }
 

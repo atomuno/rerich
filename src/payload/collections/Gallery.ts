@@ -1,13 +1,15 @@
 import type { CollectionConfig } from "payload";
 
+import { PAYLOAD_ADMIN_GROUP, PAYLOAD_COLLECTION_LABELS } from "../admin-labels";
 import { authenticated } from "../access/authenticated";
 
 /** Соответствует GalleryItem + Quote; image → Media */
 export const Gallery: CollectionConfig = {
   slug: "gallery",
   defaultSort: "sortOrder",
+  labels: PAYLOAD_COLLECTION_LABELS.gallery,
   admin: {
-    group: "Fund",
+    group: PAYLOAD_ADMIN_GROUP.fund,
     useAsTitle: "title",
     defaultColumns: ["sortOrder", "title", "year"],
   },

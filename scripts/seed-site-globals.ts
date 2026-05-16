@@ -1,5 +1,5 @@
 /**
- * Первичное заполнение globals: fund-about, uriel-about, fund-museum.
+ * Первичное заполнение globals: fund-about, uriel-about, fund-museum, fund-library, fund-conferences.
  * npm run payload:seed-site-pages
  * npm run payload:seed-site-pages -- --force
  */
@@ -184,12 +184,56 @@ async function main(): Promise<void> {
     footerText: "Севастопольский городской фонд Рерихов",
   };
 
-  const updates: { slug: "fund-about" | "uriel-about" | "fund-museum"; data: object }[] =
-    [
-      { slug: "fund-about", data: fundAbout },
-      { slug: "uriel-about", data: urielAbout },
-      { slug: "fund-museum", data: fundMuseum },
-    ];
+  const proceedingsPdfId = await getOrCreateMediaFromWebPath(
+    payload,
+    "/conferences/proceedings-placeholder.pdf",
+    "Сборник материалов конференции — заглушка",
+  );
+
+  const fundConferences = {
+    sectionTitle: "Сборник материалов конференции",
+    ...(proceedingsPdfId ? { proceedingsPdf: proceedingsPdfId } : {}),
+  };
+
+  const fundLibrary = {
+    title: "Общественно-массовая библиотека",
+    address: "ул. Бориса Михайлова 17-А",
+    schedule: "пн — сб: 10.00 – 15.00",
+    historyText:
+      "Библиотека основана 12 июля 1994 г., зарегистрирована как общественно-массовая библиотека Севастопольского городского фонда Рерихов 10 июля 2003 г. в Управлении Культуры Севастопольской городской государственной администрации. Регистрационная карточка № 1. На 10 июля 2008 г. библиотечный фонд содержит 11 250 экземпляров книг по десяти отделам библиотечной классификации из многих отраслей знания.",
+    fundCount: "11 250",
+    statsHeading: "Статистика фонда",
+    statsRows: [
+      { category: "Философия, этика и культура", count: "2098" },
+      { category: "Детская литература", count: "500" },
+      {
+        category: "Научный сектор (История, Техника, Военное дело)",
+        count: "6274",
+      },
+      { category: "Искусство", count: "605" },
+      { category: "Педагогика", count: "695" },
+      { category: "Медицинская литература", count: "243" },
+      { category: "Школьная и мировая классика", count: "700" },
+    ],
+    statsTotalLabel: "Всего в наличии:",
+    statsTotalValue: "11 250 книг",
+  };
+
+  const updates: {
+    slug:
+      | "fund-about"
+      | "uriel-about"
+      | "fund-museum"
+      | "fund-library"
+      | "fund-conferences";
+    data: object;
+  }[] = [
+    { slug: "fund-about", data: fundAbout },
+    { slug: "uriel-about", data: urielAbout },
+    { slug: "fund-museum", data: fundMuseum },
+    { slug: "fund-library", data: fundLibrary },
+    { slug: "fund-conferences", data: fundConferences },
+  ];
 
   for (const { slug, data } of updates) {
     const existing = await payload.findGlobal({ slug, depth: 0 });
@@ -198,7 +242,11 @@ async function main(): Promise<void> {
         ? Boolean(existing?.pageTitle)
         : slug === "uriel-about"
           ? Boolean(existing?.pageTitle)
-          : Boolean(existing?.title);
+          : slug === "fund-conferences"
+            ? Boolean(existing?.sectionTitle)
+            : slug === "fund-library"
+              ? Boolean(existing?.title)
+              : Boolean(existing?.title);
 
     if (hasData && !force) {
       console.log(`${slug}: уже заполнен, пропуск.`);

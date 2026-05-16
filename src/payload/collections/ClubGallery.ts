@@ -1,13 +1,15 @@
 import type { CollectionConfig } from "payload";
 
+import { PAYLOAD_ADMIN_GROUP, PAYLOAD_COLLECTION_LABELS } from "../admin-labels";
 import { authenticated } from "../access/authenticated";
 
 /** Фото галереи кружков: /uriel/clubs/art и /uriel/clubs/ships */
 export const ClubGallery: CollectionConfig = {
   slug: "club-gallery",
   defaultSort: "sortOrder",
+  labels: PAYLOAD_COLLECTION_LABELS.clubGallery,
   admin: {
-    group: "Uriel",
+    group: PAYLOAD_ADMIN_GROUP.uriel,
     useAsTitle: "alt",
     defaultColumns: ["sortOrder", "club", "alt"],
   },

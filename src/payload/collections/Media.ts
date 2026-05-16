@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 
 import type { CollectionConfig } from "payload";
 
+import { PAYLOAD_COLLECTION_LABELS } from "../admin-labels";
 import { authenticated } from "../access/authenticated";
 
 const filename = fileURLToPath(import.meta.url);
@@ -10,6 +11,7 @@ const dirname = path.dirname(filename);
 
 export const Media: CollectionConfig = {
   slug: "media",
+  labels: PAYLOAD_COLLECTION_LABELS.media,
   access: {
     create: authenticated,
     delete: authenticated,
@@ -20,7 +22,7 @@ export const Media: CollectionConfig = {
     {
       name: "alt",
       type: "text",
-      label: "Alt / описание",
+      label: "Описание (alt)",
     },
   ],
   upload: {

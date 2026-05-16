@@ -5,7 +5,8 @@
  * коллекции, где уже есть документы. --force затирает контент и media (users не трогаем).
  * Для полного seed:cms --force нужны legacy-файлы (см. scripts/seed-payload-cms.ts в репозитории
  * или восстановите payload:restore из архива). Сайт читает только payload.sqlite + public/media.
- * Одноразовые миграции: payload:migrate-uriel-exhibitions, payload:migrate-club-photos.
+ * Одноразовые миграции: payload:migrate-uriel-exhibitions, payload:migrate-club-photos,
+ * payload:migrate-fund-conferences (страница конференций: PDF + доклады).
  *
  * Запуск: npm run seed:cms   |   Полная перезаливка: npm run seed:cms -- --force
  */
@@ -22,7 +23,6 @@ import {
   type PayloadInstance,
 } from "./lib/payload-media";
 import { booksData } from "../src/data/books";
-import { conferenciesData } from "../src/data/conferenciesData";
 import { craftsData } from "../src/data/craftsData";
 import { diplomasData } from "../src/data/diplomasData";
 import { fundExhibitions } from "../src/data/exhibitionsFundData";
@@ -40,7 +40,6 @@ const CONTENT_COLLECTIONS = [
   "gallery",
   "books",
   "exhibitions-fund",
-  "conferences",
   "videos",
   "lectures",
   "media",
@@ -100,37 +99,6 @@ async function main(): Promise<void> {
       console.log(`  очищено: ${slug}`);
     }
     clearPayloadMediaCache();
-  }
-
-  // --- conferences ---
-  if (!force && (await collectionHasDocs(payload, "conferences"))) {
-    console.log("conferences: уже есть записи, пропуск.");
-  } else {
-    let i = 0;
-    for (const row of conferenciesData) {
-      const r = row as {
-        id: number;
-        title: string;
-        speaker: string;
-        date: string;
-        url: string;
-        tag: string;
-      };
-      await payload.create({
-        collection: "conferences",
-        data: {
-          sortOrder: r.id * 10,
-          title: r.title,
-          speaker: r.speaker,
-          date: r.date,
-          url: r.url,
-          tag: r.tag,
-        },
-        overrideAccess: true,
-      });
-      i++;
-    }
-    console.log(`conferences: создано ${i} записей.`);
   }
 
   // --- videos ---
@@ -355,13 +323,7 @@ async function main(): Promise<void> {
           date: ex.date,
           title: ex.title,
           location: ex.location,
-          hasPhotos: photos.length > 0,
-          ...(ex.slug ? { slug: ex.slug } : {}),
-          ...(photos.length
-            ? { photoCount: photos.length, photos }
-            : typeof ex.photoCount === "number"
-              ? { photoCount: ex.photoCount }
-              : {}),
+          ...(photos.length ? { photos } : {}),
         },
         overrideAccess: true,
       });

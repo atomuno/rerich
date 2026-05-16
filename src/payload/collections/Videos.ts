@@ -1,13 +1,15 @@
 import type { CollectionConfig } from "payload";
 
+import { PAYLOAD_ADMIN_GROUP, PAYLOAD_COLLECTION_LABELS } from "../admin-labels";
 import { authenticated } from "../access/authenticated";
 
 /** Соответствует FundVideoItem */
 export const Videos: CollectionConfig = {
   slug: "videos",
   defaultSort: "sortOrder",
+  labels: PAYLOAD_COLLECTION_LABELS.videos,
   admin: {
-    group: "Fund",
+    group: PAYLOAD_ADMIN_GROUP.fund,
     useAsTitle: "title",
     defaultColumns: ["sortOrder", "title"],
   },

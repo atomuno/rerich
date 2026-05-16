@@ -1,13 +1,15 @@
 import type { CollectionConfig } from "payload";
 
+import { PAYLOAD_ADMIN_GROUP, PAYLOAD_COLLECTION_LABELS } from "../admin-labels";
 import { authenticated } from "../access/authenticated";
 
 /** Лекторий: title, speaker, date, url, опциональный tag; сортировка sortOrder */
 export const Lectures: CollectionConfig = {
   slug: "lectures",
   defaultSort: "sortOrder",
+  labels: PAYLOAD_COLLECTION_LABELS.lectures,
   admin: {
-    group: "Fund",
+    group: PAYLOAD_ADMIN_GROUP.fund,
     useAsTitle: "title",
     defaultColumns: ["sortOrder", "tag", "title", "date"],
   },

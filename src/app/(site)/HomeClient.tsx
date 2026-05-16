@@ -3,6 +3,63 @@
 import { ArrowRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 
+const fundSubLinks = [
+  { href: "/fund/library", label: "Библиотека" },
+  { href: "/fund/museum", label: "Музей" },
+  { href: "/fund/exhibitions", label: "Выставки" },
+  { href: "/fund/science/conferences", label: "Конференции" },
+  { href: "/fund/science/lectures", label: "Лекторий" },
+  { href: "/fund/gallery", label: "Галерея" },
+];
+
+const urielSubLinks = [
+  { href: "/uriel/clubs/ships", label: "Судомодельный кружок" },
+  { href: "/uriel/clubs/art", label: "Художественный кружок" },
+  { href: "/uriel/works/models", label: "Модели кораблей" },
+  { href: "/uriel/works/crafts", label: "Поделки" },
+  { href: "/uriel/exhibitions", label: "Выставки" },
+  { href: "/uriel/diplomas", label: "Грамоты" },
+];
+
+function SubsectionTile({
+  href,
+  label,
+  bgImage,
+  overlayHoverClass,
+  variant,
+}: {
+  href: string;
+  label: string;
+  bgImage: string;
+  overlayHoverClass: string;
+  variant: "fund" | "uriel";
+}) {
+  const borderClass =
+    variant === "fund"
+      ? "border-b border-slate-200/30 md:border-r"
+      : "border-b border-slate-200/30 md:border-r md:[&:nth-child(even)]:border-r-0";
+
+  return (
+    <Link
+      href={href}
+      className={`relative group flex items-center justify-center px-4 py-3 sm:px-5 sm:py-4 md:px-6 md:py-6 overflow-hidden min-h-[4.25rem] sm:min-h-[5rem] md:aspect-[25/16] md:min-h-0 md:w-full transition-all duration-700 ${borderClass}`}
+    >
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center scale-105 blur-[0px] transition-transform duration-[1.5s] group-hover:scale-110"
+          style={{ backgroundImage: `url('${bgImage}')` }}
+        />
+      </div>
+      <div
+        className={`absolute inset-0 z-10 bg-slate-950/55 transition-all duration-700 ${overlayHoverClass}`}
+      />
+      <h3 className="relative z-20 text-center px-3 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-serif font-bold uppercase tracking-[0.08em] text-white leading-tight">
+        {label}
+      </h3>
+    </Link>
+  );
+}
+
 export default function HomeClient() {
   const highlights = [
     {
@@ -19,15 +76,6 @@ export default function HomeClient() {
     },
   ];
 
-  const quickActions = [
-    { href: "/fund/exhibitions", label: "Выставки фонда" },
-    { href: "/fund/gallery", label: "Галерея картин" },
-    { href: "/fund/videos", label: "Видеоролики" },
-    { href: "/uriel/exhibitions", label: "Выставки «Уриэль»" },
-    { href: "/uriel/works/models", label: "Модели кораблей" },
-    { href: "/uriel/diplomas", label: "Грамоты и достижения" },
-  ];
-
   const scrollToSections = () => {
     const element = document.getElementById("sections");
     if (element) {
@@ -42,29 +90,29 @@ export default function HomeClient() {
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('/hero-bg.jpg')" }}
         />
-        <div className="absolute inset-0 z-10 bg-slate-950/40 backdrop-blur-[4px]" />
+        <div className="absolute inset-0 z-10 bg-slate-950/40 backdrop-blur-[2px]" />
 
         <div className="relative z-20 max-w-6xl mx-auto space-y-10 md:space-y-12 -mt-10">
           <div className="space-y-4 md:space-y-5">
             <span className="text-white/95 font-serif tracking-[0.2em] text-[14px] md:text-base lg:text-2xl block font-bold">
               Региональная общественная организация
             </span>
-            <h1 className="text-2xl md:text-4xl lg:text-6xl font-serif text-white leading-tight drop-shadow-lg tracking-wide">
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-serif text-white leading-tight drop-shadow-lg uppercase tracking-[0.1em]">
               Севастопольский городской <br className="hidden md:block" />
               фонд Рерихов
-            </h1>
+            </h2>
           </div>
 
           <div className="h-px w-20 md:w-32 bg-white/30 mx-auto shadow-sm"></div>
 
           <div className="space-y-4 md:space-y-5">
             <span className="text-white/95 font-serif tracking-[0.2em] text-[14px] md:text-base lg:text-2xl block font-bold">
-            Региональная общественная организация
+              Региональная общественная организация
             </span>
             <h2 className="text-2xl md:text-4xl lg:text-5xl font-serif text-white leading-tight drop-shadow-lg uppercase tracking-[0.1em]">
-            Севастопольский городской центр детского творчества «УРИЭЛЬ» <br /> имени Н.К. Рериха
+              Севастопольский городской центр детского творчества «УРИЭЛЬ»{" "}
+              <br /> имени Н.К. Рериха
             </h2>
-           
           </div>
         </div>
 
@@ -150,25 +198,31 @@ export default function HomeClient() {
         </div>
       </section>
 
-      <section className="bg-white py-14 md:py-16 border-t border-slate-100">
-        <div className="max-w-6xl mx-auto px-4 md:px-6">
-          <h2 className="text-center text-2xl md:text-3xl font-serif font-bold uppercase text-slate-900 mb-8">
-            Быстрые действия
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-            {quickActions.map((action) => (
-              <Link
-                key={action.href}
-                href={action.href}
-                className="group rounded-xl border border-slate-200 bg-white px-4 py-3.5 font-sans font-semibold text-slate-700 hover:border-blue-300 hover:text-blue-800 hover:shadow-sm transition-all"
-              >
-                <span className="inline-flex items-center justify-between w-full">
-                  {action.label}
-                  <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-700" />
-                </span>
-              </Link>
-            ))}
-          </div>
+      <section className="flex flex-col md:flex-row border-t border-slate-200 overflow-hidden font-serif">
+        <div className="w-full md:w-1/2 grid grid-cols-1 md:grid-cols-2">
+          {fundSubLinks.map((item) => (
+            <SubsectionTile
+              key={item.href}
+              href={item.href}
+              label={item.label}
+              bgImage="/fond-bg.jpg"
+              overlayHoverClass="group-hover:bg-blue-900/75"
+              variant="fund"
+            />
+          ))}
+        </div>
+
+        <div className="w-full md:w-1/2 grid grid-cols-1 md:grid-cols-2">
+          {urielSubLinks.map((item) => (
+            <SubsectionTile
+              key={item.href}
+              href={item.href}
+              label={item.label}
+              bgImage="/uriel-bg.jpg"
+              overlayHoverClass="group-hover:bg-blue-800/75"
+              variant="uriel"
+            />
+          ))}
         </div>
       </section>
     </div>

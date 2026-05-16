@@ -1,9 +1,11 @@
 import type { GlobalConfig } from "payload";
 
+import { PAYLOAD_ADMIN_GROUP, PAYLOAD_GLOBAL_LABELS } from "../admin-labels";
+
 export const FundMuseum: GlobalConfig = {
   slug: "fund-museum",
-  label: "Фонд — Музей",
-  admin: { group: "Страницы" },
+  label: PAYLOAD_GLOBAL_LABELS.fundMuseum,
+  admin: { group: PAYLOAD_ADMIN_GROUP.fund },
   access: { read: () => true },
   fields: [
     { name: "title", type: "text", required: true, label: "Заголовок" },

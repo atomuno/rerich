@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload";
 
+import { PAYLOAD_ADMIN_GROUP, PAYLOAD_COLLECTION_LABELS } from "../admin-labels";
 import { authenticated } from "../access/authenticated";
 
 /**
@@ -9,8 +10,9 @@ import { authenticated } from "../access/authenticated";
 export const Books: CollectionConfig = {
   slug: "books",
   defaultSort: "sortOrder",
+  labels: PAYLOAD_COLLECTION_LABELS.books,
   admin: {
-    group: "Fund",
+    group: PAYLOAD_ADMIN_GROUP.fund,
     useAsTitle: "title",
     defaultColumns: ["sortOrder", "title", "year"],
   },

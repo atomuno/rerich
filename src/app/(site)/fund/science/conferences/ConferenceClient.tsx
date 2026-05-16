@@ -1,12 +1,25 @@
 "use client";
 
-import type { ConferenceTalkView } from "@/lib/cms/payload-queries";
-import { Play, Calendar, User, ArrowRight, ExternalLink } from "lucide-react";
+import type {
+  ConferenceTalkView,
+  FundConferencesView,
+} from "@/lib/cms/payload-queries";
+import {
+  Play,
+  Calendar,
+  User,
+  ArrowRight,
+  ExternalLink,
+  Download,
+  FileText,
+} from "lucide-react";
 
 export default function ConferenceClient({
   talks,
+  proceedings,
 }: {
   talks: ConferenceTalkView[];
+  proceedings: FundConferencesView;
 }) {
   const archiveData = [
     { year: "2026", id: "pending" },
@@ -54,8 +67,60 @@ export default function ConferenceClient({
         </div>
       </section>
 
-      {/* ВИДЕОМАТЕРИАЛЫ - СЕТКА В СТИЛЕ ЛЕКТОРИЯ */}
+      {/* СБОРНИК / PDF */}
       <section className="max-w-6xl mx-auto px-6 mt-12">
+        <div className="flex items-center gap-4 mb-8">
+          <h2 className="font-sans text-[11px] font-black uppercase tracking-[0.4em] text-slate-400">
+            {proceedings.sectionTitle}
+          </h2>
+          <div className="h-px flex-grow bg-slate-200" />
+        </div>
+
+        <div className="bg-white border border-slate-200 shadow-sm overflow-hidden">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-6 py-4 border-b border-slate-100 bg-slate-50/80">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-blue-900/10 flex items-center justify-center shrink-0">
+                <FileText size={18} className="text-blue-900" />
+              </div>
+              <p className="font-sans text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                Предпросмотр документа
+              </p>
+            </div>
+            <a
+              href={proceedings.proceedingsPdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-blue-900 text-white font-sans text-[9px] font-black uppercase tracking-[0.2em] hover:bg-slate-900 transition-colors"
+            >
+              <Download size={12} />
+              Скачать PDF
+            </a>
+          </div>
+
+          <div className="relative w-full bg-slate-100">
+            <iframe
+              title={proceedings.sectionTitle}
+              src={`${proceedings.proceedingsPdf}#view=FitH`}
+              className="w-full min-h-[70vh] md:min-h-[80vh] border-0"
+            />
+          </div>
+
+          <p className="px-6 py-3 font-sans text-[9px] text-slate-400 uppercase tracking-widest text-center border-t border-slate-100">
+            Если документ не отображается,{" "}
+            <a
+              href={proceedings.proceedingsPdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-900 font-bold hover:underline"
+            >
+              откройте PDF в новой вкладке
+            </a>
+          </p>
+        </div>
+      </section>
+
+      {/* ВИДЕОМАТЕРИАЛЫ - СЕТКА В СТИЛЕ ЛЕКТОРИЯ */}
+      <section className="max-w-6xl mx-auto px-6 mt-24">
         <div className="flex items-center gap-4 mb-8">
           <h2 className="font-sans text-[11px] font-black uppercase tracking-[0.4em] text-slate-400">
             Видеоматериалы конференции

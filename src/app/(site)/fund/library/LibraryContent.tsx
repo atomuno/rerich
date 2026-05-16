@@ -22,8 +22,9 @@ import {
   pereodic,
   sba,
 } from "../../../../../public/library";
-import Image from "next/image"; // Импортируем компонент Image
+import Image from "next/image";
 import type { LucideIcon } from "lucide-react";
+import type { FundLibraryView } from "@/lib/cms/payload-queries";
 
 interface LibrarySectionProps {
   id: string;
@@ -34,10 +35,39 @@ interface LibrarySectionProps {
   children: React.ReactNode;
 }
 
-export default function LibraryContent() {
+function LibraryHistoryText({
+  text,
+  highlight,
+}: {
+  text: string;
+  highlight: string;
+}) {
+  const needle = highlight.trim();
+  if (!needle) {
+    return <p className="font-sans">{text}</p>;
+  }
+  const idx = text.indexOf(needle);
+  if (idx === -1) {
+    return <p className="font-sans">{text}</p>;
+  }
+  return (
+    <p className="font-sans">
+      {text.slice(0, idx)}
+      <span className="text-blue-900 font-bold">{needle}</span>
+      {text.slice(idx + needle.length)}
+    </p>
+  );
+}
+
+export default function LibraryContent({
+  library,
+}: {
+  library: FundLibraryView;
+}) {
   const [openSection, setOpenSection] = useState<string | null>(null);
 
   const toggle = (id: string) => setOpenSection(openSection === id ? null : id);
+  const titleLines = library.title.split("\n").filter(Boolean);
 
   return (
     <div className="min-h-screen bg-[#F8F7F5] text-[#1a1a1a] font-serif py-12 px-4 selection:bg-blue-100">
@@ -45,18 +75,27 @@ export default function LibraryContent() {
         {/* ХЕДЕР */}
         <header className="text-center mb-16 border-b-2 border-slate-900 pb-12">
           <h1 className="text-4xl md:text-6xl font-black mb-8 tracking-tighter uppercase leading-none">
-            Общественно-массовая <br /> библиотека
+            {titleLines.length > 1 ? (
+              titleLines.map((line, i) => (
+                <span key={line}>
+                  {line}
+                  {i < titleLines.length - 1 ? <br /> : null}
+                </span>
+              ))
+            ) : (
+              library.title
+            )}
           </h1>
           <div className="flex flex-col md:flex-row justify-center items-center gap-8 text-[11px] font-sans uppercase tracking-[0.2em] text-slate-500">
             <div className="flex items-center gap-2">
               <MapPin size={16} className="text-blue-900" />
               <span className="border-b border-transparent hover:border-slate-300 transition-colors cursor-default">
-                ул. Бориса Михайлова 17-А
+                {library.address}
               </span>
             </div>
             <div className="flex items-center gap-2">
               <Clock size={16} className="text-blue-900" />
-              <span>пн — сб: 10.00 – 15.00</span>
+              <span>{library.schedule}</span>
             </div>
           </div>
         </header>
@@ -64,7 +103,7 @@ export default function LibraryContent() {
         {/* ГЛАВНОЕ ФОТО БИБЛИОТЕКИ */}
         <div className="mb-16 relative w-full aspect-[1181/531] overflow-hidden rounded-xl shadow-2xl border border-slate-200">
           <Image
-            src="/biblio.jpg"
+            src={library.heroImage}
             alt="Интерьер общественно-массовой библиотеки"
             fill
             priority
@@ -81,18 +120,10 @@ export default function LibraryContent() {
             <History size={18} /> Историческая справка
           </h2>
           <div className="space-y-6 leading-relaxed text-md text-slate-800">
-            <p className="font-sans">
-              Библиотека основана 12 июля 1994 г., зарегистрирована как
-              общественно-массовая библиотека Севастопольского городского фонда
-              Рерихов 10 июля 2003 г. в Управлении Культуры Севастопольской
-              городской государственной администрации. Регистрационная карточка
-              № 1. На 10 июля 2008 г. библиотечный фонд содержит{" "}
-              <span className="text-blue-900 font-bold">
-                11 250 экземпляров
-              </span>{" "}
-              книг по десяти отделам библиотечной классификации из многих
-              отраслей знания.
-            </p>
+            <LibraryHistoryText
+              text={library.historyText}
+              highlight={library.fundCountHighlight}
+            />
           </div>
         </section>
 
@@ -307,7 +338,7 @@ export default function LibraryContent() {
           <div className="flex items-center gap-4 mb-8">
             <Calculator className="text-blue-900" size={32} />
             <h2 className="text-2xl font-black uppercase tracking-tight">
-              Статистика фонда
+              {library.statsHeading}
             </h2>
           </div>
 
@@ -320,24 +351,16 @@ export default function LibraryContent() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {[
-                  ["Философия, этика и культура", "2098"],
-                  ["Детская литература", "500"],
-                  ["Научный сектор (История, Техника, Военное дело)", "6274"],
-                  ["Искусство", "605"],
-                  ["Педагогика", "695"],
-                  ["Медицинская литература", "243"],
-                  ["Школьная и мировая классика", "700"],
-                ].map(([title, count]) => (
+                {library.statsRows.map((row) => (
                   <tr
-                    key={title}
+                    key={row.category}
                     className="hover:bg-blue-50/30 transition-colors"
                   >
                     <td className="p-6 font-bold text-slate-800 uppercase text-[11px] tracking-tight">
-                      {title}
+                      {row.category}
                     </td>
                     <td className="p-6 text-right font-mono font-bold text-lg">
-                      {count}
+                      {row.count}
                     </td>
                   </tr>
                 ))}
@@ -345,10 +368,10 @@ export default function LibraryContent() {
               <tfoot>
                 <tr className="bg-blue-900 text-white">
                   <td className="p-4 text-start font-sans text-slate-100 uppercase tracking-[0.1em] text-[14px] font-bold">
-                    Всего в наличии:
+                    {library.statsTotalLabel}
                   </td>
                   <td className="p-4 text-end font-mono font-bold font-white text-2xl text-white">
-                    11 250 книг
+                    {library.statsTotalValue}
                   </td>
                 </tr>
               </tfoot>

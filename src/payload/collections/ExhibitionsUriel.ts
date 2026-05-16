@@ -1,15 +1,17 @@
 import type { CollectionConfig } from "payload";
 
+import { PAYLOAD_ADMIN_GROUP, PAYLOAD_COLLECTION_LABELS } from "../admin-labels";
 import { authenticated } from "../access/authenticated";
 
-/** Соответствует Exhibition из exhibitionsUrielData */
+/** Выставки центра «Уриэль» — /uriel/exhibitions */
 export const ExhibitionsUriel: CollectionConfig = {
   slug: "exhibitions-uriel",
   defaultSort: "sortOrder",
+  labels: PAYLOAD_COLLECTION_LABELS.exhibitionsUriel,
   admin: {
-    group: "Uriel",
+    group: PAYLOAD_ADMIN_GROUP.uriel,
     useAsTitle: "title",
-    defaultColumns: ["sortOrder", "date", "hasPhotos", "title"],
+    defaultColumns: ["sortOrder", "date", "title", "location"],
   },
   access: {
     read: () => true,
@@ -29,31 +31,14 @@ export const ExhibitionsUriel: CollectionConfig = {
     { name: "title", type: "text", required: true, label: "Название" },
     { name: "location", type: "text", required: true, label: "Место" },
     {
-      name: "hasPhotos",
-      type: "checkbox",
-      label: "Есть фотогалерея (устарело — см. поле «Фото»)",
-      defaultValue: false,
-      admin: { position: "sidebar" },
-    },
-    {
-      name: "slug",
-      type: "text",
-      label: "Slug legacy-папки (public/exhibitions)",
-      admin: {
-        description: "Используется скриптом миграции; после переноса можно оставить для справки.",
-        position: "sidebar",
-      },
-    },
-    {
-      name: "photoCount",
-      type: "number",
-      label: "Кол-во фото legacy (для миграции)",
-      admin: { position: "sidebar" },
-    },
-    {
       name: "photos",
       type: "array",
       label: "Фото",
+      labels: { singular: "Фото", plural: "Фотографии" },
+      admin: {
+        description:
+          "Если добавлены фото, на сайте выставка откроется с галереей.",
+      },
       fields: [
         {
           name: "image",

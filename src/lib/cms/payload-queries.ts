@@ -176,7 +176,7 @@ export async function fetchGallery(): Promise<GalleryItemView[]> {
 }
 
 export type ConferenceTalkView = {
-  id: number;
+  id: string;
   title: string;
   speaker: string;
   date: string;
@@ -184,26 +184,68 @@ export type ConferenceTalkView = {
   tag: string;
 };
 
-export async function fetchConferenceTalks(): Promise<ConferenceTalkView[]> {
-  const p = await payload();
-  const { docs } = await p.find({
-    collection: "conferences",
-    sort: "sortOrder",
-    limit: 200,
-    depth: 0,
-  });
-  return docs.map((doc) => {
-    const id =
-      typeof doc.id === "number" ? doc.id : Number.parseInt(String(doc.id), 10);
+export const CONFERENCE_PROCEEDINGS_PLACEHOLDER =
+  "/conferences/proceedings-placeholder.pdf";
+
+export type FundConferencesPageView = {
+  sectionTitle: string;
+  proceedingsPdf: string;
+  talks: ConferenceTalkView[];
+};
+
+export type FundConferencesView = Pick<
+  FundConferencesPageView,
+  "sectionTitle" | "proceedingsPdf"
+>;
+
+function mapConferenceTalks(rows: unknown): ConferenceTalkView[] {
+  if (!Array.isArray(rows)) return [];
+  return [...rows]
+    .sort((a, b) => {
+      const ao =
+        typeof a === "object" && a && "sortOrder" in a
+          ? Number(a.sortOrder)
+          : 0;
+      const bo =
+        typeof b === "object" && b && "sortOrder" in b
+          ? Number(b.sortOrder)
+          : 0;
+      return ao - bo;
+    })
+    .map((row, index) => {
+      if (!row || typeof row !== "object") return null;
+      const r = row as Record<string, unknown>;
+      return {
+        id: r.id != null ? String(r.id) : `talk-${index}`,
+        title: String(r.title ?? ""),
+        speaker: String(r.speaker ?? ""),
+        date: String(r.date ?? ""),
+        url: String(r.url ?? ""),
+        tag: String(r.tag ?? ""),
+      };
+    })
+    .filter(Boolean) as ConferenceTalkView[];
+}
+
+export async function fetchFundConferencesPage(): Promise<FundConferencesPageView> {
+  const defaults: FundConferencesPageView = {
+    sectionTitle: "Сборник материалов конференции",
+    proceedingsPdf: CONFERENCE_PROCEEDINGS_PLACEHOLDER,
+    talks: [],
+  };
+
+  try {
+    const p = await payload();
+    const doc = await p.findGlobal({ slug: "fund-conferences", depth: 2 });
+    const pdf = mediaUrl(doc?.proceedingsPdf as MediaLike);
     return {
-      id,
-      title: String(doc.title ?? ""),
-      speaker: String(doc.speaker ?? ""),
-      date: String(doc.date ?? ""),
-      url: String(doc.url ?? ""),
-      tag: String(doc.tag ?? ""),
+      sectionTitle: String(doc?.sectionTitle ?? defaults.sectionTitle),
+      proceedingsPdf: pdf || defaults.proceedingsPdf,
+      talks: mapConferenceTalks(doc?.talks),
     };
-  });
+  } catch {
+    return defaults;
+  }
 }
 
 export type LectureCardView = {
@@ -299,7 +341,7 @@ export async function fetchUrielExhibitions(): Promise<UrielExhibitionView[]> {
       })
       .filter(Boolean) as { src: string; alt: string; caption?: string }[];
 
-    const hasPhotos = photos.length > 0 || Boolean(doc.hasPhotos);
+    const hasPhotos = photos.length > 0;
 
     return {
       id,
@@ -497,6 +539,89 @@ function mapSidebar(doc: Record<string, unknown>): AboutSidebarView {
     kpp: String(doc.kpp ?? ""),
     registeredAt: String(doc.registeredAt ?? ""),
   };
+}
+
+export type FundLibraryStatRow = {
+  category: string;
+  count: string;
+};
+
+export type FundLibraryView = {
+  title: string;
+  address: string;
+  schedule: string;
+  heroImage: string;
+  historyText: string;
+  fundCountHighlight: string;
+  statsHeading: string;
+  statsRows: FundLibraryStatRow[];
+  statsTotalLabel: string;
+  statsTotalValue: string;
+};
+
+const FUND_LIBRARY_DEFAULT_STATS: FundLibraryStatRow[] = [
+  { category: "Философия, этика и культура", count: "2098" },
+  { category: "Детская литература", count: "500" },
+  {
+    category: "Научный сектор (История, Техника, Военное дело)",
+    count: "6274",
+  },
+  { category: "Искусство", count: "605" },
+  { category: "Педагогика", count: "695" },
+  { category: "Медицинская литература", count: "243" },
+  { category: "Школьная и мировая классика", count: "700" },
+];
+
+function mapLibraryStatsRows(rows: unknown): FundLibraryStatRow[] {
+  if (!Array.isArray(rows)) return [];
+  return rows
+    .map((row) => {
+      if (!row || typeof row !== "object") return null;
+      const r = row as Record<string, unknown>;
+      const category = String(r.category ?? "").trim();
+      const count = String(r.count ?? "").trim();
+      if (!category) return null;
+      return { category, count };
+    })
+    .filter(Boolean) as FundLibraryStatRow[];
+}
+
+export async function fetchFundLibrary(): Promise<FundLibraryView> {
+  const defaults: FundLibraryView = {
+    title: "Общественно-массовая библиотека",
+    address: "ул. Бориса Михайлова 17-А",
+    schedule: "пн — сб: 10.00 – 15.00",
+    heroImage: "/biblio.jpg",
+    historyText:
+      "Библиотека основана 12 июля 1994 г., зарегистрирована как общественно-массовая библиотека Севастопольского городского фонда Рерихов 10 июля 2003 г. в Управлении Культуры Севастопольской городской государственной администрации. Регистрационная карточка № 1. На 10 июля 2008 г. библиотечный фонд содержит 11 250 экземпляров книг по десяти отделам библиотечной классификации из многих отраслей знания.",
+    fundCountHighlight: "11 250",
+    statsHeading: "Статистика фонда",
+    statsRows: FUND_LIBRARY_DEFAULT_STATS,
+    statsTotalLabel: "Всего в наличии:",
+    statsTotalValue: "11 250 книг",
+  };
+
+  try {
+    const p = await payload();
+    const doc = await p.findGlobal({ slug: "fund-library", depth: 2 });
+    const statsRows = mapLibraryStatsRows(doc?.statsRows);
+    const hero = mediaUrl(doc?.heroImage as MediaLike);
+
+    return {
+      title: String(doc?.title ?? defaults.title),
+      address: String(doc?.address ?? defaults.address),
+      schedule: String(doc?.schedule ?? defaults.schedule),
+      heroImage: hero || defaults.heroImage,
+      historyText: String(doc?.historyText ?? defaults.historyText),
+      fundCountHighlight: String(doc?.fundCount ?? defaults.fundCountHighlight),
+      statsHeading: String(doc?.statsHeading ?? defaults.statsHeading),
+      statsRows: statsRows.length ? statsRows : defaults.statsRows,
+      statsTotalLabel: String(doc?.statsTotalLabel ?? defaults.statsTotalLabel),
+      statsTotalValue: String(doc?.statsTotalValue ?? defaults.statsTotalValue),
+    };
+  } catch {
+    return defaults;
+  }
 }
 
 export async function fetchFundAbout(): Promise<FundAboutView | null> {
