@@ -1,0 +1,7 @@
+# Фрагмент для nginx перед проксированием на Next (порт 3000).
+# Без этого PDF > 1MB дают 413 Request Entity Too Large.
+#
+# В server { ... } для sevcrf.ru:
+#   include /path/to/this/snippet;   — или скопируйте строку ниже
+#
+client_max_body_size 50M;
