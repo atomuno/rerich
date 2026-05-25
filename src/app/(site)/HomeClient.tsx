@@ -4,21 +4,21 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 
 const fundSubLinks = [
-  { href: "/fund/library", label: "Библиотека" },
-  { href: "/fund/museum", label: "Музей" },
-  { href: "/fund/exhibitions", label: "Выставки" },
-  { href: "/fund/science/conferences", label: "Конференции" },
-  { href: "/fund/science/lectures", label: "Лекторий" },
-  { href: "/fund/gallery", label: "Галерея" },
+  { href: "/fund/library", label: "Библиотека", bgImage: "/backgrounds/04.jpg" },
+  { href: "/fund/museum", label: "Музей", bgImage: "/backgrounds/07.jpg" },
+  { href: "/fund/exhibitions", label: "Выставки", bgImage: "/backgrounds/05.jpg" },
+  { href: "/fund/science/conferences", label: "Конференции", bgImage: "/backgrounds/08.jpg" },
+  { href: "/fund/science/lectures", label: "Лекторий", bgImage: "/backgrounds/06.jpg" },
+  { href: "/fund/gallery", label: "Галерея", bgImage: "/backgrounds/09.jpg" },
 ];
 
 const urielSubLinks = [
-  { href: "/uriel/clubs/ships", label: "Судомодельный кружок" },
-  { href: "/uriel/clubs/art", label: "Художественный кружок" },
-  { href: "/uriel/works/models", label: "Модели кораблей" },
-  { href: "/uriel/works/crafts", label: "Поделки" },
-  { href: "/uriel/exhibitions", label: "Выставки" },
-  { href: "/uriel/diplomas", label: "Грамоты" },
+  { href: "/uriel/clubs/ships", label: "Судомодельный кружок", bgImage: "/backgrounds/10.jpg" },
+  { href: "/uriel/clubs/art", label: "Художественный кружок", bgImage: "/backgrounds/13.jpg" },
+  { href: "/uriel/works/models", label: "Модели кораблей", bgImage: "/backgrounds/11.jpg" },
+  { href: "/uriel/works/crafts", label: "Поделки", bgImage: "/backgrounds/14.jpg" },
+  { href: "/uriel/exhibitions", label: "Выставки", bgImage: "/backgrounds/12.jpg" },
+  { href: "/uriel/diplomas", label: "Грамоты", bgImage: "/backgrounds/15.jpg" },
 ];
 
 function SubsectionTile({
@@ -51,7 +51,7 @@ function SubsectionTile({
         />
       </div>
       <div
-        className={`absolute inset-0 z-10 bg-slate-950/55 transition-all duration-700 ${overlayHoverClass}`}
+        className={`absolute inset-0 z-10 bg-slate-950/30 transition-all duration-700 ${overlayHoverClass}`}
       />
       <h3 className="relative z-20 text-center px-3 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-serif font-bold uppercase tracking-[0.08em] text-white leading-tight">
         {label}
@@ -88,7 +88,7 @@ export default function HomeClient() {
       <section className="relative h-[calc(100vh-10px)] min-h-[600px] flex flex-col items-center justify-center px-4 text-center overflow-hidden">
         <div
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/hero-bg.jpg')" }}
+          style={{ backgroundImage: "url('/backgrounds/01.jpg')" }}
         />
         <div className="absolute inset-0 z-10 bg-slate-950/40 backdrop-blur-[2px]" />
 
@@ -135,7 +135,7 @@ export default function HomeClient() {
         >
           <div
             className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-[1.5s] group-hover:scale-105"
-            style={{ backgroundImage: "url('/fond-bg.jpg')" }}
+            style={{ backgroundImage: "url('/backgrounds/02.jpg')" }}
           />
           <div className="absolute inset-0 z-10 bg-slate-950/40 transition-all duration-700 group-hover:bg-blue-900/75" />
           <div className="relative z-20 text-center space-y-6 px-4">
@@ -154,7 +154,7 @@ export default function HomeClient() {
         >
           <div
             className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-[1.5s] group-hover:scale-105"
-            style={{ backgroundImage: "url('/uriel-bg.jpg')" }}
+            style={{ backgroundImage: "url('/backgrounds/03.jpg')" }}
           />
           <div className="absolute inset-0 z-10 bg-slate-950/40 transition-all duration-700 group-hover:bg-blue-800/75" />
           <div className="relative z-20 text-center space-y-6 px-4">
@@ -205,7 +205,7 @@ export default function HomeClient() {
               key={item.href}
               href={item.href}
               label={item.label}
-              bgImage="/fond-bg.jpg"
+              bgImage={item.bgImage}
               overlayHoverClass="group-hover:bg-blue-900/75"
               variant="fund"
             />
@@ -218,7 +218,7 @@ export default function HomeClient() {
               key={item.href}
               href={item.href}
               label={item.label}
-              bgImage="/uriel-bg.jpg"
+              bgImage={item.bgImage}
               overlayHoverClass="group-hover:bg-blue-800/75"
               variant="uriel"
             />
