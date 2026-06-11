@@ -105,7 +105,7 @@ export default function SiteRootLayout({
               <div className="text-[9px] text-slate-500 tracking-widest uppercase text-center md:text-right">
                 <p suppressHydrationWarning>© {year} — СГФР | УРИЭЛЬ</p>
                 <p className="mt-1 text-slate-600 lowercase tracking-normal">
-                  официальное представительство
+                  официальное представительство фонда
                 </p>
               </div>
             </div>
