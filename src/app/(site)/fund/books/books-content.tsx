@@ -3,8 +3,8 @@ import { Download } from "lucide-react";
 import type { BookView } from "@/lib/cms/payload-queries";
 
 export default function BooksContent({ books }: { books: BookView[] }) {
-  // Массив годов для генерации ссылок на PDF-сборники конференции
-  const conferenceYears = [2019, 2020, 2021, 2022, 2023, 2024, 2025];
+  // Массив годов для генерации ссылок на PDF-сборники конференции, добавил 2026 год
+  const conferenceYears = [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026];
 
   return (
     <div className="min-h-screen bg-white text-slate-900 pb-20">
@@ -39,10 +39,29 @@ export default function BooksContent({ books }: { books: BookView[] }) {
             <h2 className="text-2xl font-serif font-bold text-slate-900 uppercase mb-4 leading-tight">
               Перспективы развития современного общества
             </h2>
-            
-            <span className="inline-block text-slate-400 uppercase text-xs font-bold tracking-widest mb-6 border-b border-slate-200 pb-2">
-              Материалы Всероссийской научно-практической конференции
-            </span>
+
+            {/* Характеристики сборника в стиле остальных книг */}
+            <div className="flex flex-wrap gap-x-6 gap-y-2 mb-6 text-sm border-b border-slate-100 pb-6">
+              <p>
+                <span className="text-slate-400 uppercase text-[10px] block mb-1">
+                  Авторы
+                </span>
+                <span className="font-bold">Головин В.В., Косцова М.В.</span>
+              </p>
+              <p>
+                <span className="text-slate-400 uppercase text-[10px] block mb-1">
+                  Годы издания
+                </span>
+                <span className="font-bold">2019-2026</span>
+              </p>
+              
+              <p>
+                <span className="text-slate-400 uppercase text-[10px] block mb-1">
+                  Тираж
+                </span>
+                <span className="font-bold">по 50 экз.</span>
+              </p>
+            </div>
 
             <div className="text-slate-700 leading-relaxed text-base font-sans antialiased space-y-4 mb-8">
               <p>
