@@ -3,10 +3,13 @@ import { Download } from "lucide-react";
 import type { BookView } from "@/lib/cms/payload-queries";
 
 export default function BooksContent({ books }: { books: BookView[] }) {
+  // Массив годов для генерации ссылок на PDF-сборники конференции
+  const conferenceYears = [2019, 2020, 2021, 2022, 2023, 2024, 2025];
+
   return (
     <div className="min-h-screen bg-white text-slate-900 pb-20">
       <header className="max-w-4xl mx-auto pt-24 pb-16 px-6 font-serif text-center">
-        <h1 className="text-4xl md:text-5xl font-bold uppercase mb-6">Книги</h1>
+        <h1 className="text-4xl md:text-5xl font-bold uppercase mb-6">Книги и Сборники</h1>
         <p className="text-slate-700 leading-relaxed text-lg">
           Здесь представлены книги, изданные сотрудниками и друзьями
           Севастопольского городского фонда Рерихов. Все эти издания
@@ -16,10 +19,77 @@ export default function BooksContent({ books }: { books: BookView[] }) {
       </header>
 
       <main className="max-w-4xl mx-auto px-6 space-y-24">
+        
+        {/* Блок с конференцией */}
+        <article className="flex flex-col md:flex-row gap-10 items-start">
+          {/* Обложка конференции */}
+          <div className="w-full md:w-1/3 flex-shrink-0">
+            <div className="relative aspect-[3/4] shadow-xl border border-slate-100 mb-6">
+              <Image
+                src="/conference/cover.jpg"
+                alt="Обложка сборника материалов конференции"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Контент конференции */}
+          <div className="flex-1">
+            <h2 className="text-2xl font-serif font-bold text-slate-900 uppercase mb-4 leading-tight">
+              Перспективы развития современного общества
+            </h2>
+            
+            <span className="inline-block text-slate-400 uppercase text-xs font-bold tracking-widest mb-6 border-b border-slate-200 pb-2">
+              Материалы Всероссийской научно-практической конференции
+            </span>
+
+            <div className="text-slate-700 leading-relaxed text-base font-sans antialiased space-y-4 mb-8">
+              <p>
+                Севастопольский государственный университет, Гуманитарно-педагогический институт, 
+                кафедра «Радиоэлектроника и телекоммуникации» и РОО «Севастопольский городской 
+                фонд Рерихов» регулярно проводят Всероссийскую научно-практическую конференцию 
+                «Перспективы развития современного общества».
+              </p>
+              <p>
+                Конференция посвящается годовщине подписания 15 апреля 1935 г. первого 
+                многостороннего международного соглашения об охране культурных ценностей, 
+                известного как Пакт Рериха. Сборники представляют интерес для научных 
+                работников, преподавателей, аспирантов и студентов высших учебных заведений.
+              </p>
+            </div>
+
+            {/* Сетка кнопок для скачивания PDF */}
+            <div>
+              <h3 className="text-[10px] text-slate-400 uppercase font-bold tracking-widest mb-3">
+                Скачать сборники в PDF
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                {conferenceYears.map((year) => (
+                  <a
+                    key={year}
+                    href={`/conference/PDMS_${year}.pdf`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 py-2 px-3 border border-slate-200 text-slate-700 rounded text-xs font-bold hover:bg-slate-50 hover:text-slate-900 hover:border-slate-300 transition-colors uppercase tracking-widest"
+                  >
+                    <Download size={14} />
+                    {year}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </article>
+
+        {/* Разделитель между конференцией и остальными книгами */}
+        <div className="border-t border-slate-100" />
+
+        {/* Рендер списка остальных книг */}
         {books.map((book) => (
           <article
             key={book.id}
-            className="flex flex-col md:flex-row gap-10 items-start border-t border-slate-100 pt-12"
+            className="flex flex-col md:flex-row gap-10 items-start pt-12"
           >
             {/* Обложка и кнопка */}
             <div className="w-full md:w-1/3 flex-shrink-0">
