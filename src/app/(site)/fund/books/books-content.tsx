@@ -37,14 +37,14 @@ export default function BooksContent({ books }: { books: BookView[] }) {
           {/* Контент конференции */}
           <div className="flex-1">
             <h2 className="text-2xl font-serif font-bold text-slate-900 uppercase mb-4 leading-tight">
-              Перспективы развития современного общества
+              Сборники материалов конференции "Перспективы развития современного общества"
             </h2>
 
             {/* Характеристики сборника в стиле остальных книг */}
             <div className="flex flex-wrap gap-x-6 gap-y-2 mb-6 text-sm border-b border-slate-100 pb-6">
               <p>
                 <span className="text-slate-400 uppercase text-[10px] block mb-1">
-                  Авторы
+                  Составители
                 </span>
                 <span className="font-bold">Головин В.В., Косцова М.В.</span>
               </p>
