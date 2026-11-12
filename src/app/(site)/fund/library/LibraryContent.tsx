@@ -257,16 +257,18 @@ export default function LibraryContent({
                   </p>
                 </div>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {/* Сетка обновлена на 5 колонок (md:grid-cols-5), чтобы все имена поместились в один ряд */}
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                 {[
                   "Леонардо да Винчи",
                   "Андрей Рублев",
-                  "Виктор Серов",
+                  "Валентин Серов",
+                  "Святослав Рерих",
                   "Николай Рерих",
                 ].map((artist) => (
                   <div
                     key={artist}
-                    className="p-3 border border-slate-100 text-[11px] font-sans uppercase tracking-tighter text-center bg-slate-50"
+                    className="p-3 border border-slate-100 text-[11px] font-sans uppercase tracking-tighter text-center bg-slate-50 flex items-center justify-center"
                   >
                     {artist}
                   </div>
